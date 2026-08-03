@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
-import { PHONE_DISPLAY, PHONE_TEL, SERVICES, RESOURCES } from "@/data/site";
+import { SERVICES, RESOURCES } from "@/data/site";
 
 function Dropdown({
   label,
