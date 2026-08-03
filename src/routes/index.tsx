@@ -434,11 +434,11 @@ function Index() {
               </p>
             </div>
             <a
-              href={PHONE_TEL}
+              href="#contact"
               className="inline-flex items-center gap-3 rounded-full bg-gold px-8 py-4 text-lg font-extrabold text-gold-foreground shadow-lift transition-transform hover:-translate-y-0.5"
             >
-              <Phone className="size-5" />
-              {PHONE_DISPLAY}
+              See Your Options
+              <ArrowRight className="size-5" />
             </a>
           </div>
         </section>

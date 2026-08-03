@@ -126,11 +126,10 @@ function ServicePage() {
                 <ArrowRight className="size-4" />
               </a>
               <a
-                href={PHONE_TEL}
+                href="#contact"
                 className="inline-flex items-center gap-2 rounded-full border border-navy-foreground/25 px-7 py-3.5 text-sm font-bold hover:border-gold hover:text-gold"
               >
-                <Phone className="size-4" />
-                {PHONE_DISPLAY}
+                See Your Options
               </a>
             </div>
 

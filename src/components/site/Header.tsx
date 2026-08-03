@@ -81,11 +81,10 @@ export function Header() {
 
         <div className="hidden items-center gap-4 lg:flex">
           <a
-            href={PHONE_TEL}
-            className="flex items-center gap-2 text-sm font-bold text-navy hover:text-cobalt"
+            href="#contact"
+            className="text-sm font-bold text-navy hover:text-cobalt"
           >
-            <Phone className="size-4 text-gold" />
-            {PHONE_DISPLAY}
+            See Your Options
           </a>
           <a
             href="#contact"
