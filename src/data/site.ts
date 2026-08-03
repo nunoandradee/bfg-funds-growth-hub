@@ -1,5 +1,3 @@
-export const PHONE_DISPLAY = "(888) 555-0142";
-export const PHONE_TEL = "tel:+18885550142";
 
 export const SERVICES = [
   {

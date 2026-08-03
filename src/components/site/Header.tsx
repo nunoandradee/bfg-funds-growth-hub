@@ -137,8 +137,12 @@ export function Header() {
                 {s.title}
               </Link>
             ))}
-            <a href={PHONE_TEL} className="px-2 py-3 text-sm font-bold text-cobalt">
-              {PHONE_DISPLAY}
+            <a
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="px-2 py-3 text-sm font-bold text-cobalt"
+            >
+              See Your Options
             </a>
             <a
               href="#contact"

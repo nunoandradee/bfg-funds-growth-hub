@@ -13,7 +13,6 @@ import {
   Headphones,
   Landmark,
   Percent,
-  Phone,
   Send,
   Settings2,
   ShieldCheck,
@@ -28,7 +27,7 @@ import { Hero } from "@/components/site/Hero";
 import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { INDUSTRIES, PHONE_DISPLAY, PHONE_TEL, SERVICES } from "@/data/site";
+import { INDUSTRIES, SERVICES } from "@/data/site";
 import aboutImg from "@/assets/about.jpg";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
