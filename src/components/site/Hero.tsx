@@ -10,19 +10,26 @@ const PILLS = [
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden bg-navy">
-      {/* decorative blobs */}
+      {/* soft light sweep */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-40 -top-40 size-[34rem] rounded-full bg-cobalt/50 blur-3xl"
+        className="pointer-events-none absolute -left-40 -top-52 size-[42rem] rounded-full bg-cobalt/45 blur-[120px]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-56 right-[-8rem] size-[30rem] rounded-full bg-gold/25 blur-3xl"
+        className="pointer-events-none absolute -bottom-64 right-[-10rem] size-[36rem] rounded-full bg-gold/20 blur-[130px]"
       />
+      {/* subtle diagonal sheen */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.14] [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:64px_64px]"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,transparent_35%,rgba(255,255,255,0.05)_50%,transparent_65%)]"
       />
+      {/* bottom fade into page */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(to_top,var(--color-background),transparent)] opacity-15"
+      />
+
 
       <div className="container-page relative py-20 md:py-28">
         <div className="max-w-3xl">
