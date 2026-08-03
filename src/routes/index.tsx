@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   ArrowRight,
@@ -206,13 +206,14 @@ function Index() {
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                       {service.description}
                     </p>
-                    <a
-                      href="#contact"
+                    <Link
+                      to="/services/$slug"
+                      params={{ slug: service.slug }}
                       className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-cobalt"
                     >
                       Learn More
                       <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                    </a>
+                    </Link>
                   </article>
                 );
               })}

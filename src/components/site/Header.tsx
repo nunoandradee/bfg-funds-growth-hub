@@ -1,9 +1,16 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 
 import { PHONE_DISPLAY, PHONE_TEL, SERVICES, RESOURCES } from "@/data/site";
 
-function Dropdown({ label, items }: { label: string; items: { title: string; href: string }[] }) {
+function Dropdown({
+  label,
+  items,
+}: {
+  label: string;
+  items: { title: string; href?: string; to?: string; slug?: string }[];
+}) {
   return (
     <div className="group relative">
       <button className="flex items-center gap-1 py-6 text-sm font-semibold text-navy/80 transition-colors hover:text-cobalt">
@@ -11,15 +18,26 @@ function Dropdown({ label, items }: { label: string; items: { title: string; hre
         <ChevronDown className="size-4 transition-transform group-hover:rotate-180" />
       </button>
       <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 translate-y-1 rounded-xl border border-border bg-popover p-2 opacity-0 shadow-lift transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-        {items.map((item) => (
-          <a
-            key={item.title}
-            href={item.href}
-            className="block rounded-lg px-3 py-2 text-sm font-medium text-navy/80 transition-colors hover:bg-surface hover:text-cobalt"
-          >
-            {item.title}
-          </a>
-        ))}
+        {items.map((item) =>
+          item.slug ? (
+            <Link
+              key={item.title}
+              to="/services/$slug"
+              params={{ slug: item.slug }}
+              className="block rounded-lg px-3 py-2 text-sm font-medium text-navy/80 transition-colors hover:bg-surface hover:text-cobalt"
+            >
+              {item.title}
+            </Link>
+          ) : (
+            <a
+              key={item.title}
+              href={item.href}
+              className="block rounded-lg px-3 py-2 text-sm font-medium text-navy/80 transition-colors hover:bg-surface hover:text-cobalt"
+            >
+              {item.title}
+            </a>
+          ),
+        )}
       </div>
     </div>
   );
@@ -50,7 +68,7 @@ export function Header() {
           </a>
           <Dropdown
             label="Funding Services"
-            items={SERVICES.map((s) => ({ title: s.title, href: "#services" }))}
+            items={SERVICES.map((s) => ({ title: s.title, slug: s.slug }))}
           />
           <a href="#industries" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
             Industries We Serve
@@ -92,7 +110,7 @@ export function Header() {
             {[
               { title: "Home", href: "#top" },
               { title: "Why BFG Funds", href: "#why" },
-              { title: "Funding Services", href: "#services" },
+
               { title: "Industries We Serve", href: "#industries" },
               { title: "Resources", href: "#insights" },
               { title: "Contact Us", href: "#contact" },
@@ -105,6 +123,20 @@ export function Header() {
               >
                 {l.title}
               </a>
+            ))}
+            <p className="px-2 pt-3 text-xs font-bold uppercase tracking-[0.2em] text-cobalt">
+              Funding Services
+            </p>
+            {SERVICES.map((s) => (
+              <Link
+                key={s.slug}
+                to="/services/$slug"
+                params={{ slug: s.slug }}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-2 py-3 text-sm font-semibold text-navy/85 hover:bg-surface"
+              >
+                {s.title}
+              </Link>
             ))}
             <a href={PHONE_TEL} className="px-2 py-3 text-sm font-bold text-cobalt">
               {PHONE_DISPLAY}
