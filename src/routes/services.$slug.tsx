@@ -31,7 +31,7 @@ export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
     const service = SERVICES.find((s) => s.slug === params.slug);
     if (!service) throw notFound();
-    return { service };
+    return { slug: service.slug };
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/services/$slug")({
         meta: [{ title: "Service not found | BFG Funds" }, { name: "robots", content: "noindex" }],
       };
     }
-    const { service } = loaderData;
+    const service = SERVICES.find((s) => s.slug === loaderData.slug)!;
     const title = `${service.title} | BFG Funds`;
     const description = `${service.tagline}. ${service.amount} with funding in ${service.speed.toLowerCase()} — see eligibility, how it works and apply in two minutes.`;
     return {
@@ -79,7 +79,8 @@ function ServiceNotFound() {
 }
 
 function ServicePage() {
-  const { service } = Route.useLoaderData();
+  const { slug } = Route.useLoaderData();
+  const service = SERVICES.find((s) => s.slug === slug)!;
   const Icon = ICONS[service.slug] ?? Wallet;
   const others = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 3);
 
