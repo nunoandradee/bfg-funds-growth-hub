@@ -110,7 +110,7 @@ export function Header() {
             {[
               { title: "Home", href: "#top" },
               { title: "Why BFG Funds", href: "#why" },
-              { title: "Funding Services", href: "#services" },
+
               { title: "Industries We Serve", href: "#industries" },
               { title: "Resources", href: "#insights" },
               { title: "Contact Us", href: "#contact" },
@@ -123,6 +123,20 @@ export function Header() {
               >
                 {l.title}
               </a>
+            ))}
+            <p className="px-2 pt-3 text-xs font-bold uppercase tracking-[0.2em] text-cobalt">
+              Funding Services
+            </p>
+            {SERVICES.map((s) => (
+              <Link
+                key={s.slug}
+                to="/services/$slug"
+                params={{ slug: s.slug }}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-2 py-3 text-sm font-semibold text-navy/85 hover:bg-surface"
+              >
+                {s.title}
+              </Link>
             ))}
             <a href={PHONE_TEL} className="px-2 py-3 text-sm font-bold text-cobalt">
               {PHONE_DISPLAY}
