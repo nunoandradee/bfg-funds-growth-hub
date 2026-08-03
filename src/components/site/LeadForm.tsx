@@ -111,7 +111,7 @@ export function LeadForm() {
     const stepErrors: Partial<Record<keyof FormState, string>> = {};
     for (const issue of result.error.issues) {
       const key = issue.path[0] as keyof FormState;
-      if (STEP_FIELDS[index].includes(key) && !stepErrors[key]) stepErrors[key] = issue.message;
+      if (STEP_FIELDS[index]?.includes(key) && !stepErrors[key]) stepErrors[key] = issue.message;
     }
     if (Object.keys(stepErrors).length === 0) return true;
     setErrors(stepErrors);
@@ -415,7 +415,7 @@ export function LeadForm() {
   );
 }
 
-function FieldError({ message }: { message?: string }) {
+function FieldError({ message }: { message?: string | undefined }) {
   if (!message) return null;
   return <p className="mt-2 text-xs font-semibold text-destructive">{message}</p>;
 }
