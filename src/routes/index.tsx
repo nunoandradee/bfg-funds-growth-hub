@@ -13,7 +13,6 @@ import {
   Headphones,
   Landmark,
   Percent,
-  Phone,
   Send,
   Settings2,
   ShieldCheck,
@@ -28,7 +27,7 @@ import { Hero } from "@/components/site/Hero";
 import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { INDUSTRIES, PHONE_DISPLAY, PHONE_TEL, SERVICES } from "@/data/site";
+import { INDUSTRIES, SERVICES } from "@/data/site";
 import aboutImg from "@/assets/about.jpg";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
@@ -434,11 +433,11 @@ function Index() {
               </p>
             </div>
             <a
-              href={PHONE_TEL}
+              href="#contact"
               className="inline-flex items-center gap-3 rounded-full bg-gold px-8 py-4 text-lg font-extrabold text-gold-foreground shadow-lift transition-transform hover:-translate-y-0.5"
             >
-              <Phone className="size-5" />
-              {PHONE_DISPLAY}
+              See Your Options
+              <ArrowRight className="size-5" />
             </a>
           </div>
         </section>

@@ -1,4 +1,4 @@
-import { PHONE_DISPLAY, PHONE_TEL, SERVICES } from "@/data/site";
+import { SERVICES } from "@/data/site";
 
 export function Footer() {
   return (
@@ -11,8 +11,8 @@ export function Footer() {
           <p className="mt-3 text-sm leading-relaxed text-navy-foreground/65">
             Fast, reliable funding for small and mid-sized U.S. businesses.
           </p>
-          <a href={PHONE_TEL} className="mt-4 inline-block text-sm font-bold text-gold">
-            {PHONE_DISPLAY}
+          <a href="#contact" className="mt-4 inline-block text-sm font-bold text-gold">
+            See Your Options
           </a>
         </div>
         <div>

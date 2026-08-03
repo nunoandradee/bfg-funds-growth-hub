@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 
-import { PHONE_DISPLAY, PHONE_TEL, SERVICES, RESOURCES } from "@/data/site";
+import { SERVICES, RESOURCES } from "@/data/site";
 
 function Dropdown({
   label,
@@ -81,11 +81,10 @@ export function Header() {
 
         <div className="hidden items-center gap-4 lg:flex">
           <a
-            href={PHONE_TEL}
-            className="flex items-center gap-2 text-sm font-bold text-navy hover:text-cobalt"
+            href="#contact"
+            className="text-sm font-bold text-navy hover:text-cobalt"
           >
-            <Phone className="size-4 text-gold" />
-            {PHONE_DISPLAY}
+            See Your Options
           </a>
           <a
             href="#contact"
@@ -138,8 +137,12 @@ export function Header() {
                 {s.title}
               </Link>
             ))}
-            <a href={PHONE_TEL} className="px-2 py-3 text-sm font-bold text-cobalt">
-              {PHONE_DISPLAY}
+            <a
+              href="#contact"
+              onClick={() => setOpen(false)}
+              className="px-2 py-3 text-sm font-bold text-cobalt"
+            >
+              See Your Options
             </a>
             <a
               href="#contact"
