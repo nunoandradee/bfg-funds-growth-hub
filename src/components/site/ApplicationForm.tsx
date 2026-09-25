@@ -124,8 +124,7 @@ function validDob(v: string) {
 function validate(step: number, v: Values, files: File[], signed: boolean, consents: [boolean, boolean]): Errors {
   const e: Errors = {};
   // Only name + email + amount are required so you can be contacted and matched.
-  // Everything else (phone, EIN, SSN, DOB, addresses, documents, signature, consents)
-  // is optional — fill in what you have and a specialist will follow up.
+  // Everything else can be filled in later by a specialist.
   if (step === 0) {
     if (Number(digits(v.amount)) < 5000) e.amount = "Enter the amount you need (at least $5,000).";
     if (v.fullName.trim().length < 2) e.fullName = "Enter your name.";
