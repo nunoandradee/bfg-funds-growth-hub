@@ -455,7 +455,7 @@ export function ApplicationForm() {
       )}
 
       {step === 4 && (
-        <Section title="Review and sign" sub="Confirm your details and sign to submit your application.">
+        <Section title="Review and sign" sub="Confirm your details and sign to submit. Signature and authorizations are optional — you can add them later.">
           <dl className="grid gap-x-6 gap-y-3 rounded-2xl bg-surface p-5 text-sm sm:grid-cols-2">
             <Summary label="Amount requested" value={v.amount} />
             <Summary label="Applicant" value={v.fullName} />
