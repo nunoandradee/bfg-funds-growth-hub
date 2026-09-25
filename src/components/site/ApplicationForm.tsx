@@ -123,41 +123,18 @@ function validDob(v: string) {
 
 function validate(step: number, v: Values, files: File[], signed: boolean, consents: [boolean, boolean]): Errors {
   const e: Errors = {};
+  // Only name + email + amount are required so you can be contacted and matched.
+  // Everything else (phone, EIN, SSN, DOB, addresses, documents, signature, consents)
+  // is optional — fill in what you have and a specialist will follow up.
   if (step === 0) {
     if (Number(digits(v.amount)) < 5000) e.amount = "Enter the amount you need (at least $5,000).";
-    if (v.fullName.trim().split(/\s+/).length < 2) e.fullName = "Enter your first and last name.";
+    if (v.fullName.trim().length < 2) e.fullName = "Enter your name.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim())) e.email = "Enter a valid email address.";
-    if (digits(v.phone).length !== 10) e.phone = "Enter a valid 10-digit mobile number.";
-  }
-  if (step === 1) {
-    if (!v.businessName.trim()) e.businessName = "Enter the legal business name.";
-    if (digits(v.ein).length !== 9) e.ein = "Enter the 9-digit EIN.";
-    if (!v.entityType) e.entityType = "Select the entity type.";
-    if (!validMonthYear(v.startDate)) e.startDate = "Enter month and year (MM/YYYY).";
-    const own = Number(v.ownership);
-    if (!(own > 0 && own <= 100)) e.ownership = "Enter a percentage between 1 and 100.";
-    if (!v.bStreet.trim()) e.bStreet = "Enter the street address.";
-    if (!v.bCity.trim()) e.bCity = "Enter the city.";
-    if (!v.bState) e.bState = "Select the state.";
-    if (!/^\d{5}$/.test(v.bZip)) e.bZip = "Enter a 5-digit ZIP.";
-  }
-  if (step === 2) {
-    if (!validDob(v.dob)) e.dob = "Enter your date of birth (MM/DD/YYYY).";
-    if (digits(v.ssn).length !== 9) e.ssn = "Enter your 9-digit SSN.";
-    if (!v.sameAddress) {
-      if (!v.hStreet.trim()) e.hStreet = "Enter the street address.";
-      if (!v.hCity.trim()) e.hCity = "Enter the city.";
-      if (!v.hState) e.hState = "Select the state.";
-      if (!/^\d{5}$/.test(v.hZip)) e.hZip = "Enter a 5-digit ZIP.";
-    }
   }
   if (step === 3) {
     if (files.length > MAX_FILES) e.files = `Upload up to ${MAX_FILES} files.`;
   }
-  if (step === 4) {
-    if (!signed) e.signature = "Please sign to authorize your application.";
-    if (!consents[0] || !consents[1]) e.consent = "Both authorizations are required to submit.";
-  }
+  void v; void signed; void consents;
   return e;
 }
 
