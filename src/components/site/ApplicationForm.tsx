@@ -390,7 +390,7 @@ export function ApplicationForm() {
           </label>
           {!v.sameAddress && (
             <Address
-              prefix="Home address"
+              prefix="Home address (optional)"
               street={v.hStreet}
               city={v.hCity}
               state={v.hState}
