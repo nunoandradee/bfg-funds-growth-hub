@@ -334,15 +334,15 @@ export function ApplicationForm() {
       )}
 
       {step === 1 && (
-        <Section title="About your business" sub="Use the details exactly as they appear on your business documents.">
-          <Field label="Legal business name" error={errors.businessName}>
+        <Section title="About your business (optional)" sub="Fill in what you have — a specialist can help you complete the rest.">
+          <Field label="Legal business name (optional)" error={errors.businessName}>
             <input className={fieldCls} autoComplete="organization" value={v.businessName} onChange={(e) => set("businessName", e.target.value)} />
           </Field>
           <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="EIN (Tax ID)" error={errors.ein}>
+            <Field label="EIN (Tax ID) (optional)" error={errors.ein}>
               <input inputMode="numeric" placeholder="12-3456789" className={fieldCls} value={v.ein} onChange={(e) => set("ein", maskEin(e.target.value))} />
             </Field>
-            <Field label="Entity type" error={errors.entityType}>
+            <Field label="Entity type (optional)" error={errors.entityType}>
               <select className={fieldCls} value={v.entityType} onChange={(e) => set("entityType", e.target.value)}>
                 <option value="">Select an option</option>
                 {ENTITY_TYPES.map((t) => (
@@ -350,15 +350,15 @@ export function ApplicationForm() {
                 ))}
               </select>
             </Field>
-            <Field label="Business start date" error={errors.startDate}>
+            <Field label="Business start date (optional)" error={errors.startDate}>
               <input inputMode="numeric" placeholder="MM/YYYY" className={fieldCls} value={v.startDate} onChange={(e) => set("startDate", maskDate(e.target.value, 2))} />
             </Field>
-            <Field label="Your ownership %" error={errors.ownership}>
+            <Field label="Your ownership % (optional)" error={errors.ownership}>
               <input inputMode="numeric" className={fieldCls} value={v.ownership} onChange={(e) => set("ownership", digits(e.target.value).slice(0, 3))} />
             </Field>
           </div>
           <Address
-            prefix="Business address"
+            prefix="Business address (optional)"
             street={v.bStreet}
             city={v.bCity}
             state={v.bState}
