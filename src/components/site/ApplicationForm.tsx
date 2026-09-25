@@ -124,8 +124,7 @@ function validDob(v: string) {
 function validate(step: number, v: Values, files: File[], signed: boolean, consents: [boolean, boolean]): Errors {
   const e: Errors = {};
   // Only name + email + amount are required so you can be contacted and matched.
-  // Everything else (phone, EIN, SSN, DOB, addresses, documents, signature, consents)
-  // is optional — fill in what you have and a specialist will follow up.
+  // Everything else can be filled in later by a specialist.
   if (step === 0) {
     if (Number(digits(v.amount)) < 5000) e.amount = "Enter the amount you need (at least $5,000).";
     if (v.fullName.trim().length < 2) e.fullName = "Enter your name.";
@@ -319,7 +318,7 @@ export function ApplicationForm() {
             <Field label="Email" error={errors.email}>
               <input type="email" autoComplete="email" className={fieldCls} value={v.email} onChange={(e) => set("email", e.target.value)} />
             </Field>
-            <Field label="Mobile (optional)" error={errors.phone}>
+            <Field label="Mobile" error={errors.phone}>
               <input
                 type="tel"
                 autoComplete="tel-national"
@@ -334,15 +333,15 @@ export function ApplicationForm() {
       )}
 
       {step === 1 && (
-        <Section title="About your business (optional)" sub="Fill in what you have — a specialist can help you complete the rest.">
-          <Field label="Legal business name (optional)" error={errors.businessName}>
+        <Section title="About your business" sub="Fill in what you have — a specialist can help you complete the rest.">
+          <Field label="Legal business name" error={errors.businessName}>
             <input className={fieldCls} autoComplete="organization" value={v.businessName} onChange={(e) => set("businessName", e.target.value)} />
           </Field>
           <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="EIN (Tax ID) (optional)" error={errors.ein}>
+            <Field label="EIN (Tax ID)" error={errors.ein}>
               <input inputMode="numeric" placeholder="12-3456789" className={fieldCls} value={v.ein} onChange={(e) => set("ein", maskEin(e.target.value))} />
             </Field>
-            <Field label="Entity type (optional)" error={errors.entityType}>
+            <Field label="Entity type" error={errors.entityType}>
               <select className={fieldCls} value={v.entityType} onChange={(e) => set("entityType", e.target.value)}>
                 <option value="">Select an option</option>
                 {ENTITY_TYPES.map((t) => (
@@ -350,15 +349,15 @@ export function ApplicationForm() {
                 ))}
               </select>
             </Field>
-            <Field label="Business start date (optional)" error={errors.startDate}>
+            <Field label="Business start date" error={errors.startDate}>
               <input inputMode="numeric" placeholder="MM/YYYY" className={fieldCls} value={v.startDate} onChange={(e) => set("startDate", maskDate(e.target.value, 2))} />
             </Field>
-            <Field label="Your ownership % (optional)" error={errors.ownership}>
+            <Field label="Your ownership %" error={errors.ownership}>
               <input inputMode="numeric" className={fieldCls} value={v.ownership} onChange={(e) => set("ownership", digits(e.target.value).slice(0, 3))} />
             </Field>
           </div>
           <Address
-            prefix="Business address (optional)"
+            prefix="Business address"
             street={v.bStreet}
             city={v.bCity}
             state={v.bState}
@@ -370,12 +369,12 @@ export function ApplicationForm() {
       )}
 
       {step === 2 && (
-        <Section title="About you (optional)" sub="Helpful for verification, but not required to start. Your data is encrypted.">
+        <Section title="About you" sub="Helpful for verification. Your data is encrypted.">
           <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="Date of birth (optional)" error={errors.dob}>
+            <Field label="Date of birth" error={errors.dob}>
               <input inputMode="numeric" placeholder="MM/DD/YYYY" autoComplete="bday" className={fieldCls} value={v.dob} onChange={(e) => set("dob", maskDate(e.target.value, 3))} />
             </Field>
-            <Field label="Social Security Number (optional)" error={errors.ssn}>
+            <Field label="Social Security Number" error={errors.ssn}>
               <input inputMode="numeric" placeholder="123-45-6789" autoComplete="off" className={fieldCls} value={v.ssn} onChange={(e) => set("ssn", maskSsn(e.target.value))} />
             </Field>
           </div>
@@ -390,7 +389,7 @@ export function ApplicationForm() {
           </label>
           {!v.sameAddress && (
             <Address
-              prefix="Home address (optional)"
+              prefix="Home address"
               street={v.hStreet}
               city={v.hCity}
               state={v.hState}
@@ -455,7 +454,7 @@ export function ApplicationForm() {
       )}
 
       {step === 4 && (
-        <Section title="Review and sign" sub="Confirm your details and sign to submit. Signature and authorizations are optional — you can add them later.">
+        <Section title="Review and sign" sub="Confirm your details and sign to submit. You can add more later.">
           <dl className="grid gap-x-6 gap-y-3 rounded-2xl bg-surface p-5 text-sm sm:grid-cols-2">
             <Summary label="Amount requested" value={v.amount} />
             <Summary label="Applicant" value={v.fullName} />
