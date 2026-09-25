@@ -177,9 +177,9 @@ export const SERVICES = [
 ] as const;
 
 export const RESOURCES = [
-  { title: "Blog", href: "#insights" },
-  { title: "Careers", href: "#insights" },
-  { title: "Case Studies", href: "#insights" },
+  { title: "Blog", href: "/#insights" },
+  { title: "Careers", href: "/#insights" },
+  { title: "Case Studies", href: "/#insights" },
 ];
 
 export const INDUSTRIES = [

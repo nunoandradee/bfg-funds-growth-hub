@@ -90,6 +90,9 @@ const STEP_FIELDS: (keyof FormState)[][] = [
 
 const STEP_LABELS = ["Your business", "Funding profile", "Contact details"];
 
+const CONSENT_TEXT =
+  "I agree to the terms & conditions and consent to be contacted about funding options.";
+
 const fieldCls =
   "w-full rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground outline-none transition-shadow focus:border-cobalt focus:ring-4 focus:ring-cobalt/15";
 const labelCls = "mb-2 block text-sm font-semibold text-navy";
@@ -99,6 +102,8 @@ export function LeadForm() {
   const [values, setValues] = useState<FormState>(EMPTY);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
   const [done, setDone] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [trap, setTrap] = useState("");
 
   const set = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setValues((v) => ({ ...v, [key]: value }));
@@ -122,13 +127,42 @@ export function LeadForm() {
     if (validateStep(step)) setStep((s) => Math.min(s + 1, 2));
   };
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateStep(2)) return;
+    if (sending || !validateStep(2)) return;
     const result = schema.safeParse(values);
     if (!result.success) return;
-    setDone(true);
-    toast.success("Application received — a funding specialist will call you shortly.");
+    setSending(true);
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          timeInBusiness: values.timeInBusiness,
+          amount: values.amount,
+          revenue: values.revenue,
+          creditScore: values.creditScore,
+          industry: values.industry,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          phone: values.mobile,
+          businessName: values.businessName,
+          email: values.email,
+          consent: values.terms,
+          consentText: CONSENT_TEXT,
+          pageUrl: window.location.href,
+          website: trap,
+        }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean };
+      if (!res.ok || !data.ok) throw new Error("failed");
+      setDone(true);
+      toast.success("Application received — a funding specialist will call you shortly.");
+    } catch {
+      toast.error("We couldn’t submit your request. Please try again in a moment.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const formatCurrency = (raw: string) => {
@@ -176,6 +210,17 @@ export function LeadForm() {
             </div>
           ) : (
             <form onSubmit={submit} noValidate>
+              {/* Honeypot for bots — hidden from people and assistive tech. */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+                value={trap}
+                onChange={(e) => setTrap(e.target.value)}
+              />
               <div className="mb-8 flex items-center gap-3">
                 {STEP_LABELS.map((label, i) => (
                   <div key={label} className="flex-1">
@@ -400,9 +445,10 @@ export function LeadForm() {
                 ) : (
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
+                    disabled={sending}
+                    className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5 disabled:opacity-60"
                   >
-                    Submit Application
+                    {sending ? "Submitting…" : "Submit Application"}
                     <ArrowRight className="size-4" />
                   </button>
                 )}

@@ -49,7 +49,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 backdrop-blur-md">
       <div className="container-page flex items-center justify-between gap-6">
-        <a href="#top" className="flex shrink-0 items-center gap-2 py-4" aria-label="BFG Funds home">
+        <a href="/#top" className="flex shrink-0 items-center gap-2 py-4" aria-label="BFG Funds home">
           {/* Placeholder wordmark — swap for a real logo asset later */}
           <span className="grid size-9 place-items-center rounded-lg bg-navy text-sm font-extrabold text-navy-foreground">
             B
@@ -60,34 +60,34 @@ export function Header() {
         </a>
 
         <nav className="hidden items-center gap-7 lg:flex">
-          <a href="#top" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
+          <a href="/#top" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
             Home
           </a>
-          <a href="#why" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
+          <a href="/#why" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
             Why BFG Funds
           </a>
           <Dropdown
             label="Funding Services"
             items={SERVICES.map((s) => ({ title: s.title, slug: s.slug }))}
           />
-          <a href="#industries" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
+          <a href="/#industries" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
             Industries We Serve
           </a>
           <Dropdown label="Resources" items={RESOURCES} />
-          <a href="#contact" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
+          <a href="/#contact" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
             Contact Us
           </a>
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
           <a
-            href="#contact"
+            href="/#contact"
             className="text-sm font-bold text-navy hover:text-cobalt"
           >
             See Your Options
           </a>
           <a
-            href="#contact"
+            href="/apply"
             className="rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
           >
             Apply Now
@@ -107,12 +107,12 @@ export function Header() {
         <div className="border-t border-border bg-background lg:hidden">
           <div className="container-page flex flex-col gap-1 py-4">
             {[
-              { title: "Home", href: "#top" },
-              { title: "Why BFG Funds", href: "#why" },
+              { title: "Home", href: "/#top" },
+              { title: "Why BFG Funds", href: "/#why" },
 
-              { title: "Industries We Serve", href: "#industries" },
-              { title: "Resources", href: "#insights" },
-              { title: "Contact Us", href: "#contact" },
+              { title: "Industries We Serve", href: "/#industries" },
+              { title: "Resources", href: "/#insights" },
+              { title: "Contact Us", href: "/#contact" },
             ].map((l) => (
               <a
                 key={l.title}
@@ -138,14 +138,14 @@ export function Header() {
               </Link>
             ))}
             <a
-              href="#contact"
+              href="/#contact"
               onClick={() => setOpen(false)}
               className="px-2 py-3 text-sm font-bold text-cobalt"
             >
               See Your Options
             </a>
             <a
-              href="#contact"
+              href="/apply"
               onClick={() => setOpen(false)}
               className="mt-1 rounded-full bg-gold px-5 py-3 text-center text-sm font-bold text-gold-foreground"
             >

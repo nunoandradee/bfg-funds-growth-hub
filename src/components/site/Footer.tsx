@@ -11,7 +11,7 @@ export function Footer() {
           <p className="mt-3 text-sm leading-relaxed text-navy-foreground/65">
             Fast, reliable funding for small and mid-sized U.S. businesses.
           </p>
-          <a href="#contact" className="mt-4 inline-block text-sm font-bold text-gold">
+          <a href="/#contact" className="mt-4 inline-block text-sm font-bold text-gold">
             See Your Options
           </a>
         </div>
@@ -22,7 +22,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-navy-foreground/75">
             {SERVICES.map((s) => (
               <li key={s.title}>
-                <a href="#services" className="hover:text-gold">
+                <a href="/#services" className="hover:text-gold">
                   {s.title}
                 </a>
               </li>
@@ -36,7 +36,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm text-navy-foreground/75">
             {["About", "Industries We Serve", "Blog", "Careers", "Case Studies"].map((l) => (
               <li key={l}>
-                <a href="#insights" className="hover:text-gold">
+                <a href="/#insights" className="hover:text-gold">
                   {l}
                 </a>
               </li>
@@ -51,7 +51,7 @@ export function Footer() {
             Apply in minutes. No impact to your credit to see options.
           </p>
           <a
-            href="#contact"
+            href="/#contact"
             className="mt-4 inline-block rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-gold-foreground"
           >
             Apply Now
