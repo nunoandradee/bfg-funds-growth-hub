@@ -370,12 +370,12 @@ export function ApplicationForm() {
       )}
 
       {step === 2 && (
-        <Section title="About you" sub="Required by our lending partners to verify the business owner. Your data is encrypted.">
+        <Section title="About you (optional)" sub="Helpful for verification, but not required to start. Your data is encrypted.">
           <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="Date of birth" error={errors.dob}>
+            <Field label="Date of birth (optional)" error={errors.dob}>
               <input inputMode="numeric" placeholder="MM/DD/YYYY" autoComplete="bday" className={fieldCls} value={v.dob} onChange={(e) => set("dob", maskDate(e.target.value, 3))} />
             </Field>
-            <Field label="Social Security Number" error={errors.ssn}>
+            <Field label="Social Security Number (optional)" error={errors.ssn}>
               <input inputMode="numeric" placeholder="123-45-6789" autoComplete="off" className={fieldCls} value={v.ssn} onChange={(e) => set("ssn", maskSsn(e.target.value))} />
             </Field>
           </div>
