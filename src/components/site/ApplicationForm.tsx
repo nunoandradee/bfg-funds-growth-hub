@@ -319,7 +319,7 @@ export function ApplicationForm() {
             <Field label="Email" error={errors.email}>
               <input type="email" autoComplete="email" className={fieldCls} value={v.email} onChange={(e) => set("email", e.target.value)} />
             </Field>
-            <Field label="Mobile" error={errors.phone}>
+            <Field label="Mobile (optional)" error={errors.phone}>
               <input
                 type="tel"
                 autoComplete="tel-national"
