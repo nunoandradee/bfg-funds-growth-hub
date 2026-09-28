@@ -11,6 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApplyRouteImport } from './routes/apply'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as SmsTermsRouteImport } from './routes/sms-terms'
+import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as ApiApplyRouteImport } from './routes/api/apply'
 import { Route as ApiLeadRouteImport } from './routes/api/lead'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
@@ -23,6 +27,26 @@ const IndexRoute = IndexRouteImport.update({
 const ApplyRoute = ApplyRouteImport.update({
   id: '/apply',
   path: '/apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SmsTermsRoute = SmsTermsRouteImport.update({
+  id: '/sms-terms',
+  path: '/sms-terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
+  id: '/terms-of-service',
+  path: '/terms-of-service',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiApplyRoute = ApiApplyRouteImport.update({
@@ -44,6 +68,10 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
+  '/contact': typeof ContactRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sms-terms': typeof SmsTermsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/api/apply': typeof ApiApplyRoute
   '/api/lead': typeof ApiLeadRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -51,6 +79,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
+  '/contact': typeof ContactRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sms-terms': typeof SmsTermsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/api/apply': typeof ApiApplyRoute
   '/api/lead': typeof ApiLeadRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -59,22 +91,57 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/apply': typeof ApplyRoute
+  '/contact': typeof ContactRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sms-terms': typeof SmsTermsRoute
+  '/terms-of-service': typeof TermsOfServiceRoute
   '/api/apply': typeof ApiApplyRoute
   '/api/lead': typeof ApiLeadRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/apply' | '/api/apply' | '/api/lead' | '/services/$slug'
+  fullPaths:
+    | '/'
+    | '/apply'
+    | '/contact'
+    | '/privacy-policy'
+    | '/sms-terms'
+    | '/terms-of-service'
+    | '/api/apply'
+    | '/api/lead'
+    | '/services/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/apply' | '/api/apply' | '/api/lead' | '/services/$slug'
+  to:
+    | '/'
+    | '/apply'
+    | '/contact'
+    | '/privacy-policy'
+    | '/sms-terms'
+    | '/terms-of-service'
+    | '/api/apply'
+    | '/api/lead'
+    | '/services/$slug'
   id:
-    '__root__' | '/' | '/apply' | '/api/apply' | '/api/lead' | '/services/$slug'
+    | '__root__'
+    | '/'
+    | '/apply'
+    | '/contact'
+    | '/privacy-policy'
+    | '/sms-terms'
+    | '/terms-of-service'
+    | '/api/apply'
+    | '/api/lead'
+    | '/services/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApplyRoute: typeof ApplyRoute
+  ContactRoute: typeof ContactRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  SmsTermsRoute: typeof SmsTermsRoute
+  TermsOfServiceRoute: typeof TermsOfServiceRoute
   ApiApplyRoute: typeof ApiApplyRoute
   ApiLeadRoute: typeof ApiLeadRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
@@ -94,6 +161,34 @@ declare module '@tanstack/react-router' {
       path: '/apply'
       fullPath: '/apply'
       preLoaderRoute: typeof ApplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sms-terms': {
+      id: '/sms-terms'
+      path: '/sms-terms'
+      fullPath: '/sms-terms'
+      preLoaderRoute: typeof SmsTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-of-service': {
+      id: '/terms-of-service'
+      path: '/terms-of-service'
+      fullPath: '/terms-of-service'
+      preLoaderRoute: typeof TermsOfServiceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/apply': {
@@ -123,6 +218,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApplyRoute: ApplyRoute,
+  ContactRoute: ContactRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  SmsTermsRoute: SmsTermsRoute,
+  TermsOfServiceRoute: TermsOfServiceRoute,
   ApiApplyRoute: ApiApplyRoute,
   ApiLeadRoute: ApiLeadRoute,
   ServicesSlugRoute: ServicesSlugRoute,

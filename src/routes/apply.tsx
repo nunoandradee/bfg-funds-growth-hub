@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 
 import { ApplicationForm } from "@/components/site/ApplicationForm";
@@ -15,7 +15,10 @@ export const Route = createFileRoute("/apply")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://bfgfunds.com/apply" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://bfgfunds.com/apply" }],
   }),
   component: ApplyPage,
 });
@@ -49,6 +52,12 @@ function ApplyPage() {
           </aside>
           <ApplicationForm />
         </div>
+        <footer className="container-page mt-10 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
+          <span>Luciano Leite LLC d/b/a BFG Funds</span>
+          <Link to="/privacy-policy" className="font-semibold text-cobalt">Privacy Policy</Link>
+          <Link to="/terms-of-service" className="font-semibold text-cobalt">Terms of Service</Link>
+          <Link to="/sms-terms" className="font-semibold text-cobalt">SMS Terms</Link>
+        </footer>
       </main>
     </div>
   );

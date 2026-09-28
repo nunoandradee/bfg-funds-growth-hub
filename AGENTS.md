@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Centralize the registered company identity and contact details in `src/data/site.ts` so all legal disclosures remain consistent.

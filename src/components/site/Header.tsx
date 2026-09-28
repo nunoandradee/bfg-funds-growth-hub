@@ -74,9 +74,9 @@ export function Header() {
             Industries We Serve
           </a>
           <Dropdown label="Resources" items={RESOURCES} />
-          <a href="/#contact" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
+          <Link to="/contact" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
             Contact Us
-          </a>
+          </Link>
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
@@ -112,7 +112,7 @@ export function Header() {
 
               { title: "Industries We Serve", href: "/#industries" },
               { title: "Resources", href: "/#insights" },
-              { title: "Contact Us", href: "/#contact" },
+              { title: "Contact Us", href: "/contact" },
             ].map((l) => (
               <a
                 key={l.title}
