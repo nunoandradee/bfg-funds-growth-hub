@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { Button } from "@/components/ui/button";
 import { INDUSTRIES } from "@/data/site";
 
 const TIME_IN_BUSINESS = [
@@ -98,7 +99,7 @@ const STEP_LABELS = ["Your business", "Funding profile", "Contact details"];
 const CONSENT_TEXT =
   "I agree to the Terms of Service and Privacy Policy and consent to be contacted about my funding request by phone and email.";
 const SMS_CONSENT_TEXT =
-  "I agree to receive recurring automated SMS messages from BFG Funds about my application and funding options. Message frequency varies, up to 4 messages per month. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not a condition of applying for or receiving funding.";
+  "I agree to receive recurring automated SMS messages from BFG Funds. Message & data rates may apply. Message frequency varies (up to 4 messages per month). Reply STOP to opt out, HELP for help. Consent is not a condition of applying for or receiving funding.";
 
 const fieldCls =
   "w-full rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground outline-none transition-shadow focus:border-cobalt focus:ring-4 focus:ring-cobalt/15";
@@ -427,31 +428,37 @@ export function LeadForm() {
                     </label>
                     <FieldError message={errors.terms} />
                   </div>
-                   <label className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground">
-                     <input
-                       type="checkbox"
-                       className="mt-1 size-4 shrink-0 rounded border-input accent-[var(--cobalt)]"
-                       checked={values.smsConsent}
-                       onChange={(e) => set("smsConsent", e.target.checked)}
-                     />
-                     <span>
-                       {SMS_CONSENT_TEXT} See our{" "}
-                       <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">SMS Terms</a>.
-                     </span>
-                   </label>
                 </div>
               )}
 
+              <div className="mt-7 border-t border-border pt-5">
+                <label className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground">
+                  <input
+                    type="checkbox"
+                    className="mt-1 size-4 shrink-0 rounded border-input accent-[var(--cobalt)]"
+                    checked={values.smsConsent}
+                    onChange={(e) => set("smsConsent", e.target.checked)}
+                  />
+                  <span>
+                    {SMS_CONSENT_TEXT} Read our{" "}
+                    <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">Privacy Policy</a>{" "}
+                    and{" "}
+                    <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">SMS Terms</a>.
+                  </span>
+                </label>
+              </div>
+
               <div className="mt-8 flex items-center justify-between gap-3">
                 {step > 0 ? (
-                  <button
+                  <Button
                     type="button"
+                    variant="outline"
                     onClick={() => setStep((s) => s - 1)}
-                    className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-bold text-navy transition-colors hover:bg-surface"
+                    className="h-auto rounded-full px-5 py-3 font-bold text-navy"
                   >
                     <ArrowLeft className="size-4" />
                     Back
-                  </button>
+                  </Button>
                 ) : (
                   <span className="text-xs font-medium text-muted-foreground">
                     Step {step + 1} of 3
@@ -459,25 +466,33 @@ export function LeadForm() {
                 )}
 
                 {step < 2 ? (
-                  <button
+                  <Button
                     type="button"
                     onClick={next}
-                    className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
+                    className="h-auto rounded-full bg-gold px-7 py-3 font-bold text-gold-foreground shadow-card hover:bg-gold/90"
                   >
                     Continue
                     <ArrowRight className="size-4" />
-                  </button>
+                  </Button>
                 ) : (
-                  <button
+                  <Button
                     type="submit"
                     disabled={sending}
-                    className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+                    className="h-auto rounded-full bg-gold px-7 py-3 font-bold text-gold-foreground shadow-card hover:bg-gold/90"
                   >
                     {sending ? "Submitting…" : "Submit Application"}
                     <ArrowRight className="size-4" />
-                  </button>
+                  </Button>
                 )}
               </div>
+              {step === 2 && (
+                <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                  By submitting this form with SMS consent checked, you agree to our{" "}
+                  <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">Privacy Policy</a>{" "}
+                  and{" "}
+                  <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">SMS Terms</a>.
+                </p>
+              )}
             </form>
           )}
         </div>
