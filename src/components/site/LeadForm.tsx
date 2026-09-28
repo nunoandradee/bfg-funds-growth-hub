@@ -46,9 +46,11 @@ const schema = z.object({
   mobile: z
     .string()
     .trim()
-    .min(10, "Enter a valid mobile number")
     .max(20)
-    .regex(/^[0-9+()\-.\s]+$/, "Enter a valid mobile number"),
+    .refine(
+      (value) => value === "" || (/^[0-9+()\-.\s]+$/.test(value) && value.replace(/\D/g, "").length >= 10),
+      "Enter a valid mobile number",
+    ),
   businessName: z.string().trim().min(1, "Legal business name is required").max(120),
   email: z.string().trim().email("Enter a valid email address").max(255),
   terms: z.literal(true, { errorMap: () => ({ message: "Please accept the terms to continue" }) }),
