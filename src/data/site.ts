@@ -1,3 +1,12 @@
+export const COMPANY = {
+  legalName: "Luciano Leite LLC",
+  dba: "BFG Funds",
+  displayName: "Luciano Leite LLC d/b/a BFG Funds",
+  address: "W Antantic Blvd, Coconut Creek, FL 33066, US",
+  phoneDisplay: "+1 (786) 642-0539",
+  phoneHref: "tel:+17866420539",
+  email: "hello@bfgfunds.com",
+} as const;
 
 export const SERVICES = [
   {

@@ -1,4 +1,7 @@
-import { SERVICES } from "@/data/site";
+import { Link } from "@tanstack/react-router";
+import { Mail, MapPin, Phone } from "lucide-react";
+
+import { COMPANY, SERVICES } from "@/data/site";
 
 export function Footer() {
   return (
@@ -11,9 +14,9 @@ export function Footer() {
           <p className="mt-3 text-sm leading-relaxed text-navy-foreground/65">
             Fast, reliable funding for small and mid-sized U.S. businesses.
           </p>
-          <a href="/#contact" className="mt-4 inline-block text-sm font-bold text-gold">
+          <Link to="/contact" className="mt-4 inline-block text-sm font-bold text-gold">
             See Your Options
-          </a>
+          </Link>
         </div>
         <div>
           <h3 className="text-sm font-bold uppercase tracking-widest text-navy-foreground/60">
@@ -45,22 +48,23 @@ export function Footer() {
         </div>
         <div>
           <h3 className="text-sm font-bold uppercase tracking-widest text-navy-foreground/60">
-            Get funded
+            Contact
           </h3>
-          <p className="mt-4 text-sm text-navy-foreground/70">
-            Apply in minutes. No impact to your credit to see options.
-          </p>
-          <a
-            href="/#contact"
-            className="mt-4 inline-block rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-gold-foreground"
-          >
-            Apply Now
-          </a>
+          <address className="mt-4 space-y-3 text-sm not-italic text-navy-foreground/75">
+            <p className="flex items-start gap-2"><MapPin className="mt-0.5 size-4 shrink-0 text-gold" />{COMPANY.address}</p>
+            <a href={COMPANY.phoneHref} className="flex items-center gap-2 hover:text-gold"><Phone className="size-4 text-gold" />{COMPANY.phoneDisplay}</a>
+            <a href={`mailto:${COMPANY.email}`} className="flex items-center gap-2 hover:text-gold"><Mail className="size-4 text-gold" />{COMPANY.email}</a>
+          </address>
         </div>
       </div>
-      <div className="container-page mt-12 border-t border-navy-foreground/15 pt-6 text-xs text-navy-foreground/55">
-        © {new Date().getFullYear()} BFG Funds. All rights reserved. Not a bank. Funding subject to
-        approval.
+      <div className="container-page mt-12 flex flex-col gap-4 border-t border-navy-foreground/15 pt-6 text-xs text-navy-foreground/55 md:flex-row md:items-center md:justify-between">
+        <p>© {new Date().getFullYear()} {COMPANY.displayName}. All rights reserved. Not a bank. Funding subject to approval.</p>
+        <nav aria-label="Legal" className="flex flex-wrap gap-x-5 gap-y-2">
+          <Link to="/privacy-policy" className="hover:text-gold">Privacy Policy</Link>
+          <Link to="/terms-of-service" className="hover:text-gold">Terms of Service</Link>
+          <Link to="/sms-terms" className="hover:text-gold">SMS Terms &amp; Opt-Out</Link>
+          <Link to="/contact" className="hover:text-gold">Contact</Link>
+        </nav>
       </div>
     </footer>
   );

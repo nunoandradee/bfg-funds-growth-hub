@@ -19,7 +19,7 @@ const AMOUNTS = [30_000, 50_000, 100_000, 250_000, 500_000, 1_000_000, 2_000_000
 const STEPS = ["Funding", "Business", "Owner", "Documents", "Review & sign"] as const;
 
 const CONSENT_CONTACT =
-  "I agree to receive calls, texts, and emails from BFG Funds regarding my application, including communications sent using automated technology. Consent is not a condition of funding. Message and data rates may apply.";
+  "I agree to receive recurring automated SMS messages from BFG Funds regarding my application and funding options. Message frequency varies, up to 4 messages per month. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not a condition of applying for or receiving funding.";
 const CONSENT_SHARE =
   "I certify that the information provided is accurate and authorize BFG Funds to share my application with its lending partners and obtain a soft-pull credit report.";
 
@@ -218,7 +218,10 @@ export function ApplicationForm() {
     fd.set("home_country", "US");
     fd.set("home_address", `${home.street.trim()}, ${home.city.trim()}, ${home.state} ${home.zip}`);
     fd.set("signature", canvasRef.current?.toDataURL("image/png") ?? "");
-    fd.set("communication_consent", "agreed");
+    fd.set("sms_consent", consents[0] ? "agreed" : "not_agreed");
+    fd.set("sms_consent_text", CONSENT_CONTACT);
+    fd.set("application_authorization", consents[1] ? "agreed" : "not_agreed");
+    fd.set("application_authorization_text", CONSENT_SHARE);
     fd.set("language", "en");
     fd.set("assigned_to", "mike");
     fd.set("website", trap);
@@ -479,7 +482,11 @@ export function ApplicationForm() {
                     setErrors((er) => ({ ...er, consent: undefined }));
                   }}
                 />
-                <span>{text}</span>
+                <span>
+                  {text}{i === 0 && (
+                    <> See our <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">SMS Terms</a>, <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">Privacy Policy</a>, and <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">Terms of Service</a>.</>
+                  )}
+                </span>
               </label>
             ))}
             {errors.consent && <FieldError message={errors.consent} />}

@@ -46,12 +46,15 @@ const schema = z.object({
   mobile: z
     .string()
     .trim()
-    .min(10, "Enter a valid mobile number")
     .max(20)
-    .regex(/^[0-9+()\-.\s]+$/, "Enter a valid mobile number"),
+    .refine(
+      (value) => value === "" || (/^[0-9+()\-.\s]+$/.test(value) && value.replace(/\D/g, "").length >= 10),
+      "Enter a valid mobile number",
+    ),
   businessName: z.string().trim().min(1, "Legal business name is required").max(120),
   email: z.string().trim().email("Enter a valid email address").max(255),
   terms: z.literal(true, { errorMap: () => ({ message: "Please accept the terms to continue" }) }),
+  smsConsent: z.boolean(),
 });
 
 type FormState = {
@@ -66,6 +69,7 @@ type FormState = {
   businessName: string;
   email: string;
   terms: boolean;
+  smsConsent: boolean;
 };
 
 const EMPTY: FormState = {
@@ -80,6 +84,7 @@ const EMPTY: FormState = {
   businessName: "",
   email: "",
   terms: false,
+  smsConsent: false,
 };
 
 const STEP_FIELDS: (keyof FormState)[][] = [
@@ -91,7 +96,9 @@ const STEP_FIELDS: (keyof FormState)[][] = [
 const STEP_LABELS = ["Your business", "Funding profile", "Contact details"];
 
 const CONSENT_TEXT =
-  "I agree to the terms & conditions and consent to be contacted about funding options.";
+  "I agree to the Terms of Service and Privacy Policy and consent to be contacted about my funding request by phone and email.";
+const SMS_CONSENT_TEXT =
+  "I agree to receive recurring automated SMS messages from BFG Funds about my application and funding options. Message frequency varies, up to 4 messages per month. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not a condition of applying for or receiving funding.";
 
 const fieldCls =
   "w-full rounded-xl border border-input bg-background px-4 py-3 text-sm text-foreground outline-none transition-shadow focus:border-cobalt focus:ring-4 focus:ring-cobalt/15";
@@ -150,6 +157,8 @@ export function LeadForm() {
           email: values.email,
           consent: values.terms,
           consentText: CONSENT_TEXT,
+          smsConsent: values.smsConsent,
+          smsConsentText: SMS_CONSENT_TEXT,
           pageUrl: window.location.href,
           website: trap,
         }),
@@ -406,14 +415,30 @@ export function LeadForm() {
                       />
                       <span>
                         I agree to the{" "}
-                        <a href="#terms" className="font-semibold text-cobalt underline">
-                          terms &amp; conditions
-                        </a>{" "}
-                        and consent to be contacted about funding options.
+                         <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">
+                           Terms of Service
+                         </a>{" "}
+                         and{" "}
+                         <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">
+                           Privacy Policy
+                         </a>{" "}
+                         and consent to be contacted about my funding request by phone and email.
                       </span>
                     </label>
                     <FieldError message={errors.terms} />
                   </div>
+                   <label className="flex items-start gap-3 text-sm leading-relaxed text-muted-foreground">
+                     <input
+                       type="checkbox"
+                       className="mt-1 size-4 shrink-0 rounded border-input accent-[var(--cobalt)]"
+                       checked={values.smsConsent}
+                       onChange={(e) => set("smsConsent", e.target.checked)}
+                     />
+                     <span>
+                       {SMS_CONSENT_TEXT} See our{" "}
+                       <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">SMS Terms</a>.
+                     </span>
+                   </label>
                 </div>
               )}
 
