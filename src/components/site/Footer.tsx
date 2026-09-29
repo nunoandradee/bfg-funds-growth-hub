@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone } from "lucide-react";
 
+import logoWhite from "@/assets/bfg-logo-white.svg.asset.json";
 import { COMPANY, SERVICES } from "@/data/site";
 
 export function Footer() {
@@ -8,9 +9,13 @@ export function Footer() {
     <footer className="bg-navy py-14 text-navy-foreground">
       <div className="container-page grid gap-10 md:grid-cols-4">
         <div>
-          <span className="text-lg font-extrabold tracking-tight">
-            BFG <span className="text-gold">FUNDS</span>
-          </span>
+          <img
+            src={logoWhite.url}
+            alt="BFG Funds"
+            width={232}
+            height={56}
+            className="h-9 w-auto"
+          />
           <p className="mt-3 text-sm leading-relaxed text-navy-foreground/65">
             Fast, reliable funding for small and mid-sized U.S. businesses.
           </p>

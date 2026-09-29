@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import logoHorizontal from "@/assets/bfg-logo-horizontal.svg.asset.json";
+
 import { Link } from "@tanstack/react-router";
 import { ChevronDown, Menu, X } from "lucide-react";
 
@@ -49,14 +52,14 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 backdrop-blur-md">
       <div className="container-page flex items-center justify-between gap-6">
-        <a href="/#top" className="flex shrink-0 items-center gap-2 py-4" aria-label="BFG Funds home">
-          {/* Placeholder wordmark — swap for a real logo asset later */}
-          <span className="grid size-9 place-items-center rounded-lg bg-navy text-sm font-extrabold text-navy-foreground">
-            B
-          </span>
-          <span className="text-lg font-extrabold tracking-tight text-navy">
-            BFG <span className="text-cobalt">FUNDS</span>
-          </span>
+        <a href="/#top" className="flex shrink-0 items-center py-4" aria-label="BFG Funds home">
+          <img
+            src={logoHorizontal.url}
+            alt="BFG Funds"
+            width={232}
+            height={56}
+            className="h-9 w-auto"
+          />
         </a>
 
         <nav className="hidden items-center gap-7 lg:flex">
