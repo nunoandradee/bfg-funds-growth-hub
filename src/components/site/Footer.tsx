@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone } from "lucide-react";
 
+import logoWhite from "@/assets/bfg-logo-white.svg.asset.json";
 import { COMPANY, SERVICES } from "@/data/site";
 
 export function Footer() {
