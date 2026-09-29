@@ -53,7 +53,7 @@ function ApplyPage() {
           <ApplicationForm />
         </div>
         <footer className="container-page mt-10 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
-          <span>Luciano Leite LLC d/b/a BFG Funds</span>
+          <span>BFG Funds</span>
           <Link to="/privacy-policy" className="font-semibold text-cobalt">Privacy Policy</Link>
           <Link to="/terms-of-service" className="font-semibold text-cobalt">Terms of Service</Link>
           <Link to="/sms-terms" className="font-semibold text-cobalt">SMS Terms</Link>

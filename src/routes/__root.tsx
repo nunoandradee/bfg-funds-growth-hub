@@ -85,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "BFG Funds delivers $30K–$2M in small business funding in 24–48 hours, from lines of credit to SBA loans.",
       },
-      { name: "author", content: "Luciano Leite LLC d/b/a BFG Funds" },
+      { name: "author", content: "BFG Funds" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
