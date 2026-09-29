@@ -1,4 +1,5 @@
-import { useState } from "react";
+import logoHorizontal from "@/assets/bfg-logo-horizontal.svg.asset.json";
+
 import { Link } from "@tanstack/react-router";
 import { ChevronDown, Menu, X } from "lucide-react";
 
