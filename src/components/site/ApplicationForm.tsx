@@ -218,6 +218,8 @@ export function ApplicationForm() {
     fd.set("home_country", "US");
     fd.set("home_address", `${home.street.trim()}, ${home.city.trim()}, ${home.state} ${home.zip}`);
     fd.set("signature", canvasRef.current?.toDataURL("image/png") ?? "");
+    // Back office requires this field: consent to be contacted about the submitted application.
+    fd.set("communication_consent", "agreed");
     fd.set("sms_consent", consents[0] ? "agreed" : "not_agreed");
     fd.set("sms_consent_text", CONSENT_CONTACT);
     fd.set("application_authorization", consents[1] ? "agreed" : "not_agreed");
