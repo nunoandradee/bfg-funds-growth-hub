@@ -15,8 +15,10 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as SmsTermsRouteImport } from './routes/sms-terms'
 import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as ApiApplyRouteImport } from './routes/api/apply'
 import { Route as ApiLeadRouteImport } from './routes/api/lead'
+import { Route as ApiUnsubscribeRouteImport } from './routes/api/unsubscribe'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -49,6 +51,11 @@ const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
   path: '/terms-of-service',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiApplyRoute = ApiApplyRouteImport.update({
   id: '/api/apply',
   path: '/api/apply',
@@ -57,6 +64,11 @@ const ApiApplyRoute = ApiApplyRouteImport.update({
 const ApiLeadRoute = ApiLeadRouteImport.update({
   id: '/api/lead',
   path: '/api/lead',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiUnsubscribeRoute = ApiUnsubscribeRouteImport.update({
+  id: '/api/unsubscribe',
+  path: '/api/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
@@ -72,8 +84,10 @@ export interface FileRoutesByFullPath {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sms-terms': typeof SmsTermsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/api/apply': typeof ApiApplyRoute
   '/api/lead': typeof ApiLeadRoute
+  '/api/unsubscribe': typeof ApiUnsubscribeRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRoutesByTo {
@@ -83,8 +97,10 @@ export interface FileRoutesByTo {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sms-terms': typeof SmsTermsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/api/apply': typeof ApiApplyRoute
   '/api/lead': typeof ApiLeadRoute
+  '/api/unsubscribe': typeof ApiUnsubscribeRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRoutesById {
@@ -95,8 +111,10 @@ export interface FileRoutesById {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/sms-terms': typeof SmsTermsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/api/apply': typeof ApiApplyRoute
   '/api/lead': typeof ApiLeadRoute
+  '/api/unsubscribe': typeof ApiUnsubscribeRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRouteTypes {
@@ -108,8 +126,10 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/sms-terms'
     | '/terms-of-service'
+    | '/unsubscribe'
     | '/api/apply'
     | '/api/lead'
+    | '/api/unsubscribe'
     | '/services/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -119,8 +139,10 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/sms-terms'
     | '/terms-of-service'
+    | '/unsubscribe'
     | '/api/apply'
     | '/api/lead'
+    | '/api/unsubscribe'
     | '/services/$slug'
   id:
     | '__root__'
@@ -130,8 +152,10 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/sms-terms'
     | '/terms-of-service'
+    | '/unsubscribe'
     | '/api/apply'
     | '/api/lead'
+    | '/api/unsubscribe'
     | '/services/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -142,8 +166,10 @@ export interface RootRouteChildren {
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SmsTermsRoute: typeof SmsTermsRoute
   TermsOfServiceRoute: typeof TermsOfServiceRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   ApiApplyRoute: typeof ApiApplyRoute
   ApiLeadRoute: typeof ApiLeadRoute
+  ApiUnsubscribeRoute: typeof ApiUnsubscribeRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
 }
 
@@ -191,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsOfServiceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/apply': {
       id: '/api/apply'
       path: '/api/apply'
@@ -203,6 +236,13 @@ declare module '@tanstack/react-router' {
       path: '/api/lead'
       fullPath: '/api/lead'
       preLoaderRoute: typeof ApiLeadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/unsubscribe': {
+      id: '/api/unsubscribe'
+      path: '/api/unsubscribe'
+      fullPath: '/api/unsubscribe'
+      preLoaderRoute: typeof ApiUnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/$slug': {
@@ -222,8 +262,10 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   SmsTermsRoute: SmsTermsRoute,
   TermsOfServiceRoute: TermsOfServiceRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   ApiApplyRoute: ApiApplyRoute,
   ApiLeadRoute: ApiLeadRoute,
+  ApiUnsubscribeRoute: ApiUnsubscribeRoute,
   ServicesSlugRoute: ServicesSlugRoute,
 }
 export const routeTree = rootRouteImport

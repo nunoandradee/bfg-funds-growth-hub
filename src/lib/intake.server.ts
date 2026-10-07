@@ -4,7 +4,7 @@
 
 const TIMEOUT_MS = 40_000;
 
-function destination(kind: "lead" | "application"): { url: string; key: string } | null {
+function destination(kind: "lead" | "application" | "unsubscribe"): { url: string; key: string } | null {
   const base = (process.env["INTAKE_URL"] ?? "").replace(/\/$/, "");
   const key = process.env["INTAKE_KEY"] ?? "";
   if (!base || !key) return null;
@@ -57,5 +57,53 @@ export async function forward(
     return { ok: false };
   } finally {
     clearTimeout(timer);
+  }
+}
+
+export type UnsubscribeState = {
+  ok: boolean;
+  masked?: string | undefined;
+  unsubscribed?: boolean | undefined;
+  invalid?: boolean | undefined;
+};
+
+/** Email preferences: checks or changes the subscription behind a signed email link. */
+export async function unsubscribeRequest(
+  request: Request,
+  token: string,
+  action: "check" | "unsubscribe" | "resubscribe",
+): Promise<UnsubscribeState> {
+  const dest = destination("unsubscribe");
+  if (!dest) {
+    console.error("[intake] INTAKE_URL / INTAKE_KEY not configured");
+    return { ok: false };
+  }
+  try {
+    const res = await fetch(dest.url, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${dest.key}`,
+        "content-type": "application/json",
+        "x-client-ip": clientIp(request),
+        "x-client-user-agent": request.headers.get("user-agent") ?? "",
+      },
+      body: JSON.stringify({ t: token, action }),
+      signal: AbortSignal.timeout(15_000),
+    });
+    const data = (await res.json().catch(() => ({}))) as {
+      ok?: boolean;
+      error?: string;
+      masked?: string;
+      unsubscribed?: boolean;
+    };
+    if (!res.ok || !data.ok) {
+      if (data.error === "invalid_token") return { ok: false, invalid: true };
+      console.error("[intake] unsubscribe rejected", res.status, data.error);
+      return { ok: false };
+    }
+    return { ok: true, masked: data.masked, unsubscribed: Boolean(data.unsubscribed) };
+  } catch (error) {
+    console.error("[intake] unsubscribe failed", (error as Error)?.message);
+    return { ok: false };
   }
 }
