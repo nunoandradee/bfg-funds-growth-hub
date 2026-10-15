@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
-import heroOwner from "@/assets/hero-owner.jpg";
+import heroOwners from "@/assets/hero-owners.jpg";
 import { COMPANY } from "@/data/site";
 
 const AMOUNTS = [
@@ -80,12 +80,12 @@ export function Hero() {
 
         <figure className="relative">
           <img
-            src={heroOwner}
-            alt="Small business owner standing in his clothing store"
+            src={heroOwners}
+            alt="Two café owners smiling behind their counter"
             width={1600}
-            height={1069}
+            height={900}
             fetchPriority="high"
-            className="aspect-[4/3] w-full rounded-xl object-cover object-[60%_30%] lg:aspect-square"
+            className="aspect-[4/3] w-full rounded-xl object-cover object-center lg:aspect-[3/2]"
           />
         </figure>
       </div>

@@ -13,7 +13,7 @@ export type Photo = { src: string; alt: string };
 
 export const INDUSTRY_PHOTOS: Record<string, Photo> = {
   construction: { src: construction, alt: "Contractor cutting trim with a miter saw" },
-  restaurants: { src: restaurants, alt: "Café owner standing behind her counter" },
+  restaurants: { src: restaurants, alt: "Restaurant owner at the pass of his kitchen" },
   trucking: { src: trucking, alt: "Semi truck on an open highway" },
   "retail-ecommerce": { src: retail, alt: "Shop owner sitting in her clothing store" },
   "auto-repair": { src: autoRepair, alt: "Mechanic working in his repair shop" },
