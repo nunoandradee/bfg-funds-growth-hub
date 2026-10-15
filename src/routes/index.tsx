@@ -2,6 +2,21 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   ArrowRight,
+  Briefcase,
+  Building2,
+  Car,
+  Factory,
+  HardHat,
+  Landmark as BankIcon,
+  Mail,
+  Phone,
+  Scissors,
+  ShoppingBag,
+  Stethoscope,
+  TreePine,
+  Truck,
+  Users,
+  UtensilsCrossed,
   BadgeCheck,
   Banknote,
   Calculator,
@@ -31,8 +46,10 @@ import { LeadForm } from "@/components/site/LeadForm";
 import { CALCULATORS } from "@/data/calculators";
 import { GUIDES } from "@/data/guides";
 import { INDUSTRY_PAGES } from "@/data/industries";
-import { SERVICES, SITE_URL } from "@/data/site";
-import { pageHead } from "@/lib/seo";
+import { COMPANY, SERVICES, SITE_URL } from "@/data/site";
+import { faqLd, pageHead } from "@/lib/seo";
+import { GENERAL_FAQS } from "@/data/faqs";
+import { FaqList } from "@/components/site/PageParts";
 import aboutImg from "@/assets/about.jpg";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
@@ -55,6 +72,7 @@ export const Route = createFileRoute("/")({
           name: "BFG Funds",
           url: `${SITE_URL}/`,
         },
+        faqLd(HOME_FAQS),
       ],
     }),
   component: Index,
@@ -132,6 +150,31 @@ const MARKETPLACE = [
 ];
 
 const GUIDE_IMAGES = [blog1, blog2, blog3];
+
+const HOME_FAQS = GENERAL_FAQS.slice(0, 6);
+
+const INDUSTRY_ICONS: Record<string, typeof Truck> = {
+  construction: HardHat,
+  restaurants: UtensilsCrossed,
+  trucking: Truck,
+  "retail-ecommerce": ShoppingBag,
+  healthcare: Stethoscope,
+  "auto-repair": Car,
+  "professional-services": Briefcase,
+  manufacturing: Factory,
+  "beauty-wellness": Scissors,
+  staffing: Users,
+  landscaping: TreePine,
+  "real-estate-services": Building2,
+};
+
+/** The lowest bar across our programs; term and SBA loans ask for more. */
+const MINIMUMS = [
+  { value: "4+ months", label: "in business" },
+  { value: "$10K+", label: "monthly revenue" },
+  { value: "Business", label: "checking account" },
+  { value: "All credit", label: "scores considered" },
+];
 
 function Index() {
   const [visible, setVisible] = useState(3);
@@ -289,29 +332,89 @@ function Index() {
           </div>
         </section>
 
-        {/* INDUSTRIES */}
-        <section id="industries" className="bg-surface py-16">
+        {/* MINIMUM REQUIREMENTS */}
+        <section className="bg-surface py-16 md:py-20">
           <div className="container-page">
-            <h2 className="text-balance-tight text-3xl font-extrabold text-navy md:text-4xl">
-              Industries We Serve
-            </h2>
-            <p className="mt-4 max-w-2xl text-muted-foreground">
-              From jobsites to storefronts, we help the operators keeping American main streets
-              running find the right funding.
-            </p>
-            <ul className="mt-8 flex flex-wrap gap-2.5">
-              {INDUSTRY_PAGES.map((industry) => (
-                <li key={industry.slug}>
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-2xl">
+                <h2 className="text-balance-tight text-3xl font-extrabold text-navy md:text-4xl">
+                  Are we a match? Check the minimums.
+                </h2>
+                <p className="mt-3 text-muted-foreground">
+                  The starting point across our programs. Term and SBA loans ask for more time in
+                  business and stronger credit.
+                </p>
+              </div>
+              <Link
+                to="/resources/$slug"
+                params={{ slug: "business-loan-requirements" }}
+                className="inline-flex items-center gap-2 text-sm font-bold text-cobalt"
+              >
+                Requirements by product
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+            <dl className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
+              {MINIMUMS.map((m) => (
+                <div
+                  key={m.label}
+                  className="rounded-2xl border border-border bg-card p-6 text-center shadow-card"
+                >
+                  <dt className="sr-only">{m.label}</dt>
+                  <dd>
+                    <span className="block text-2xl font-extrabold text-navy md:text-3xl">
+                      {m.value}
+                    </span>
+                    <span className="mt-1 block text-sm text-muted-foreground">{m.label}</span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        {/* INDUSTRIES */}
+        <section id="industries" className="py-20 md:py-28">
+          <div className="container-page">
+            <div className="max-w-3xl">
+              <h2 className="text-balance-tight text-4xl font-extrabold text-navy md:text-5xl">
+                Your industry, understood
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+                Draws and retainage, insurance reimbursements, net-60 freight invoices — we match
+                you with lenders who know how your industry earns and spends.
+              </p>
+            </div>
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {INDUSTRY_PAGES.slice(0, 6).map((industry) => {
+                const Icon = INDUSTRY_ICONS[industry.slug] ?? BankIcon;
+                return (
                   <Link
+                    key={industry.slug}
                     to="/industries/$slug"
                     params={{ slug: industry.slug }}
-                    className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-navy/85 transition-colors hover:border-cobalt hover:text-cobalt"
+                    className="group flex flex-col rounded-2xl border border-border bg-card p-6 shadow-card transition-all hover:-translate-y-1 hover:border-cobalt/40"
                   >
-                    {industry.name}
+                    <Icon className="size-7 text-gold" />
+                    <h3 className="mt-4 text-lg font-extrabold text-navy">{industry.name}</h3>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                      {industry.summary}
+                    </p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-cobalt">
+                      Learn more
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                    </span>
                   </Link>
-                </li>
-              ))}
-            </ul>
+                );
+              })}
+            </div>
+            <Link
+              to="/industries"
+              className="mt-10 inline-flex items-center gap-2 rounded-full border border-navy px-7 py-3 text-sm font-bold text-navy transition-colors hover:bg-navy hover:text-navy-foreground"
+            >
+              View all {INDUSTRY_PAGES.length} industries
+              <ArrowRight className="size-4" />
+            </Link>
           </div>
         </section>
 
@@ -441,6 +544,45 @@ function Index() {
               >
                 All guides
               </Link>
+            </div>
+          </div>
+        </section>
+
+        <FaqList faqs={HOME_FAQS} title="Questions owners ask us" />
+        <div className="container-page -mt-8 max-w-4xl pb-16 md:pb-20">
+          <Link to="/faq" className="inline-flex items-center gap-2 text-sm font-bold text-cobalt">
+            See all questions
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
+
+        {/* TALK TO A PERSON */}
+        <section className="border-y border-border bg-surface py-16">
+          <div className="container-page flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl">
+              <h2 className="text-balance-tight text-3xl font-extrabold text-navy md:text-4xl">
+                Rather talk it through? Call a real person.
+              </h2>
+              <p className="mt-3 text-lg leading-relaxed text-muted-foreground">
+                Talk to a dedicated funding specialist. No call center, no script — just someone who
+                knows the lenders and will tell you what fits.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <a
+                href={COMPANY.phoneHref}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-7 py-4 text-base font-extrabold text-navy-foreground transition-transform hover:-translate-y-0.5"
+              >
+                <Phone className="size-5" />
+                {COMPANY.phoneDisplay}
+              </a>
+              <a
+                href={`mailto:${COMPANY.email}`}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-navy px-7 py-4 text-base font-bold text-navy hover:bg-navy hover:text-navy-foreground"
+              >
+                <Mail className="size-5" />
+                Email us
+              </a>
             </div>
           </div>
         </section>
