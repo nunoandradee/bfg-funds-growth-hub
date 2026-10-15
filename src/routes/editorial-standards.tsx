@@ -65,7 +65,7 @@ function EditorialStandardsPage() {
           <div className="container-page grid max-w-5xl gap-6 md:grid-cols-2">
             {SECTIONS.map((s) => (
               <div key={s.title} className="rounded-2xl border border-border bg-card p-7">
-                <h2 className="text-xl font-extrabold text-navy">{s.title}</h2>
+                <h2 className="text-xl text-navy">{s.title}</h2>
                 <p className="mt-3 leading-relaxed text-muted-foreground">{s.text}</p>
               </div>
             ))}

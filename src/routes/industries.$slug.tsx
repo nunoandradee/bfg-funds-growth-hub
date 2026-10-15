@@ -4,7 +4,8 @@ import { ArrowRight, Check } from "lucide-react";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { LeadForm } from "@/components/site/LeadForm";
-import { Disclaimer, FaqList, PageHero } from "@/components/site/PageParts";
+import { FaqList, PageHero } from "@/components/site/PageParts";
+import { INDUSTRY_PHOTOS } from "@/data/photos";
 import { findIndustry, INDUSTRY_PAGES } from "@/data/industries";
 import { CONTENT_REVIEWED, SERVICES } from "@/data/site";
 import { EditorialByline } from "@/components/site/Editorial";
@@ -58,23 +59,24 @@ function IndustryPage() {
             { name: "Industries", to: "/industries" },
             { name: industry.name },
           ]}
-          eyebrow="Industry Funding"
+          eyebrow="Industry funding"
           title={`${industry.name} business funding`}
           intro={industry.summary}
+          image={INDUSTRY_PHOTOS[industry.slug]}
         >
           <div className="mt-10 flex flex-wrap gap-4">
             <a
               href="/apply"
-              className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-md bg-gold px-7 py-3.5 text-sm font-bold text-gold-foreground transition-colors"
             >
-              Start your application
+              Check my options
               <ArrowRight className="size-4" />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-navy-foreground/25 px-7 py-3.5 text-sm font-bold hover:border-gold hover:text-gold"
+              className="inline-flex items-center gap-2 rounded-md border border-navy/25 px-7 py-3.5 text-sm font-semibold text-navy hover:bg-navy/5"
             >
-              See Your Options
+              Talk to a specialist
             </a>
           </div>
           <EditorialByline updated={CONTENT_REVIEWED} />
@@ -83,7 +85,7 @@ function IndustryPage() {
         <section className="py-16 md:py-20">
           <div className="container-page grid gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="text-3xl font-extrabold text-navy">
+              <h2 className="text-3xl text-navy">
                 Why {industry.name.toLowerCase()} businesses need flexible funding
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{industry.intro}</p>
@@ -91,7 +93,7 @@ function IndustryPage() {
               <ul className="mt-4 space-y-3">
                 {industry.challenges.map((c) => (
                   <li key={c} className="flex items-start gap-3 text-navy/80">
-                    <Check className="mt-1 size-5 shrink-0 text-gold" />
+                    <Check className="mt-1 size-5 shrink-0 text-cobalt" />
                     {c}
                   </li>
                 ))}
@@ -115,7 +117,7 @@ function IndustryPage() {
 
         <section className="bg-surface py-16 md:py-20">
           <div className="container-page">
-            <h2 className="text-3xl font-extrabold text-navy md:text-4xl">
+            <h2 className="text-3xl text-navy md:text-4xl">
               Funding options that fit {industry.name.toLowerCase()}
             </h2>
             <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -140,7 +142,6 @@ function IndustryPage() {
                 </Link>
               ))}
             </div>
-            <Disclaimer className="mt-6 max-w-3xl" />
           </div>
         </section>
 
@@ -148,7 +149,7 @@ function IndustryPage() {
 
         <section className="border-t border-border py-12">
           <div className="container-page">
-            <h2 className="text-xl font-extrabold text-navy">Other industries we serve</h2>
+            <h2 className="text-xl text-navy">Other industries we serve</h2>
             <ul className="mt-4 flex flex-wrap gap-2.5">
               {others.map((i) => (
                 <li key={i.slug}>

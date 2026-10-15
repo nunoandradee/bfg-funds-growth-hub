@@ -251,7 +251,7 @@ export function ApplicationForm() {
         <div className="mx-auto grid size-16 place-items-center rounded-full bg-gold/20">
           <Check className="size-8 text-navy" />
         </div>
-        <h2 className="mt-6 text-3xl font-extrabold text-navy">Application submitted</h2>
+        <h2 className="mt-6 text-3xl text-navy">Application submitted</h2>
         <p className="mx-auto mt-3 max-w-md text-muted-foreground">
           Thank you, {v.fullName.trim().split(/\s+/)[0]}. A BFG Funds specialist is reviewing your application and will
           reach out with next steps — usually within one business day.
@@ -506,7 +506,7 @@ export function ApplicationForm() {
             type="button"
             onClick={() => go(step - 1)}
             disabled={sending}
-            className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-bold text-navy transition-colors hover:bg-surface disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-bold text-navy transition-colors hover:bg-surface disabled:opacity-60"
           >
             <ArrowLeft className="size-4" />
             Back
@@ -518,7 +518,7 @@ export function ApplicationForm() {
           <button
             type="button"
             onClick={next}
-            className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 rounded-md bg-gold px-7 py-3 text-sm font-bold text-gold-foreground transition-colors"
           >
             {step === 3 && files.length === 0 ? "Skip for now" : "Continue"}
             <ArrowRight className="size-4" />
@@ -528,7 +528,7 @@ export function ApplicationForm() {
             type="button"
             onClick={submit}
             disabled={sending}
-            className="inline-flex items-center gap-2 rounded-full bg-gold px-7 py-3 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5 disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-md bg-gold px-7 py-3 text-sm font-bold text-gold-foreground transition-colors disabled:opacity-60"
           >
             {sending ? "Submitting…" : "Submit application"}
             {!sending && <ArrowRight className="size-4" />}
@@ -543,7 +543,7 @@ function Section({ title, sub, children }: { title: string; sub: string; childre
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-2xl font-extrabold text-navy">{title}</h2>
+        <h2 className="text-2xl text-navy">{title}</h2>
         <p className="mt-1.5 text-sm text-muted-foreground">{sub}</p>
       </div>
       {children}

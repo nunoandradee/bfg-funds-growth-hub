@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BadgeCheck, Eye, Handshake, Network, ShieldCheck, UserRound } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { CtaBand, PageHero } from "@/components/site/PageParts";
+import { INDUSTRY_PHOTOS } from "@/data/photos";
 import { COMPANY } from "@/data/site";
 import { breadcrumbLd, pageHead } from "@/lib/seo";
 
@@ -26,22 +27,18 @@ export const Route = createFileRoute("/about")({
 
 const STEPS = [
   {
-    icon: UserRound,
     title: "One application, one specialist",
     text: "You apply once and work with a dedicated funding specialist — not a call center and not a dozen lenders calling you.",
   },
   {
-    icon: Network,
     title: "We go to the market for you",
     text: "Your specialist reviews your business and presents your file to the independent lenders and funding providers in our network most likely to approve it at the best terms.",
   },
   {
-    icon: Eye,
     title: "You compare, you decide",
     text: "We lay out each offer's amount, total cost, payment and term side by side, and explain the trade-offs in plain English. You choose — or walk away.",
   },
   {
-    icon: Handshake,
     title: "We stay with you",
     text: "From signing to funding and beyond, the same specialist helps you plan your next step, including moving to lower-cost funding as your business grows.",
   },
@@ -66,12 +63,13 @@ function AboutPage() {
           eyebrow="About BFG Funds"
           title="Your partner in the business funding market"
           intro="Banks say no to most small businesses. Dozens of alternative lenders say yes — at very different prices. BFG Funds exists to help owners find the right one, understand the real cost and decide with confidence."
+          image={INDUSTRY_PHOTOS["restaurants"]}
         />
 
         <section className="py-16 md:py-20">
-          <div className="container-page grid gap-12 lg:grid-cols-2">
+          <div className="container-page grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
             <div>
-              <h2 className="text-3xl font-extrabold text-navy md:text-4xl">Who we are</h2>
+              <h2 className="text-3xl text-navy md:text-4xl">Who we are</h2>
               <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                 {COMPANY.displayName} is a business funding marketplace based in Coconut Creek,
                 Florida, serving small and mid-sized businesses across the United States. We are not
@@ -87,9 +85,9 @@ function AboutPage() {
                 what comes back.
               </p>
             </div>
-            <div className="rounded-3xl border border-border bg-surface p-8">
-              <h2 className="text-xl font-extrabold text-navy">What we are not</h2>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground">
+            <div className="self-start border-l-4 border-navy bg-surface p-7">
+              <h2 className="text-xl text-navy">What we are not</h2>
+              <ul className="mt-4 space-y-3 text-muted-foreground">
                 <li>We are not a bank and do not take deposits.</li>
                 <li>
                   We do not make credit decisions; each provider approves and prices its own offers.
@@ -100,32 +98,30 @@ function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-surface py-16 md:py-20">
+        <section className="border-t border-border bg-surface py-16 md:py-20">
           <div className="container-page">
-            <h2 className="text-3xl font-extrabold text-navy md:text-4xl">
-              How working with us works
-            </h2>
-            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {STEPS.map(({ icon: Icon, title, text }) => (
-                <div key={title} className="rounded-2xl border border-border bg-card p-7">
-                  <div className="grid size-11 place-items-center rounded-xl bg-cobalt text-cobalt-foreground">
-                    <Icon className="size-5" />
+            <h2 className="text-3xl text-navy md:text-4xl">How working with us works</h2>
+            <ol className="mt-10 grid gap-x-12 gap-y-10 md:grid-cols-2">
+              {STEPS.map(({ title, text }, i) => (
+                <li
+                  key={title}
+                  className="grid grid-cols-[2.5rem_1fr] gap-4 border-t border-border pt-6"
+                >
+                  <span className="font-display text-3xl leading-none text-cobalt">{i + 1}</span>
+                  <div>
+                    <h3 className="text-lg text-navy">{title}</h3>
+                    <p className="mt-2 leading-relaxed text-muted-foreground">{text}</p>
                   </div>
-                  <h3 className="mt-5 text-lg font-extrabold text-navy">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
 
         <section className="py-16 md:py-20">
-          <div className="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <div className="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <div>
-              <ShieldCheck className="size-10 text-cobalt" />
-              <h2 className="mt-4 text-3xl font-extrabold text-navy md:text-4xl">
-                Our commitments to you
-              </h2>
+              <h2 className="text-3xl text-navy md:text-4xl">Our commitments to you</h2>
               <p className="mt-4 text-muted-foreground">
                 Read more in our{" "}
                 <Link to="/privacy-policy" className="font-semibold text-cobalt underline">
@@ -138,13 +134,10 @@ function AboutPage() {
                 .
               </p>
             </div>
-            <ul className="grid gap-4 sm:grid-cols-2">
+            <ul className="divide-y divide-border border-y border-border">
               {COMMITMENTS.map((c) => (
-                <li
-                  key={c}
-                  className="flex items-start gap-3 rounded-2xl border border-border bg-card p-5 text-sm font-semibold text-navy"
-                >
-                  <BadgeCheck className="size-5 shrink-0 text-gold" />
+                <li key={c} className="flex items-start gap-3 py-4 text-navy">
+                  <Check className="mt-0.5 size-5 shrink-0 text-cobalt" />
                   {c}
                 </li>
               ))}

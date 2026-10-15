@@ -44,7 +44,7 @@ function IndustriesIndex() {
                 params={{ slug: i.slug }}
                 className="group flex flex-col rounded-2xl border border-border bg-card p-7 shadow-card transition-all hover:-translate-y-1 hover:border-cobalt/40"
               >
-                <h2 className="text-xl font-extrabold text-navy">{i.name}</h2>
+                <h2 className="text-xl text-navy">{i.name}</h2>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {i.summary}
                 </p>

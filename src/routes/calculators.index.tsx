@@ -46,7 +46,7 @@ function CalculatorsIndex() {
                 <span className="grid size-12 place-items-center rounded-xl bg-navy text-navy-foreground">
                   <Calculator className="size-6" />
                 </span>
-                <h2 className="mt-5 text-xl font-extrabold text-navy">{c.title}</h2>
+                <h2 className="mt-5 text-xl text-navy">{c.title}</h2>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {c.summary}
                 </p>

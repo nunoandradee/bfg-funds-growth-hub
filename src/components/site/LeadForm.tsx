@@ -49,7 +49,8 @@ const schema = z.object({
     .trim()
     .max(20)
     .refine(
-      (value) => value === "" || (/^[0-9+()\-.\s]+$/.test(value) && value.replace(/\D/g, "").length >= 10),
+      (value) =>
+        value === "" || (/^[0-9+()\-.\s]+$/.test(value) && value.replace(/\D/g, "").length >= 10),
       "Enter a valid mobile number",
     ),
   businessName: z.string().trim().min(1, "Legal business name is required").max(120),
@@ -184,29 +185,29 @@ export function LeadForm() {
     <section id="contact" className="bg-surface py-20 md:py-28">
       <div className="container-page grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
-          <h2 className="text-balance-tight text-4xl font-extrabold text-navy md:text-5xl">
-            Have Questions? We Are All Ears!
+          <h2 className="text-balance-tight text-4xl text-navy md:text-5xl">
+            Tell us about your business
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Tell us a little about your business and we'll match you with the funding program that
-            fits — line of credit, working capital, SBA, equipment or revenue-based. It takes about
-            two minutes and there's no obligation.
+            A few details are all we need to start. A funding specialist will look at what your
+            business needs and come back with the options that fit — usually the same business day.
+            There's no obligation.
           </p>
           <ul className="mt-8 space-y-3 text-sm font-medium text-navy/80">
             {[
-              "No impact to your credit to review options",
-              "A real funding specialist, not a call center",
-              "Decisions in as little as 24 hours",
+              "Checking your options won't affect your credit",
+              "You talk to one specialist, not a call center",
+              "Many decisions come within 24 to 48 hours",
             ].map((item) => (
               <li key={item} className="flex items-start gap-3">
-                <Check className="mt-0.5 size-5 shrink-0 text-gold" />
+                <Check className="mt-0.5 size-5 shrink-0 text-cobalt" />
                 {item}
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="rounded-3xl border border-border bg-card p-6 shadow-lift md:p-9">
+        <div className="rounded-lg border border-border bg-card p-6 md:p-9">
           {done ? (
             <div className="py-14 text-center">
               <div className="mx-auto grid size-14 place-items-center rounded-full bg-gold/20 text-gold-foreground">
@@ -416,14 +417,24 @@ export function LeadForm() {
                       />
                       <span>
                         I agree to the{" "}
-                         <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">
-                           Terms of Service
-                         </a>{" "}
-                         and{" "}
-                         <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">
-                           Privacy Policy
-                         </a>{" "}
-                         and consent to be contacted about my funding request by phone and email.
+                        <a
+                          href="/terms-of-service"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-cobalt underline"
+                        >
+                          Terms of Service
+                        </a>{" "}
+                        and{" "}
+                        <a
+                          href="/privacy-policy"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-cobalt underline"
+                        >
+                          Privacy Policy
+                        </a>{" "}
+                        and consent to be contacted about my funding request by phone and email.
                       </span>
                     </label>
                     <FieldError message={errors.terms} />
@@ -441,9 +452,24 @@ export function LeadForm() {
                   />
                   <span>
                     {SMS_CONSENT_TEXT} Read our{" "}
-                    <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">Privacy Policy</a>{" "}
+                    <a
+                      href="/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-cobalt underline"
+                    >
+                      Privacy Policy
+                    </a>{" "}
                     and{" "}
-                    <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">SMS Terms</a>.
+                    <a
+                      href="/sms-terms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-cobalt underline"
+                    >
+                      SMS Terms
+                    </a>
+                    .
                   </span>
                 </label>
               </div>
@@ -454,7 +480,7 @@ export function LeadForm() {
                     type="button"
                     variant="outline"
                     onClick={() => setStep((s) => s - 1)}
-                    className="h-auto rounded-full px-5 py-3 font-bold text-navy"
+                    className="h-auto rounded-md px-5 py-3 font-bold text-navy"
                   >
                     <ArrowLeft className="size-4" />
                     Back
@@ -469,7 +495,7 @@ export function LeadForm() {
                   <Button
                     type="button"
                     onClick={next}
-                    className="h-auto rounded-full bg-gold px-7 py-3 font-bold text-gold-foreground shadow-card hover:bg-gold/90"
+                    className="h-auto rounded-md bg-gold px-7 py-3 font-bold text-gold-foreground hover:bg-gold/90"
                   >
                     Continue
                     <ArrowRight className="size-4" />
@@ -478,7 +504,7 @@ export function LeadForm() {
                   <Button
                     type="submit"
                     disabled={sending}
-                    className="h-auto rounded-full bg-gold px-7 py-3 font-bold text-gold-foreground shadow-card hover:bg-gold/90"
+                    className="h-auto rounded-md bg-gold px-7 py-3 font-bold text-gold-foreground hover:bg-gold/90"
                   >
                     {sending ? "Submitting…" : "Submit Application"}
                     <ArrowRight className="size-4" />
@@ -488,9 +514,24 @@ export function LeadForm() {
               {step === 2 && (
                 <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
                   By submitting this form with SMS consent checked, you agree to our{" "}
-                  <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">Privacy Policy</a>{" "}
+                  <a
+                    href="/privacy-policy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-cobalt underline"
+                  >
+                    Privacy Policy
+                  </a>{" "}
                   and{" "}
-                  <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">SMS Terms</a>.
+                  <a
+                    href="/sms-terms"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-cobalt underline"
+                  >
+                    SMS Terms
+                  </a>
+                  .
                 </p>
               )}
             </form>

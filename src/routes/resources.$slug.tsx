@@ -112,7 +112,7 @@ function GuidePage() {
                 id={anchorId(section.heading)}
                 className="mb-10 scroll-mt-24"
               >
-                <h2 className="text-2xl font-extrabold text-navy">{section.heading}</h2>
+                <h2 className="text-2xl text-navy">{section.heading}</h2>
                 {section.paragraphs?.map((p) => (
                   <p
                     key={p.slice(0, 40)}

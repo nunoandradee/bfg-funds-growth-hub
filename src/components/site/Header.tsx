@@ -6,7 +6,7 @@ import { Link } from "@tanstack/react-router";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 import { CALCULATORS } from "@/data/calculators";
-import { SERVICES } from "@/data/site";
+import { COMPANY, SERVICES } from "@/data/site";
 
 type NavItem = { title: string; href: string };
 
@@ -102,19 +102,19 @@ export function Header() {
           <Dropdown label="Calculators" items={TOOLS} />
           <Dropdown label="Resources" items={RESOURCES} />
           <Link to="/contact" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
-            Contact Us
+            Contact
           </Link>
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <a href="/#contact" className="text-sm font-bold text-navy hover:text-cobalt">
-            See Your Options
+          <a href={COMPANY.phoneHref} className="text-sm font-semibold text-navy hover:text-cobalt">
+            {COMPANY.phoneDisplay}
           </a>
           <a
             href="/apply"
-            className="rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
+            className="rounded-md bg-gold px-5 py-2.5 text-sm font-bold text-gold-foreground transition-colors"
           >
-            Apply Now
+            Apply now
           </a>
         </div>
 
@@ -138,19 +138,23 @@ export function Header() {
               items={[
                 { title: "Industries", href: "/industries" },
                 ...RESOURCES,
-                { title: "Contact Us", href: "/contact" },
+                { title: "Contact", href: "/contact" },
               ]}
               onNavigate={close}
             />
-            <a href="/#contact" onClick={close} className="px-2 py-3 text-sm font-bold text-cobalt">
-              See Your Options
+            <a
+              href={COMPANY.phoneHref}
+              onClick={close}
+              className="px-2 py-3 text-sm font-bold text-cobalt"
+            >
+              Call {COMPANY.phoneDisplay}
             </a>
             <a
               href="/apply"
               onClick={close}
-              className="mt-1 rounded-full bg-gold px-5 py-3 text-center text-sm font-bold text-gold-foreground"
+              className="mt-1 rounded-md bg-gold px-5 py-3 text-center text-sm font-bold text-gold-foreground"
             >
-              Apply Now
+              Apply now
             </a>
           </div>
         </div>
