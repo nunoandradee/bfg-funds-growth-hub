@@ -5,7 +5,7 @@ import { ApplicationForm } from "@/components/site/ApplicationForm";
 
 const TITLE = "Apply for Business Funding | BFG Funds";
 const DESCRIPTION =
-  "Apply online for $30K–$2M in small business funding with BFG Funds. One secure application, no impact to your credit to review options.";
+  "Apply online for $10K–$2M in small business funding with BFG Funds. One secure application, no impact to your credit to review options.";
 
 export const Route = createFileRoute("/apply")({
   head: () => ({
@@ -35,7 +35,7 @@ function ApplyPage() {
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
               One secure application gives our funding specialists everything they need to match you with the right
-              program — from $30K to $2M.
+              program — from $10K to $2M.
             </p>
             <ul className="mt-8 space-y-3 text-sm font-medium text-navy/80">
               {[

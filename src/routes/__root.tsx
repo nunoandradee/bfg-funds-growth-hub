@@ -85,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "BFG Funds delivers $30K–$2M in small business funding in 24–48 hours, from lines of credit to SBA loans.",
+          "BFG Funds delivers $10K–$2M in small business funding in 24–48 hours, from lines of credit to SBA loans.",
       },
       { name: "author", content: "BFG Funds" },
       { property: "og:type", content: "website" },

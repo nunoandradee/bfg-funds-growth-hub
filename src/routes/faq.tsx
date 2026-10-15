@@ -35,10 +35,6 @@ const GENERAL = [
     a: "Often, yes. Revenue-based financing, merchant cash advances, invoice factoring and equipment financing consider lower credit scores, usually at a higher cost.",
   },
   {
-    q: "Do you charge me a fee?",
-    a: "BFG Funds is typically compensated by the funding provider when your funding closes. Any fee that would be charged to you is disclosed in writing before you sign.",
-  },
-  {
     q: "Which states do you serve?",
     a: "We work with businesses across the United States. Some products and providers are not available in every state.",
   },
@@ -53,7 +49,7 @@ export const Route = createFileRoute("/faq")({
     pageHead({
       title: "Business Funding FAQ | BFG Funds",
       description:
-        "Answers about BFG Funds, credit checks, documents, funding speed, costs, bad credit options and how we are paid.",
+        "Answers about BFG Funds, credit checks, documents, funding speed, costs and bad credit options.",
       path: "/faq",
       jsonLd: [
         breadcrumbLd([

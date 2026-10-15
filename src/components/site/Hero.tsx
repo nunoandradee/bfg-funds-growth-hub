@@ -39,7 +39,7 @@ export function Hero() {
           </span>
 
           <h1 className="mt-6 text-balance-tight text-5xl font-extrabold leading-[1.05] text-navy-foreground md:text-7xl">
-            $30K to $2M in <span className="text-gold">24–48 Hours</span>
+            $10K to $2M in <span className="text-gold">24–48 Hours</span>
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-navy-foreground/75">

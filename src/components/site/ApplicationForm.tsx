@@ -14,7 +14,7 @@ const ENTITY_TYPES = [
   "Partnership",
 ];
 
-const AMOUNTS = [30_000, 50_000, 100_000, 250_000, 500_000, 1_000_000, 2_000_000];
+const AMOUNTS = [10_000, 30_000, 50_000, 100_000, 250_000, 500_000, 1_000_000, 2_000_000];
 
 const STEPS = ["Funding", "Business", "Owner", "Documents", "Review & sign"] as const;
 
@@ -290,7 +290,7 @@ export function ApplicationForm() {
       />
 
       {step === 0 && (
-        <Section title="How much funding do you need?" sub="From $30K to $2M. Checking your options won't affect your credit score.">
+        <Section title="How much funding do you need?" sub="From $10K to $2M. Checking your options won't affect your credit score.">
           <Field label="Amount" error={errors.amount}>
             <input
               inputMode="numeric"

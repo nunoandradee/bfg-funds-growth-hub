@@ -12,7 +12,7 @@ export const Route = createFileRoute("/about")({
     pageHead({
       title: "About BFG Funds | How Our Business Funding Marketplace Works",
       description:
-        "BFG Funds connects U.S. small businesses with independent lenders and funding providers. Learn how we work, how we are paid and what we commit to.",
+        "BFG Funds connects U.S. small businesses with independent lenders and funding providers. Learn how we work and what we commit to.",
       path: "/about",
       jsonLd: [
         breadcrumbLd([
@@ -88,13 +88,7 @@ function AboutPage() {
               </p>
             </div>
             <div className="rounded-3xl border border-border bg-surface p-8">
-              <h2 className="text-xl font-extrabold text-navy">How we are paid</h2>
-              <p className="mt-4 leading-relaxed text-muted-foreground">
-                {COMPANY.displayName} is typically compensated by the lender or funding provider
-                when your funding closes. Any fee that would be charged to you is disclosed in
-                writing before you sign anything. You are never obligated to accept an offer.
-              </p>
-              <h2 className="mt-8 text-xl font-extrabold text-navy">What we are not</h2>
+              <h2 className="text-xl font-extrabold text-navy">What we are not</h2>
               <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground">
                 <li>We are not a bank and do not take deposits.</li>
                 <li>

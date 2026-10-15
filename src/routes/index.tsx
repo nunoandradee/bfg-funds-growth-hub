@@ -38,7 +38,7 @@ import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
 import blog3 from "@/assets/blog-3.jpg";
 
-const TITLE = "BFG Funds | $30K–$2M Small Business Funding in 24–48 Hours";
+const TITLE = "BFG Funds | $10K–$2M Small Business Funding in 24–48 Hours";
 const DESCRIPTION =
   "Compare small business funding from a network of lenders: lines of credit, working capital, SBA loans, term loans, equipment financing and more. One application, decisions often in 24–48 hours.";
 
@@ -457,7 +457,7 @@ function Index() {
                 Get Funded. Grow Faster.
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-cobalt-foreground/85">
-                From $30,000 to $2 million for growth, payroll, inventory and everyday cash flow —
+                From $10,000 to $2 million for growth, payroll, inventory and everyday cash flow —
                 matched to your revenue, with many programs funding in as little as 24 hours.
               </p>
             </div>
