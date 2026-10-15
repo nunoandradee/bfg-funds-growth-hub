@@ -2,7 +2,38 @@ export type GuideSection = {
   heading: string;
   paragraphs?: readonly string[];
   bullets?: readonly string[];
+  table?: { columns: readonly string[]; rows: readonly (readonly string[])[]; note?: string };
 };
+
+export type Source = { title: string; url: string };
+
+/** Official and primary sources cited by the guides. */
+export const SOURCES = {
+  sba7a: {
+    title: "U.S. Small Business Administration — 7(a) loans",
+    url: "https://www.sba.gov/funding-programs/loans/7a-loans",
+  },
+  sba504: {
+    title: "U.S. Small Business Administration — 504 loans",
+    url: "https://www.sba.gov/funding-programs/loans/504-loans",
+  },
+  sbaTerms: {
+    title: "U.S. Small Business Administration — Terms, conditions and eligibility",
+    url: "https://www.sba.gov/partners/lenders/7a-loan-program/terms-conditions-eligibility",
+  },
+  fedSbcs: {
+    title: "Federal Reserve — Small Business Credit Survey",
+    url: "https://www.fedsmallbusiness.org/survey",
+  },
+  fedPrime: {
+    title: "Federal Reserve — Selected Interest Rates (H.15), bank prime loan rate",
+    url: "https://www.federalreserve.gov/releases/h15/",
+  },
+  irs179: {
+    title: "IRS — Section 179 deduction (Publication 946)",
+    url: "https://www.irs.gov/publications/p946",
+  },
+} satisfies Record<string, Source>;
 
 export type Guide = {
   slug: string;
@@ -12,12 +43,93 @@ export type Guide = {
   /** ISO date the guide was last reviewed. */
   updated: string;
   readMinutes: number;
+  /** Short summary box shown at the top of the guide. */
+  takeaways: readonly string[];
   sections: readonly GuideSection[];
+  sources: readonly Source[];
   /** Related service slugs. */
   services: readonly string[];
 };
 
 export const GUIDES: readonly Guide[] = [
+  {
+    slug: "business-loan-rates",
+    title: "Business Loan Rates: Typical Ranges by Product",
+    description:
+      "Typical small business loan rates and costs by product — bank vs. online lenders, SBA rate caps, factor rates and factoring fees — and what drives your rate.",
+    category: "Costs & Rates",
+    updated: "2026-10-15",
+    readMinutes: 6,
+    takeaways: [
+      "Bank and SBA loans are the cheapest but hardest to get; online and alternative products cost more and decide faster.",
+      "SBA 7(a) rates are capped at the Prime rate plus a maximum spread that depends on loan size.",
+      "Your rate depends mostly on revenue, time in business, credit, existing debt and the product you choose.",
+    ],
+    services: ["term-loan", "business-line-of-credit", "sba-loans", "merchant-cash-advance"],
+    sources: [SOURCES.sbaTerms, SOURCES.sba7a, SOURCES.fedPrime, SOURCES.fedSbcs],
+    sections: [
+      {
+        heading: "Typical cost ranges by product",
+        paragraphs: [
+          "The ranges below are approximate and reflect the broad market for U.S. small business funding. Rates move with the Prime rate, and every lender prices each business individually.",
+        ],
+        table: {
+          columns: ["Product", "Banks & SBA lenders", "Online & alternative providers"],
+          rows: [
+            ["Term loan", "Roughly single digits to mid-teens APR", "Low teens to 40%+ APR"],
+            [
+              "Business line of credit",
+              "Roughly single digits to mid-teens APR",
+              "Low teens to 50%+ APR, plus possible draw fees",
+            ],
+            ["SBA 7(a) loan", "Prime + a capped spread (see below)", "—"],
+            [
+              "Equipment financing",
+              "Single digits to low teens APR",
+              "Low teens to 30%+ APR, depending on credit and asset",
+            ],
+            ["Working capital / revenue-based", "—", "Factor rate about 1.10–1.45"],
+            ["Merchant cash advance", "—", "Factor rate about 1.15–1.50"],
+            ["Invoice factoring", "—", "About 1%–5% of the invoice per month outstanding"],
+          ],
+          note: "Approximate market ranges for illustration only; not an offer or a quote.",
+        },
+      },
+      {
+        heading: "SBA 7(a) maximum interest rates",
+        paragraphs: [
+          "The SBA caps what lenders may charge on 7(a) loans. For variable-rate loans, the maximum is a base rate (commonly the Prime rate) plus a spread that shrinks as the loan gets larger:",
+        ],
+        table: {
+          columns: ["Loan amount", "Maximum variable rate"],
+          rows: [
+            ["$50,000 or less", "Base rate + 6.5%"],
+            ["$50,001 – $250,000", "Base rate + 6.0%"],
+            ["$250,001 – $350,000", "Base rate + 4.5%"],
+            ["More than $350,000", "Base rate + 3.0%"],
+          ],
+          note: "Fixed-rate caps are higher. Check the SBA's current terms before relying on these figures.",
+        },
+      },
+      {
+        heading: "What determines your rate",
+        bullets: [
+          "Monthly revenue and how consistent your deposits are",
+          "Time in business",
+          "Personal credit score of the owners",
+          "Existing debt and open advances",
+          "Collateral (equipment, receivables, real estate)",
+          "Term length and payment frequency",
+        ],
+      },
+      {
+        heading: "How to compare rates fairly",
+        paragraphs: [
+          "Rates are quoted in different ways — APR, interest rate, factor rate or a monthly factoring fee. Convert offers to the same terms: total amount repaid, payment amount and frequency, and fees taken out of the funding. Our factor rate calculator converts a factor rate into an estimated APR.",
+        ],
+      },
+    ],
+  },
   {
     slug: "how-to-get-a-small-business-loan",
     title: "How to Get a Small Business Loan: A Step-by-Step Guide",
@@ -26,6 +138,12 @@ export const GUIDES: readonly Guide[] = [
     category: "Getting Started",
     updated: "2026-10-15",
     readMinutes: 7,
+    takeaways: [
+      "Start from the purpose: one-time investments fit term, SBA or equipment financing; recurring needs fit a line of credit or working capital.",
+      "Most decisions start with your last 4 months of business bank statements, time in business and credit.",
+      "Compare offers on total payback and payment schedule, not just the quoted rate.",
+    ],
+    sources: [SOURCES.fedSbcs, SOURCES.sba7a],
     services: ["term-loan", "business-line-of-credit", "working-capital"],
     sections: [
       {
@@ -86,6 +204,12 @@ export const GUIDES: readonly Guide[] = [
     category: "Getting Started",
     updated: "2026-10-15",
     readMinutes: 6,
+    takeaways: [
+      "Lenders look at time in business, monthly revenue, credit, cash-flow health and existing debt.",
+      "Alternative providers often start at 4–6 months in business and about $10K in monthly deposits.",
+      "Bank and SBA loans typically expect 2+ years, stronger credit and full financial statements.",
+    ],
+    sources: [SOURCES.sbaTerms, SOURCES.fedSbcs],
     services: ["working-capital", "term-loan", "sba-loans"],
     sections: [
       {
@@ -137,6 +261,12 @@ export const GUIDES: readonly Guide[] = [
     category: "Costs & Rates",
     updated: "2026-10-15",
     readMinutes: 6,
+    takeaways: [
+      "A factor rate sets a fixed total payback: 1.30 on $50,000 means $65,000 repaid.",
+      "Because terms are short and payments start right away, the equivalent APR is much higher than the factor suggests.",
+      "Compare total payback, payment frequency, fees and early-payoff terms.",
+    ],
+    sources: [SOURCES.fedSbcs],
     services: ["merchant-cash-advance", "revenue-based-financing", "working-capital"],
     sections: [
       {
@@ -179,6 +309,12 @@ export const GUIDES: readonly Guide[] = [
     category: "Getting Started",
     updated: "2026-10-15",
     readMinutes: 6,
+    takeaways: [
+      "With credit below about 600, revenue-based products, factoring and equipment financing are the most realistic options.",
+      "Lower credit usually means higher cost and more frequent payments.",
+      "Paying a short-term product on time can open the door to cheaper funding later.",
+    ],
+    sources: [SOURCES.fedSbcs],
     services: [
       "revenue-based-financing",
       "merchant-cash-advance",
@@ -233,6 +369,12 @@ export const GUIDES: readonly Guide[] = [
     category: "Comparisons",
     updated: "2026-10-15",
     readMinutes: 5,
+    takeaways: [
+      "Term loans fit one planned expense; lines of credit fit recurring or unpredictable needs.",
+      "Lines charge interest only on what you draw; term loans charge on the full balance.",
+      "Many established businesses use both.",
+    ],
+    sources: [SOURCES.fedSbcs],
     services: ["business-line-of-credit", "term-loan"],
     sections: [
       {
@@ -267,6 +409,12 @@ export const GUIDES: readonly Guide[] = [
     category: "Comparisons",
     updated: "2026-10-15",
     readMinutes: 5,
+    takeaways: [
+      "SBA loans have rates capped at Prime plus a set spread and terms up to 10 years (25 for real estate).",
+      "They take 30–60 days or more and require full documentation.",
+      "Online term loans fund in days at a higher rate.",
+    ],
+    sources: [SOURCES.sba7a, SOURCES.sbaTerms, SOURCES.sba504],
     services: ["sba-loans", "term-loan"],
     sections: [
       {
@@ -309,6 +457,12 @@ export const GUIDES: readonly Guide[] = [
     category: "Underwriting",
     updated: "2026-10-15",
     readMinutes: 5,
+    takeaways: [
+      "Recent bank statements are the core of most small business funding decisions.",
+      "Funders check deposits, average daily balance, negative days and existing debt payments.",
+      "Send complete PDF statements and avoid overdrafts before applying.",
+    ],
+    sources: [SOURCES.fedSbcs],
     services: ["working-capital", "revenue-based-financing", "business-line-of-credit"],
     sections: [
       {
@@ -347,6 +501,12 @@ export const GUIDES: readonly Guide[] = [
     category: "Getting Started",
     updated: "2026-10-15",
     readMinutes: 5,
+    takeaways: [
+      "Working capital, revenue-based financing and cash advances can fund in 24–48 hours.",
+      "Having statements and ID ready is the biggest time saver.",
+      "Faster funding costs more — confirm total payback before signing.",
+    ],
+    sources: [SOURCES.fedSbcs],
     services: ["working-capital", "merchant-cash-advance", "business-line-of-credit"],
     sections: [
       {

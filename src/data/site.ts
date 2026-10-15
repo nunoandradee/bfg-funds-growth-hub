@@ -20,6 +20,9 @@ export const FUNDING_DISCLAIMER =
 
 export type Faq = { q: string; a: string };
 
+/** Date the product and industry pages were last reviewed. */
+export const CONTENT_REVIEWED = "2026-10-15";
+
 export type Service = {
   slug: string;
   title: string;

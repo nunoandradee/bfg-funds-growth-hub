@@ -6,7 +6,8 @@ import { Header } from "@/components/site/Header";
 import { LeadForm } from "@/components/site/LeadForm";
 import { Disclaimer, FaqList, PageHero } from "@/components/site/PageParts";
 import { findIndustry, INDUSTRY_PAGES } from "@/data/industries";
-import { SERVICES } from "@/data/site";
+import { CONTENT_REVIEWED, SERVICES } from "@/data/site";
+import { EditorialByline } from "@/components/site/Editorial";
 import { breadcrumbLd, faqLd, pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/industries/$slug")({
@@ -76,6 +77,7 @@ function IndustryPage() {
               See Your Options
             </a>
           </div>
+          <EditorialByline updated={CONTENT_REVIEWED} />
         </PageHero>
 
         <section className="py-16 md:py-20">

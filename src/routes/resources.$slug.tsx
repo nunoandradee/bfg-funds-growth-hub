@@ -4,6 +4,14 @@ import { ArrowRight } from "lucide-react";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { CtaBand, Disclaimer, PageHero } from "@/components/site/PageParts";
+import {
+  DataTable,
+  EditorialByline,
+  KeyTakeaways,
+  SourceList,
+  WhyTrust,
+  anchorId,
+} from "@/components/site/Editorial";
 import { findGuide, GUIDES } from "@/data/guides";
 import { COMPANY, SERVICES } from "@/data/site";
 import { ORGANIZATION_LD, absoluteUrl, breadcrumbLd, pageHead } from "@/lib/seo";
@@ -53,14 +61,6 @@ export const Route = createFileRoute("/resources/$slug")({
   component: GuidePage,
 });
 
-function formatDate(iso: string) {
-  return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-}
-
 function GuidePage() {
   const { slug } = Route.useLoaderData();
   const guide = findGuide(slug)!;
@@ -83,16 +83,35 @@ function GuidePage() {
           title={guide.title}
           intro={guide.description}
         >
-          <p className="mt-6 text-sm text-navy-foreground/60">
-            By the {COMPANY.displayName} Editorial Team · Updated {formatDate(guide.updated)} ·{" "}
-            {guide.readMinutes} min read
-          </p>
+          <EditorialByline updated={guide.updated} readMinutes={guide.readMinutes} />
         </PageHero>
 
         <div className="container-page grid gap-12 py-14 md:py-20 lg:grid-cols-[minmax(0,1fr)_300px]">
           <article className="max-w-3xl">
+            <KeyTakeaways items={guide.takeaways} />
+            <nav aria-label="On this page" className="mb-10 rounded-2xl border border-border p-6">
+              <p className="text-sm font-bold uppercase tracking-widest text-navy/60">
+                On this page
+              </p>
+              <ol className="mt-3 space-y-2 text-sm">
+                {guide.sections.map((section) => (
+                  <li key={section.heading}>
+                    <a
+                      href={`#${anchorId(section.heading)}`}
+                      className="font-semibold text-cobalt hover:underline"
+                    >
+                      {section.heading}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
             {guide.sections.map((section) => (
-              <section key={section.heading} className="mb-10">
+              <section
+                key={section.heading}
+                id={anchorId(section.heading)}
+                className="mb-10 scroll-mt-24"
+              >
                 <h2 className="text-2xl font-extrabold text-navy">{section.heading}</h2>
                 {section.paragraphs?.map((p) => (
                   <p
@@ -109,12 +128,15 @@ function GuidePage() {
                     ))}
                   </ul>
                 )}
+                {section.table && <DataTable {...section.table} />}
               </section>
             ))}
-            <Disclaimer className="border-t border-border pt-6" />
+            <SourceList sources={guide.sources} />
+            <Disclaimer className="mt-8 border-t border-border pt-6" />
           </article>
 
           <aside className="space-y-8 lg:sticky lg:top-24 lg:h-fit">
+            <WhyTrust />
             {services.length > 0 && (
               <div className="rounded-2xl border border-border bg-surface p-6">
                 <h2 className="text-sm font-bold uppercase tracking-widest text-navy/60">

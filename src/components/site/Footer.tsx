@@ -10,6 +10,7 @@ const COMPANY_LINKS = [
   { title: "Industries We Serve", href: "/industries" },
   { title: "Guides & Resources", href: "/resources" },
   { title: "FAQ", href: "/faq" },
+  { title: "Editorial Standards", href: "/editorial-standards" },
   { title: "Contact", href: "/contact" },
 ];
 

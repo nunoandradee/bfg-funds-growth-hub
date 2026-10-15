@@ -21,6 +21,7 @@ function sitemapPaths(): { path: string; priority: string; lastmod?: string }[] 
     ...GUIDES.map((g) => ({ path: `/resources/${g.slug}`, priority: "0.7", lastmod: g.updated })),
     { path: "/about", priority: "0.6" },
     { path: "/faq", priority: "0.6" },
+    { path: "/editorial-standards", priority: "0.4" },
     { path: "/contact", priority: "0.6" },
     { path: "/apply", priority: "0.8" },
     { path: "/privacy-policy", priority: "0.2" },

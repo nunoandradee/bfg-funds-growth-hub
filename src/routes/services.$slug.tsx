@@ -21,7 +21,8 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
 import { Disclaimer, FaqList } from "@/components/site/PageParts";
-import { SERVICES } from "@/data/site";
+import { CONTENT_REVIEWED, SERVICES } from "@/data/site";
+import { EditorialByline } from "@/components/site/Editorial";
 import { INDUSTRY_PAGES } from "@/data/industries";
 import { GUIDES } from "@/data/guides";
 import { ORGANIZATION_LD, breadcrumbLd, faqLd, pageHead, absoluteUrl } from "@/lib/seo";
@@ -140,6 +141,7 @@ function ServicePage() {
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-navy-foreground/75">
               {service.tagline}. {service.description}
             </p>
+            <EditorialByline updated={CONTENT_REVIEWED} />
 
             <div className="mt-10 flex flex-wrap gap-4">
               <a
