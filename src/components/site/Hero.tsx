@@ -1,177 +1,93 @@
 import { useState } from "react";
-import { ArrowRight, Clock, Layers, Lock, ShieldCheck, UserRound, Zap } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 
-import { SERVICES } from "@/data/site";
-
-// Plain facts about the process, shown under the call to action.
-const ASSURANCES = [
-  { icon: ShieldCheck, text: "No impact on your credit to check options" },
-  { icon: Lock, text: "Secure, encrypted application" },
-  { icon: UserRound, text: "One dedicated funding specialist" },
-  { icon: Layers, text: "8 funding products, one application" },
-];
+import heroOwner from "@/assets/hero-owner.jpg";
+import { COMPANY } from "@/data/site";
 
 const AMOUNTS = [
-  { value: 10_000, label: "$10K" },
-  { value: 50_000, label: "$50K" },
-  { value: 100_000, label: "$100K" },
-  { value: 250_000, label: "$250K" },
-  { value: 500_000, label: "$500K" },
-  { value: 1_000_000, label: "$1M+" },
+  { value: 10_000, label: "$10,000" },
+  { value: 25_000, label: "$25,000" },
+  { value: 50_000, label: "$50,000" },
+  { value: 100_000, label: "$100,000" },
+  { value: 250_000, label: "$250,000" },
+  { value: 500_000, label: "$500,000" },
+  { value: 1_000_000, label: "$1,000,000" },
+  { value: 2_000_000, label: "$2,000,000" },
 ];
-
-/** What the money is for → the product that usually fits it best. */
-const PURPOSES = [
-  { label: "Cash flow & payroll", slug: "business-line-of-credit" },
-  { label: "Inventory", slug: "working-capital" },
-  { label: "Equipment or vehicles", slug: "equipment-financing" },
-  { label: "Expansion", slug: "term-loan" },
-  { label: "Real estate", slug: "sba-loans" },
-  { label: "Unpaid invoices", slug: "invoice-factoring" },
-];
-
-/** Quick start: amount and purpose, then the full application with the amount filled in. */
-function QuickStart() {
-  const [amount, setAmount] = useState(100_000);
-  const [purpose, setPurpose] = useState<string | null>(null);
-  const fit = purpose ? SERVICES.find((s) => s.slug === purpose) : undefined;
-
-  const chip = (active: boolean) =>
-    `rounded-xl border px-3 py-2.5 text-sm font-bold transition-colors ${
-      active
-        ? "border-navy bg-navy text-navy-foreground"
-        : "border-border bg-background text-navy hover:border-navy"
-    }`;
-
-  return (
-    <div className="rounded-3xl bg-card p-6 text-card-foreground shadow-lift md:p-8">
-      <p className="text-xs font-bold uppercase tracking-[0.2em] text-cobalt">See your options</p>
-      <h2 className="mt-2 text-2xl font-extrabold text-navy">How much do you need?</h2>
-
-      <div className="mt-5 grid grid-cols-3 gap-2" role="group" aria-label="Funding amount">
-        {AMOUNTS.map((a) => (
-          <button
-            key={a.value}
-            type="button"
-            aria-pressed={amount === a.value}
-            onClick={() => setAmount(a.value)}
-            className={chip(amount === a.value)}
-          >
-            {a.label}
-          </button>
-        ))}
-      </div>
-
-      <p className="mt-6 text-sm font-bold text-navy">What is it for?</p>
-      <div className="mt-2 grid grid-cols-2 gap-2" role="group" aria-label="Use of funds">
-        {PURPOSES.map((p) => (
-          <button
-            key={p.slug}
-            type="button"
-            aria-pressed={purpose === p.slug}
-            onClick={() => setPurpose(p.slug)}
-            className={`${chip(purpose === p.slug)} text-left font-semibold`}
-          >
-            {p.label}
-          </button>
-        ))}
-      </div>
-
-      <p className="mt-4 min-h-5 text-sm text-muted-foreground">
-        {fit ? (
-          <>
-            Often a good fit:{" "}
-            <a href={`/services/${fit.slug}`} className="font-semibold text-cobalt hover:underline">
-              {fit.title}
-            </a>
-          </>
-        ) : (
-          "Your specialist will compare every option that fits."
-        )}
-      </p>
-
-      <a
-        href={`/apply?amount=${amount}`}
-        className="mt-5 flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-4 text-base font-extrabold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
-      >
-        Check my options
-        <ArrowRight className="size-5" />
-      </a>
-      <p className="mt-3 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-        <Clock className="size-3.5" />
-        Takes about 5 minutes · No impact on your credit
-      </p>
-    </div>
-  );
-}
 
 export function Hero() {
+  const [amount, setAmount] = useState(100_000);
+
   return (
-    <section id="top" className="relative overflow-hidden bg-navy">
-      {/* soft light sweep */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-40 -top-52 size-[42rem] rounded-full bg-cobalt/45 blur-[120px]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-64 right-[-10rem] size-[36rem] rounded-full bg-gold/20 blur-[130px]"
-      />
-      {/* subtle diagonal sheen */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,transparent_35%,rgba(255,255,255,0.05)_50%,transparent_65%)]"
-      />
+    <section id="top" className="border-b border-border bg-surface">
+      <div className="container-page grid items-center gap-10 py-12 md:py-16 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:py-20">
+        <div>
+          <h1 className="text-balance-tight text-4xl font-extrabold leading-[1.08] text-navy md:text-6xl">
+            Funding for the business you've built.
+          </h1>
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
+            From $10K to $2M across eight funding products. Apply once, work with one specialist,
+            and compare real offers from our lender network — often within 24 to 48 hours.
+          </p>
 
-      <div className="container-page relative py-16 md:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gold">
-              <Zap className="size-3.5" />
-              Funding without bank delays
-            </span>
-
-            <h1 className="mt-6 text-balance-tight text-5xl font-extrabold leading-[1.05] text-navy-foreground md:text-7xl">
-              $10K to $2M in <span className="text-gold">24–48 Hours</span>
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-navy-foreground/75">
-              BFG Funds helps small and mid-sized U.S. businesses bridge cash flow gaps, make
-              payroll, stock inventory and seize growth opportunities — with one application, offers
-              from our lender network and approvals measured in hours, not months.
-            </p>
-
-            <div className="mt-9 flex flex-wrap gap-3">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded-full border border-navy-foreground/30 px-7 py-3.5 text-sm font-bold text-navy-foreground transition-colors hover:bg-navy-foreground/10"
+          <form action="/apply" method="get" className="mt-8 max-w-xl">
+            <label htmlFor="hero-amount" className="text-sm font-bold text-navy">
+              How much do you need?
+            </label>
+            <div className="mt-2 flex flex-col gap-3 sm:flex-row">
+              <div className="relative flex-1">
+                <select
+                  id="hero-amount"
+                  name="amount"
+                  value={amount}
+                  onChange={(e) => setAmount(Number(e.target.value))}
+                  className="h-14 w-full appearance-none rounded-lg border border-input bg-background pl-4 pr-11 text-base font-semibold text-navy outline-none focus:border-cobalt focus:ring-2 focus:ring-cobalt/20"
+                >
+                  {AMOUNTS.map((a) => (
+                    <option key={a.value} value={a.value}>
+                      {a.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown
+                  aria-hidden
+                  className="pointer-events-none absolute right-4 top-1/2 size-5 -translate-y-1/2 text-navy/60"
+                />
+              </div>
+              <button
+                type="submit"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-lg bg-gold px-7 text-base font-extrabold text-gold-foreground transition-colors hover:bg-gold/90"
               >
-                Free Consultation
-              </a>
-              <a
-                href="/services"
-                className="inline-flex items-center gap-2 px-2 py-3.5 text-sm font-bold text-navy-foreground/85 hover:text-gold"
-              >
-                Compare funding options
-                <ArrowRight className="size-4" />
-              </a>
+                See my options
+                <ArrowRight className="size-5" />
+              </button>
             </div>
-          </div>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Checking your options won't affect your credit score. Takes about 5 minutes.
+            </p>
+          </form>
 
-          <QuickStart />
+          <p className="mt-8 border-t border-border pt-6 text-sm text-navy/80">
+            Prefer to talk first? Call a funding specialist at{" "}
+            <a
+              href={COMPANY.phoneHref}
+              className="font-bold text-navy underline underline-offset-4"
+            >
+              {COMPANY.phoneDisplay}
+            </a>
+          </p>
         </div>
 
-        <ul className="mt-14 grid gap-4 border-t border-navy-foreground/15 pt-8 sm:grid-cols-2 lg:grid-cols-4">
-          {ASSURANCES.map(({ icon: Icon, text }) => (
-            <li
-              key={text}
-              className="flex items-center gap-3 text-sm font-semibold text-navy-foreground/85"
-            >
-              <Icon className="size-5 shrink-0 text-gold" />
-              {text}
-            </li>
-          ))}
-        </ul>
+        <figure className="relative">
+          <img
+            src={heroOwner}
+            alt="Small business owner standing in his clothing store"
+            width={1600}
+            height={1069}
+            fetchPriority="high"
+            className="aspect-[4/3] w-full rounded-xl object-cover object-[60%_30%] lg:aspect-square"
+          />
+        </figure>
       </div>
     </section>
   );
