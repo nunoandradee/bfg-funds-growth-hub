@@ -10,20 +10,37 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as ApplyRouteImport } from './routes/apply'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SmsTermsRouteImport } from './routes/sms-terms'
 import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as ApiApplyRouteImport } from './routes/api/apply'
 import { Route as ApiLeadRouteImport } from './routes/api/lead'
 import { Route as ApiUnsubscribeRouteImport } from './routes/api/unsubscribe'
+import { Route as CalculatorsIndexRouteImport } from './routes/calculators.index'
+import { Route as CalculatorsBusinessLoanCalculatorRouteImport } from './routes/calculators.business-loan-calculator'
+import { Route as CalculatorsHowMuchFundingCanIGetRouteImport } from './routes/calculators.how-much-funding-can-i-get'
+import { Route as CalculatorsMerchantCashAdvanceCalculatorRouteImport } from './routes/calculators.merchant-cash-advance-calculator'
+import { Route as IndustriesIndexRouteImport } from './routes/industries.index'
+import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
+import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
+import { Route as ResourcesSlugRouteImport } from './routes/resources.$slug'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApplyRoute = ApplyRouteImport.update({
@@ -36,9 +53,19 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SmsTermsRoute = SmsTermsRouteImport.update({
@@ -71,6 +98,54 @@ const ApiUnsubscribeRoute = ApiUnsubscribeRouteImport.update({
   path: '/api/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CalculatorsIndexRoute = CalculatorsIndexRouteImport.update({
+  id: '/calculators/',
+  path: '/calculators/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculatorsBusinessLoanCalculatorRoute =
+  CalculatorsBusinessLoanCalculatorRouteImport.update({
+    id: '/calculators/business-loan-calculator',
+    path: '/calculators/business-loan-calculator',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CalculatorsHowMuchFundingCanIGetRoute =
+  CalculatorsHowMuchFundingCanIGetRouteImport.update({
+    id: '/calculators/how-much-funding-can-i-get',
+    path: '/calculators/how-much-funding-can-i-get',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CalculatorsMerchantCashAdvanceCalculatorRoute =
+  CalculatorsMerchantCashAdvanceCalculatorRouteImport.update({
+    id: '/calculators/merchant-cash-advance-calculator',
+    path: '/calculators/merchant-cash-advance-calculator',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const IndustriesIndexRoute = IndustriesIndexRouteImport.update({
+  id: '/industries/',
+  path: '/industries/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
+  id: '/industries/$slug',
+  path: '/industries/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesIndexRoute = ResourcesIndexRouteImport.update({
+  id: '/resources/',
+  path: '/resources/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesSlugRoute = ResourcesSlugRouteImport.update({
+  id: '/resources/$slug',
+  path: '/resources/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/services/$slug',
   path: '/services/$slug',
@@ -79,98 +154,182 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sms-terms': typeof SmsTermsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/api/apply': typeof ApiApplyRoute
   '/api/lead': typeof ApiLeadRoute
   '/api/unsubscribe': typeof ApiUnsubscribeRoute
+  '/calculators/business-loan-calculator': typeof CalculatorsBusinessLoanCalculatorRoute
+  '/calculators/how-much-funding-can-i-get': typeof CalculatorsHowMuchFundingCanIGetRoute
+  '/calculators/merchant-cash-advance-calculator': typeof CalculatorsMerchantCashAdvanceCalculatorRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/calculators/': typeof CalculatorsIndexRoute
+  '/industries/': typeof IndustriesIndexRoute
+  '/resources/': typeof ResourcesIndexRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sms-terms': typeof SmsTermsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/api/apply': typeof ApiApplyRoute
   '/api/lead': typeof ApiLeadRoute
   '/api/unsubscribe': typeof ApiUnsubscribeRoute
+  '/calculators/business-loan-calculator': typeof CalculatorsBusinessLoanCalculatorRoute
+  '/calculators/how-much-funding-can-i-get': typeof CalculatorsHowMuchFundingCanIGetRoute
+  '/calculators/merchant-cash-advance-calculator': typeof CalculatorsMerchantCashAdvanceCalculatorRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/calculators': typeof CalculatorsIndexRoute
+  '/industries': typeof IndustriesIndexRoute
+  '/resources': typeof ResourcesIndexRoute
+  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/apply': typeof ApplyRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sms-terms': typeof SmsTermsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/unsubscribe': typeof UnsubscribeRoute
   '/api/apply': typeof ApiApplyRoute
   '/api/lead': typeof ApiLeadRoute
   '/api/unsubscribe': typeof ApiUnsubscribeRoute
+  '/calculators/business-loan-calculator': typeof CalculatorsBusinessLoanCalculatorRoute
+  '/calculators/how-much-funding-can-i-get': typeof CalculatorsHowMuchFundingCanIGetRoute
+  '/calculators/merchant-cash-advance-calculator': typeof CalculatorsMerchantCashAdvanceCalculatorRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/calculators/': typeof CalculatorsIndexRoute
+  '/industries/': typeof IndustriesIndexRoute
+  '/resources/': typeof ResourcesIndexRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/apply'
     | '/contact'
+    | '/faq'
     | '/privacy-policy'
+    | '/sitemap.xml'
     | '/sms-terms'
     | '/terms-of-service'
     | '/unsubscribe'
     | '/api/apply'
     | '/api/lead'
     | '/api/unsubscribe'
+    | '/calculators/business-loan-calculator'
+    | '/calculators/how-much-funding-can-i-get'
+    | '/calculators/merchant-cash-advance-calculator'
+    | '/industries/$slug'
+    | '/resources/$slug'
     | '/services/$slug'
+    | '/calculators/'
+    | '/industries/'
+    | '/resources/'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/apply'
     | '/contact'
+    | '/faq'
     | '/privacy-policy'
+    | '/sitemap.xml'
     | '/sms-terms'
     | '/terms-of-service'
     | '/unsubscribe'
     | '/api/apply'
     | '/api/lead'
     | '/api/unsubscribe'
+    | '/calculators/business-loan-calculator'
+    | '/calculators/how-much-funding-can-i-get'
+    | '/calculators/merchant-cash-advance-calculator'
+    | '/industries/$slug'
+    | '/resources/$slug'
     | '/services/$slug'
+    | '/calculators'
+    | '/industries'
+    | '/resources'
+    | '/services'
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/apply'
     | '/contact'
+    | '/faq'
     | '/privacy-policy'
+    | '/sitemap.xml'
     | '/sms-terms'
     | '/terms-of-service'
     | '/unsubscribe'
     | '/api/apply'
     | '/api/lead'
     | '/api/unsubscribe'
+    | '/calculators/business-loan-calculator'
+    | '/calculators/how-much-funding-can-i-get'
+    | '/calculators/merchant-cash-advance-calculator'
+    | '/industries/$slug'
+    | '/resources/$slug'
     | '/services/$slug'
+    | '/calculators/'
+    | '/industries/'
+    | '/resources/'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   ApplyRoute: typeof ApplyRoute
   ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SmsTermsRoute: typeof SmsTermsRoute
   TermsOfServiceRoute: typeof TermsOfServiceRoute
   UnsubscribeRoute: typeof UnsubscribeRoute
   ApiApplyRoute: typeof ApiApplyRoute
   ApiLeadRoute: typeof ApiLeadRoute
   ApiUnsubscribeRoute: typeof ApiUnsubscribeRoute
+  CalculatorsBusinessLoanCalculatorRoute: typeof CalculatorsBusinessLoanCalculatorRoute
+  CalculatorsHowMuchFundingCanIGetRoute: typeof CalculatorsHowMuchFundingCanIGetRoute
+  CalculatorsMerchantCashAdvanceCalculatorRoute: typeof CalculatorsMerchantCashAdvanceCalculatorRoute
+  IndustriesSlugRoute: typeof IndustriesSlugRoute
+  ResourcesSlugRoute: typeof ResourcesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  CalculatorsIndexRoute: typeof CalculatorsIndexRoute
+  IndustriesIndexRoute: typeof IndustriesIndexRoute
+  ResourcesIndexRoute: typeof ResourcesIndexRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -180,6 +339,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/apply': {
@@ -196,11 +362,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy-policy': {
       id: '/privacy-policy'
       path: '/privacy-policy'
       fullPath: '/privacy-policy'
       preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sms-terms': {
@@ -245,6 +425,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiUnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/calculators/': {
+      id: '/calculators/'
+      path: '/calculators'
+      fullPath: '/calculators/'
+      preLoaderRoute: typeof CalculatorsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculators/business-loan-calculator': {
+      id: '/calculators/business-loan-calculator'
+      path: '/calculators/business-loan-calculator'
+      fullPath: '/calculators/business-loan-calculator'
+      preLoaderRoute: typeof CalculatorsBusinessLoanCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculators/how-much-funding-can-i-get': {
+      id: '/calculators/how-much-funding-can-i-get'
+      path: '/calculators/how-much-funding-can-i-get'
+      fullPath: '/calculators/how-much-funding-can-i-get'
+      preLoaderRoute: typeof CalculatorsHowMuchFundingCanIGetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculators/merchant-cash-advance-calculator': {
+      id: '/calculators/merchant-cash-advance-calculator'
+      path: '/calculators/merchant-cash-advance-calculator'
+      fullPath: '/calculators/merchant-cash-advance-calculator'
+      preLoaderRoute: typeof CalculatorsMerchantCashAdvanceCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/': {
+      id: '/industries/'
+      path: '/industries'
+      fullPath: '/industries/'
+      preLoaderRoute: typeof IndustriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/$slug': {
+      id: '/industries/$slug'
+      path: '/industries/$slug'
+      fullPath: '/industries/$slug'
+      preLoaderRoute: typeof IndustriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources/': {
+      id: '/resources/'
+      path: '/resources'
+      fullPath: '/resources/'
+      preLoaderRoute: typeof ResourcesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources/$slug': {
+      id: '/resources/$slug'
+      path: '/resources/$slug'
+      fullPath: '/resources/$slug'
+      preLoaderRoute: typeof ResourcesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/$slug': {
       id: '/services/$slug'
       path: '/services/$slug'
@@ -257,16 +500,30 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   ApplyRoute: ApplyRoute,
   ContactRoute: ContactRoute,
+  FaqRoute: FaqRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SmsTermsRoute: SmsTermsRoute,
   TermsOfServiceRoute: TermsOfServiceRoute,
   UnsubscribeRoute: UnsubscribeRoute,
   ApiApplyRoute: ApiApplyRoute,
   ApiLeadRoute: ApiLeadRoute,
   ApiUnsubscribeRoute: ApiUnsubscribeRoute,
+  CalculatorsBusinessLoanCalculatorRoute:
+    CalculatorsBusinessLoanCalculatorRoute,
+  CalculatorsHowMuchFundingCanIGetRoute: CalculatorsHowMuchFundingCanIGetRoute,
+  CalculatorsMerchantCashAdvanceCalculatorRoute:
+    CalculatorsMerchantCashAdvanceCalculatorRoute,
+  IndustriesSlugRoute: IndustriesSlugRoute,
+  ResourcesSlugRoute: ResourcesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  CalculatorsIndexRoute: CalculatorsIndexRoute,
+  IndustriesIndexRoute: IndustriesIndexRoute,
+  ResourcesIndexRoute: ResourcesIndexRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

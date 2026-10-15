@@ -14,10 +14,10 @@ export const Route = createFileRoute("/privacy-policy")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://bfgfunds.com/privacy-policy" },
+      { property: "og:url", content: "https://www.bfgfunds.com/privacy-policy" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://bfgfunds.com/privacy-policy" }],
+    links: [{ rel: "canonical", href: "https://www.bfgfunds.com/privacy-policy" }],
   }),
   component: PrivacyPolicyPage,
 });

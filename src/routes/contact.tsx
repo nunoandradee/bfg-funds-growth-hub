@@ -17,10 +17,10 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://bfgfunds.com/contact" },
+      { property: "og:url", content: "https://www.bfgfunds.com/contact" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://bfgfunds.com/contact" }],
+    links: [{ rel: "canonical", href: "https://www.bfgfunds.com/contact" }],
   }),
   component: ContactPage,
 });

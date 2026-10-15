@@ -4,7 +4,7 @@ import {
   ArrowRight,
   BadgeCheck,
   Banknote,
-  Building2,
+  Calculator,
   ClipboardCheck,
   CreditCard,
   FileSearch,
@@ -12,12 +12,14 @@ import {
   HandCoins,
   Headphones,
   Landmark,
+  Network,
   Percent,
+  ReceiptText,
+  Scale,
   Send,
   Settings2,
   ShieldCheck,
-  Star,
-  Truck,
+  UserRound,
   Wrench,
   Zap,
 } from "lucide-react";
@@ -26,8 +28,11 @@ import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { INDUSTRIES, SERVICES } from "@/data/site";
+import { CALCULATORS } from "@/data/calculators";
+import { GUIDES } from "@/data/guides";
+import { INDUSTRY_PAGES } from "@/data/industries";
+import { SERVICES, SITE_URL } from "@/data/site";
+import { pageHead } from "@/lib/seo";
 import aboutImg from "@/assets/about.jpg";
 import blog1 from "@/assets/blog-1.jpg";
 import blog2 from "@/assets/blog-2.jpg";
@@ -35,69 +40,98 @@ import blog3 from "@/assets/blog-3.jpg";
 
 const TITLE = "BFG Funds | $30K–$2M Small Business Funding in 24–48 Hours";
 const DESCRIPTION =
-  "BFG Funds provides fast small business funding from $30K to $2M — lines of credit, working capital, SBA loans, equipment and revenue-based financing with approvals in 24–48 hours.";
+  "Compare small business funding from a network of lenders: lines of credit, working capital, SBA loans, term loans, equipment financing and more. One application, decisions often in 24–48 hours.";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: TITLE },
-      { name: "description", content: DESCRIPTION },
-      { property: "og:title", content: TITLE },
-      { property: "og:description", content: DESCRIPTION },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://bfgfunds.com/" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: "https://bfgfunds.com/" }],
-  }),
+  head: () =>
+    pageHead({
+      title: TITLE,
+      description: DESCRIPTION,
+      path: "/",
+      jsonLd: [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "BFG Funds",
+          url: `${SITE_URL}/`,
+        },
+      ],
+    }),
   component: Index,
 });
 
-const SERVICE_ICONS = [CreditCard, Banknote, Landmark, ShieldCheck, Percent, Wrench];
+const SERVICE_ICONS: Record<string, typeof CreditCard> = {
+  "business-line-of-credit": CreditCard,
+  "working-capital": Banknote,
+  "term-loan": Landmark,
+  "sba-loans": ShieldCheck,
+  "revenue-based-financing": Percent,
+  "equipment-financing": Wrench,
+  "merchant-cash-advance": Zap,
+  "invoice-factoring": ReceiptText,
+};
 
 const WHY = [
-  { icon: Zap, title: "Fast Approvals", text: "Decisions in 24–48 hours, not weeks." },
-  { icon: Settings2, title: "Flexible Options", text: "Terms shaped around your cash flow cycle." },
-  { icon: BadgeCheck, title: "All Credit Welcome", text: "We look at revenue, not just your score." },
-  { icon: Headphones, title: "Personalized Support", text: "One specialist from apply to funded." },
+  { icon: Zap, title: "Fast Decisions", text: "Many programs decide in 24–48 hours, not weeks." },
+  {
+    icon: Settings2,
+    title: "Many Options",
+    text: "Eight funding products from a network of lenders.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "All Credit Considered",
+    text: "Many providers look at revenue, not just your score.",
+  },
+  {
+    icon: Headphones,
+    title: "Personalized Support",
+    text: "One specialist from application to funded.",
+  },
 ];
 
 const STEPS = [
-  { icon: ClipboardCheck, title: "Apply Online", text: "A two-minute application with basic business details." },
-  { icon: FileSearch, title: "Quick Funding Review", text: "We review revenue and match you to programs." },
-  { icon: Gauge, title: "Same-Day Approval", text: "Get your offer and terms, often the same day." },
-  { icon: Send, title: "Fast Fund Transfer", text: "Funds wired to your account in as little as 24 hours." },
-];
-
-const TESTIMONIALS = [
   {
-    quote:
-      "We needed inventory before our busiest quarter and the bank wanted 45 days. BFG Funds had us funded in two.",
-    name: "Marcus Reyes",
-    detail: "Retail Distributor — Tampa, FL",
+    icon: ClipboardCheck,
+    title: "Apply Online",
+    text: "A two-minute application with basic business details.",
   },
   {
-    quote:
-      "Our revenue swings hard by season. The revenue-based option means payments never squeeze payroll.",
-    name: "Danielle Ochoa",
-    detail: "Restaurant Group — Austin, TX",
+    icon: FileSearch,
+    title: "Quick Funding Review",
+    text: "Your specialist reviews revenue and matches you to programs.",
   },
   {
-    quote:
-      "Credit wasn't perfect after 2023. They looked at our deposits instead and approved a $250K line.",
-    name: "Sam Whitfield",
-    detail: "Construction — Columbus, OH",
+    icon: Gauge,
+    title: "Compare Offers",
+    text: "See amounts, payments and total cost, often the same day.",
+  },
+  {
+    icon: Send,
+    title: "Get Funded",
+    text: "Funds can be wired in as little as 24 hours after you sign.",
   },
 ];
 
-const POSTS = [
-  { img: blog1, tag: "Working Capital", title: "5 signs your business is ready for a credit line" },
-  { img: blog2, tag: "Case Study", title: "How a 3-location restaurant group funded expansion" },
-  { img: blog3, tag: "SBA Loans", title: "SBA vs. term loan: which fits a contractor best?" },
-  { img: blog3, tag: "Cash Flow", title: "Managing seasonal dips without cutting payroll" },
-  { img: blog1, tag: "Equipment", title: "When financing equipment beats paying cash" },
-  { img: blog2, tag: "Underwriting", title: "What lenders actually look for in bank statements" },
+const MARKETPLACE = [
+  {
+    icon: UserRound,
+    title: "One application",
+    text: "Apply once. Your specialist presents your business to the providers most likely to approve it.",
+  },
+  {
+    icon: Network,
+    title: "A network of lenders",
+    text: "SBA lenders, equipment financiers, lines of credit and revenue-based funders — not one lender's product.",
+  },
+  {
+    icon: Scale,
+    title: "Honest comparisons",
+    text: "Total payback, payment and term side by side — and we tell you when a cheaper option fits better.",
+  },
 ];
+
+const GUIDE_IMAGES = [blog1, blog2, blog3];
 
 function Index() {
   const [visible, setVisible] = useState(3);
@@ -108,25 +142,20 @@ function Index() {
       <main>
         <Hero />
 
-        {/* CLIENT LOGOS */}
-        <section className="border-b border-border bg-background py-10">
-          <div className="container-page">
-            <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
-              Trusted by growing businesses
-            </p>
-            <div className="mt-7 grid grid-cols-2 items-center gap-6 opacity-55 grayscale sm:grid-cols-4 lg:grid-cols-7">
-              {["Northgate", "Ironline", "Vellum Co.", "BrightPath", "Harbor & Co", "Cedarworks", "Kinetic"].map(
-                (name) => (
-                  <div
-                    key={name}
-                    className="flex items-center justify-center gap-2 rounded-lg border border-border/70 px-3 py-3"
-                  >
-                    <Building2 className="size-4 text-navy" />
-                    <span className="text-sm font-bold tracking-tight text-navy">{name}</span>
-                  </div>
-                ),
-              )}
-            </div>
+        {/* HOW THE MARKETPLACE WORKS */}
+        <section className="border-b border-border bg-background py-14">
+          <div className="container-page grid gap-8 md:grid-cols-3">
+            {MARKETPLACE.map(({ icon: Icon, title, text }) => (
+              <div key={title} className="flex items-start gap-4">
+                <div className="grid size-11 shrink-0 place-items-center rounded-xl bg-gold/20 text-navy">
+                  <Icon className="size-5" />
+                </div>
+                <div>
+                  <h2 className="text-base font-extrabold text-navy">{title}</h2>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{text}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -143,20 +172,22 @@ function Index() {
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
                 Small and mid-sized companies drive the U.S. economy, yet they're the first to get a
                 "no" when a bank's checklist doesn't line up. BFG Funds exists to change that — we
-                underwrite the business you actually run, not just a credit report.
+                look at the business you actually run, not just a credit report, and take it to the
+                lenders that do the same.
               </p>
               <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-                Our team reviews deposits, revenue trends and industry cycles to structure funding
-                that fits how money moves through your business. The result: faster answers, honest
-                terms, and a funding partner who picks up the phone.
+                Your specialist reviews deposits, revenue trends and industry cycles, then matches
+                you with the programs that fit how money moves through your business. The result:
+                faster answers, offers you can actually compare, and a funding partner who picks up
+                the phone.
               </p>
-              <a
-                href="#why"
+              <Link
+                to="/about"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-navy px-6 py-3 text-sm font-bold text-navy-foreground transition-transform hover:-translate-y-0.5"
               >
-                Learn More
+                How we work
                 <ArrowRight className="size-4" />
-              </a>
+              </Link>
             </div>
             <div className="relative">
               <div
@@ -180,24 +211,24 @@ function Index() {
           <div className="container-page">
             <div className="max-w-3xl">
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-cobalt">
-                Funding Services
+                Funding Options
               </span>
               <h2 className="mt-4 text-balance-tight text-4xl font-extrabold text-navy md:text-5xl">
-                Six ways to fund your next move
+                Eight ways to fund your next move
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                 Whether you need a safety net for slow months or capital to take on a bigger
-                contract, we'll match you with the structure that costs the least and moves the
+                contract, we'll help you find the structure that costs the least and moves the
                 fastest.
               </p>
             </div>
 
-            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {SERVICES.map((service, i) => {
-                const Icon = SERVICE_ICONS[i] ?? HandCoins;
+            <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {SERVICES.map((service) => {
+                const Icon = SERVICE_ICONS[service.slug] ?? HandCoins;
                 return (
                   <article
-                    key={service.title}
+                    key={service.slug}
                     className="group flex flex-col rounded-2xl border border-border bg-card p-7 shadow-card transition-all hover:-translate-y-1 hover:border-cobalt/40"
                   >
                     <div className="grid size-12 place-items-center rounded-xl bg-navy text-navy-foreground transition-colors group-hover:bg-cobalt">
@@ -219,6 +250,13 @@ function Index() {
                 );
               })}
             </div>
+            <Link
+              to="/services"
+              className="mt-10 inline-flex items-center gap-2 rounded-full border border-navy px-7 py-3 text-sm font-bold text-navy transition-colors hover:bg-navy hover:text-navy-foreground"
+            >
+              Compare all funding options
+              <ArrowRight className="size-4" />
+            </Link>
           </div>
         </section>
 
@@ -258,17 +296,19 @@ function Index() {
               Industries We Serve
             </h2>
             <p className="mt-4 max-w-2xl text-muted-foreground">
-              From jobsites to storefronts, we fund the operators keeping American main streets
-              running.
+              From jobsites to storefronts, we help the operators keeping American main streets
+              running find the right funding.
             </p>
             <ul className="mt-8 flex flex-wrap gap-2.5">
-              {INDUSTRIES.map((industry) => (
-                <li
-                  key={industry}
-                  className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-navy/85"
-                >
-                  <Truck className="size-3.5 text-cobalt" />
-                  {industry}
+              {INDUSTRY_PAGES.map((industry) => (
+                <li key={industry.slug}>
+                  <Link
+                    to="/industries/$slug"
+                    params={{ slug: industry.slug }}
+                    className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold text-navy/85 transition-colors hover:border-cobalt hover:text-cobalt"
+                  >
+                    {industry.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -307,69 +347,46 @@ function Index() {
           </div>
         </section>
 
-        {/* TESTIMONIALS */}
+        {/* CALCULATORS */}
         <section className="bg-navy py-20 text-navy-foreground md:py-28">
           <div className="container-page">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-2xl">
-                <h2 className="text-balance-tight text-4xl font-extrabold md:text-5xl">
-                  What Our Clients Are Saying
-                </h2>
-                <p className="mt-5 text-lg leading-relaxed text-navy-foreground/70">
-                  Thousands of owners have used BFG Funds to cover payroll, buy equipment and take on
-                  work they'd otherwise turn down.
-                </p>
-              </div>
-              <a
-                href="https://www.trustpilot.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-fit items-center gap-3 rounded-2xl border border-navy-foreground/20 bg-navy-foreground/5 px-5 py-4"
-              >
-                <div className="flex gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="size-4 fill-gold text-gold" />
-                  ))}
-                </div>
-                <span className="text-sm font-bold">4.9 out of 5 stars</span>
-              </a>
+            <div className="max-w-2xl">
+              <h2 className="text-balance-tight text-4xl font-extrabold md:text-5xl">
+                Know the numbers before you apply
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-navy-foreground/70">
+                Free calculators to estimate payments, compare factor rates with APR and see a rough
+                funding range for your business.
+              </p>
             </div>
-
-            <Carousel opts={{ align: "start" }} className="mt-12">
-              <CarouselContent>
-                {TESTIMONIALS.map((t) => (
-                  <CarouselItem key={t.name} className="md:basis-1/2 lg:basis-1/3">
-                    <figure className="flex h-full flex-col rounded-2xl border border-navy-foreground/15 bg-navy-foreground/[0.06] p-7">
-                      <div className="flex gap-0.5">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star key={i} className="size-4 fill-gold text-gold" />
-                        ))}
-                      </div>
-                      <blockquote className="mt-5 flex-1 text-base leading-relaxed text-navy-foreground/90">
-                        "{t.quote}"
-                      </blockquote>
-                      <figcaption className="mt-6">
-                        <span className="block text-sm font-bold">{t.name}</span>
-                        <span className="block text-xs text-navy-foreground/60">{t.detail}</span>
-                      </figcaption>
-                    </figure>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="mt-8 flex gap-3">
-                <CarouselPrevious className="static translate-y-0 border-navy-foreground/25 bg-transparent text-navy-foreground hover:bg-navy-foreground/10 hover:text-navy-foreground" />
-                <CarouselNext className="static translate-y-0 border-navy-foreground/25 bg-transparent text-navy-foreground hover:bg-navy-foreground/10 hover:text-navy-foreground" />
-              </div>
-            </Carousel>
+            <div className="mt-12 grid gap-6 md:grid-cols-3">
+              {CALCULATORS.map((c) => (
+                <a
+                  key={c.path}
+                  href={c.path}
+                  className="group flex h-full flex-col rounded-2xl border border-navy-foreground/15 bg-navy-foreground/[0.06] p-7 transition-colors hover:border-gold/60"
+                >
+                  <Calculator className="size-6 text-gold" />
+                  <h3 className="mt-5 text-lg font-extrabold">{c.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-navy-foreground/70">
+                    {c.summary}
+                  </p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-gold">
+                    Open calculator
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </a>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* INSIGHTS */}
+        {/* GUIDES */}
         <section id="insights" className="py-20 md:py-28">
           <div className="container-page">
             <div className="max-w-3xl">
               <h2 className="text-balance-tight text-4xl font-extrabold text-navy md:text-5xl">
-                Latest Insights &amp; Resources
+                Guides &amp; Resources
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
                 Practical guidance on capital, cash flow and growth — written for owners, not
@@ -377,11 +394,14 @@ function Index() {
               </p>
             </div>
             <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-              {POSTS.slice(0, visible).map((post, i) => (
-                <article key={`${post.title}-${i}`} className="group overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+              {GUIDES.slice(0, visible).map((guide, i) => (
+                <article
+                  key={guide.slug}
+                  className="group overflow-hidden rounded-2xl border border-border bg-card shadow-card"
+                >
                   <img
-                    src={post.img}
-                    alt={post.title}
+                    src={GUIDE_IMAGES[i % GUIDE_IMAGES.length]}
+                    alt=""
                     width={1024}
                     height={640}
                     loading="lazy"
@@ -389,32 +409,39 @@ function Index() {
                   />
                   <div className="p-6">
                     <span className="rounded-full bg-gold/20 px-3 py-1 text-xs font-bold text-navy">
-                      {post.tag}
+                      {guide.category}
                     </span>
                     <h3 className="mt-4 text-lg font-extrabold leading-snug text-navy">
-                      {post.title}
+                      {guide.title}
                     </h3>
-                    <a
-                      href="#insights"
+                    <Link
+                      to="/resources/$slug"
+                      params={{ slug: guide.slug }}
                       className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-cobalt"
                     >
                       Read More
                       <ArrowRight className="size-4" />
-                    </a>
+                    </Link>
                   </div>
                 </article>
               ))}
             </div>
-            {visible < POSTS.length && (
-              <div className="mt-10 text-center">
+            <div className="mt-10 flex flex-wrap justify-center gap-3">
+              {visible < GUIDES.length && (
                 <button
                   onClick={() => setVisible((v) => v + 3)}
                   className="rounded-full border border-navy px-7 py-3 text-sm font-bold text-navy transition-colors hover:bg-navy hover:text-navy-foreground"
                 >
                   Load More
                 </button>
-              </div>
-            )}
+              )}
+              <Link
+                to="/resources"
+                className="rounded-full bg-navy px-7 py-3 text-sm font-bold text-navy-foreground transition-transform hover:-translate-y-0.5"
+              >
+                All guides
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -431,7 +458,7 @@ function Index() {
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-cobalt-foreground/85">
                 From $30,000 to $2 million for growth, payroll, inventory and everyday cash flow —
-                structured around your revenue and funded in as little as 24 hours.
+                matched to your revenue, with many programs funding in as little as 24 hours.
               </p>
             </div>
             <a

@@ -5,54 +5,83 @@ import logoHorizontal from "@/assets/bfg-logo-horizontal.svg.asset.json";
 import { Link } from "@tanstack/react-router";
 import { ChevronDown, Menu, X } from "lucide-react";
 
-import { SERVICES, RESOURCES } from "@/data/site";
+import { CALCULATORS } from "@/data/calculators";
+import { SERVICES } from "@/data/site";
 
-function Dropdown({
-  label,
-  items,
-}: {
-  label: string;
-  items: { title: string; href?: string; to?: string; slug?: string }[];
-}) {
+type NavItem = { title: string; href: string };
+
+const FUNDING: NavItem[] = [
+  ...SERVICES.map((s) => ({ title: s.title, href: `/services/${s.slug}` })),
+  { title: "Compare all options", href: "/services" },
+];
+
+const TOOLS: NavItem[] = [
+  ...CALCULATORS.map((c) => ({ title: c.title, href: c.path })),
+  { title: "All calculators", href: "/calculators" },
+];
+
+const RESOURCES: NavItem[] = [
+  { title: "Guides", href: "/resources" },
+  { title: "FAQ", href: "/faq" },
+  { title: "About BFG Funds", href: "/about" },
+];
+
+function Dropdown({ label, items }: { label: string; items: NavItem[] }) {
   return (
     <div className="group relative">
-      <button className="flex items-center gap-1 py-6 text-sm font-semibold text-navy/80 transition-colors hover:text-cobalt">
+      <button className="flex items-center gap-1 py-6 text-sm font-semibold text-navy/80 transition-colors hover:text-cobalt group-focus-within:text-cobalt">
         {label}
         <ChevronDown className="size-4 transition-transform group-hover:rotate-180" />
       </button>
-      <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 translate-y-1 rounded-xl border border-border bg-popover p-2 opacity-0 shadow-lift transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-        {items.map((item) =>
-          item.slug ? (
-            <Link
-              key={item.title}
-              to="/services/$slug"
-              params={{ slug: item.slug }}
-              className="block rounded-lg px-3 py-2 text-sm font-medium text-navy/80 transition-colors hover:bg-surface hover:text-cobalt"
-            >
-              {item.title}
-            </Link>
-          ) : (
-            <a
-              key={item.title}
-              href={item.href}
-              className="block rounded-lg px-3 py-2 text-sm font-medium text-navy/80 transition-colors hover:bg-surface hover:text-cobalt"
-            >
-              {item.title}
-            </a>
-          ),
-        )}
+      <div className="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 translate-y-1 rounded-xl border border-border bg-popover p-2 opacity-0 shadow-lift transition-all group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+        {items.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-navy/80 transition-colors hover:bg-surface hover:text-cobalt"
+          >
+            {item.title}
+          </a>
+        ))}
       </div>
     </div>
   );
 }
 
+function MobileGroup({
+  label,
+  items,
+  onNavigate,
+}: {
+  label: string;
+  items: NavItem[];
+  onNavigate: () => void;
+}) {
+  return (
+    <>
+      <p className="px-2 pt-3 text-xs font-bold uppercase tracking-[0.2em] text-cobalt">{label}</p>
+      {items.map((item) => (
+        <a
+          key={item.href}
+          href={item.href}
+          onClick={onNavigate}
+          className="rounded-lg px-2 py-3 text-sm font-semibold text-navy/85 hover:bg-surface"
+        >
+          {item.title}
+        </a>
+      ))}
+    </>
+  );
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 backdrop-blur-md">
       <div className="container-page flex items-center justify-between gap-6">
-        <a href="/#top" className="flex shrink-0 items-center py-4" aria-label="BFG Funds home">
+        <Link to="/" className="flex shrink-0 items-center py-4" aria-label="BFG Funds home">
           <img
             src={logoHorizontal.url}
             alt="BFG Funds"
@@ -60,22 +89,17 @@ export function Header() {
             height={56}
             className="h-9 w-auto"
           />
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
-          <a href="/#top" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
-            Home
-          </a>
-          <a href="/#why" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
-            Why BFG Funds
-          </a>
-          <Dropdown
-            label="Funding Services"
-            items={SERVICES.map((s) => ({ title: s.title, slug: s.slug }))}
-          />
-          <a href="/#industries" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
-            Industries We Serve
-          </a>
+          <Dropdown label="Funding Options" items={FUNDING} />
+          <Link
+            to="/industries"
+            className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt"
+          >
+            Industries
+          </Link>
+          <Dropdown label="Calculators" items={TOOLS} />
           <Dropdown label="Resources" items={RESOURCES} />
           <Link to="/contact" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
             Contact Us
@@ -83,10 +107,7 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 lg:flex">
-          <a
-            href="/#contact"
-            className="text-sm font-bold text-navy hover:text-cobalt"
-          >
+          <a href="/#contact" className="text-sm font-bold text-navy hover:text-cobalt">
             See Your Options
           </a>
           <a
@@ -101,55 +122,32 @@ export function Header() {
           className="rounded-lg p-2 text-navy lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
+          aria-expanded={open}
         >
           {open ? <X className="size-6" /> : <Menu className="size-6" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background lg:hidden">
+        <div className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-border bg-background lg:hidden">
           <div className="container-page flex flex-col gap-1 py-4">
-            {[
-              { title: "Home", href: "/#top" },
-              { title: "Why BFG Funds", href: "/#why" },
-
-              { title: "Industries We Serve", href: "/#industries" },
-              { title: "Resources", href: "/#insights" },
-              { title: "Contact Us", href: "/contact" },
-            ].map((l) => (
-              <a
-                key={l.title}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-2 py-3 text-sm font-semibold text-navy/85 hover:bg-surface"
-              >
-                {l.title}
-              </a>
-            ))}
-            <p className="px-2 pt-3 text-xs font-bold uppercase tracking-[0.2em] text-cobalt">
-              Funding Services
-            </p>
-            {SERVICES.map((s) => (
-              <Link
-                key={s.slug}
-                to="/services/$slug"
-                params={{ slug: s.slug }}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-2 py-3 text-sm font-semibold text-navy/85 hover:bg-surface"
-              >
-                {s.title}
-              </Link>
-            ))}
-            <a
-              href="/#contact"
-              onClick={() => setOpen(false)}
-              className="px-2 py-3 text-sm font-bold text-cobalt"
-            >
+            <MobileGroup label="Funding Options" items={FUNDING} onNavigate={close} />
+            <MobileGroup label="Calculators" items={TOOLS} onNavigate={close} />
+            <MobileGroup
+              label="Company"
+              items={[
+                { title: "Industries", href: "/industries" },
+                ...RESOURCES,
+                { title: "Contact Us", href: "/contact" },
+              ]}
+              onNavigate={close}
+            />
+            <a href="/#contact" onClick={close} className="px-2 py-3 text-sm font-bold text-cobalt">
               See Your Options
             </a>
             <a
               href="/apply"
-              onClick={() => setOpen(false)}
+              onClick={close}
               className="mt-1 rounded-full bg-gold px-5 py-3 text-center text-sm font-bold text-gold-foreground"
             >
               Apply Now

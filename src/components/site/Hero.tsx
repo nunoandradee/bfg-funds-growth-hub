@@ -44,7 +44,7 @@ export function Hero() {
 
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-navy-foreground/75">
             BFG Funds helps small and mid-sized U.S. businesses bridge cash flow gaps, make payroll,
-            stock inventory and seize growth opportunities — with straightforward underwriting and
+            stock inventory and seize growth opportunities — with one application, offers from our lender network and
             approvals measured in hours, not months.
           </p>
 

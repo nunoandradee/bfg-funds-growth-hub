@@ -14,10 +14,10 @@ export const Route = createFileRoute("/terms-of-service")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://bfgfunds.com/terms-of-service" },
+      { property: "og:url", content: "https://www.bfgfunds.com/terms-of-service" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://bfgfunds.com/terms-of-service" }],
+    links: [{ rel: "canonical", href: "https://www.bfgfunds.com/terms-of-service" }],
   }),
   component: TermsPage,
 });

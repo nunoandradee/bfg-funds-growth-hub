@@ -15,10 +15,10 @@ export const Route = createFileRoute("/apply")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://bfgfunds.com/apply" },
+      { property: "og:url", content: "https://www.bfgfunds.com/apply" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://bfgfunds.com/apply" }],
+    links: [{ rel: "canonical", href: "https://www.bfgfunds.com/apply" }],
   }),
   component: ApplyPage,
 });
