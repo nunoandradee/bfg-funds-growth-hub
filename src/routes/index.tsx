@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import {
   ArrowRight,
   Briefcase,
@@ -39,8 +39,10 @@ import {
   Zap,
 } from "lucide-react";
 
+import { CountUp } from "@/components/site/CountUp";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
+import { HomeEstimator } from "@/components/site/HomeEstimator";
 import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
 import { CALCULATORS } from "@/data/calculators";
@@ -169,9 +171,9 @@ const INDUSTRY_ICONS: Record<string, typeof Truck> = {
 };
 
 /** The lowest bar across our programs; term and SBA loans ask for more. */
-const MINIMUMS = [
-  { value: "4+ months", label: "in business" },
-  { value: "$10K+", label: "monthly revenue" },
+const MINIMUMS: { value: ReactNode; label: string }[] = [
+  { value: <CountUp to={4} suffix="+ months" />, label: "in business" },
+  { value: <CountUp to={10} prefix="$" suffix="K+" />, label: "monthly revenue" },
   { value: "Business", label: "checking account" },
   { value: "All credit", label: "scores considered" },
 ];
@@ -201,6 +203,8 @@ function Index() {
             ))}
           </div>
         </section>
+
+        <HomeEstimator />
 
         {/* ABOUT */}
         <section id="about" className="py-20 md:py-28">
@@ -320,7 +324,10 @@ function Index() {
             </div>
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {WHY.map(({ icon: Icon, title, text }) => (
-                <div key={title} className="rounded-2xl border border-border bg-card p-7">
+                <div
+                  key={title}
+                  className="rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-cobalt/40 hover:shadow-card"
+                >
                   <div className="grid size-11 place-items-center rounded-xl bg-gold/20 text-navy">
                     <Icon className="size-5" />
                   </div>
@@ -358,7 +365,7 @@ function Index() {
               {MINIMUMS.map((m) => (
                 <div
                   key={m.label}
-                  className="rounded-2xl border border-border bg-card p-6 text-center shadow-card"
+                  className="rounded-2xl border border-border bg-card p-6 text-center shadow-card transition-all hover:-translate-y-1 hover:border-cobalt/40"
                 >
                   <dt className="sr-only">{m.label}</dt>
                   <dd>
@@ -434,7 +441,7 @@ function Index() {
               {STEPS.map(({ icon: Icon, title, text }, i) => (
                 <li
                   key={title}
-                  className="relative overflow-hidden rounded-2xl border border-border bg-card p-7 shadow-card"
+                  className="relative overflow-hidden rounded-2xl border border-border bg-card p-7 shadow-card transition-all hover:-translate-y-1 hover:border-cobalt/40"
                 >
                   <span className="absolute -right-2 -top-4 text-7xl font-extrabold text-navy/5">
                     {i + 1}

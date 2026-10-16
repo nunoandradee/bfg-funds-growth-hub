@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -14,7 +15,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 import { ORGANIZATION_LD, ldMeta } from "@/lib/seo";
-
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 function NotFoundComponent() {
   return (
@@ -130,6 +131,8 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  useScrollReveal(pathname);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -139,4 +142,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-
