@@ -24,7 +24,7 @@ export function Footer() {
             Fast, reliable funding for small and mid-sized U.S. businesses.
           </p>
           <Link to="/contact" className="mt-4 inline-block text-sm font-bold text-gold">
-            Talk to a specialist
+            See Your Options
           </Link>
         </div>
         <div>

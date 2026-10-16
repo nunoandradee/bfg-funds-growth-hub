@@ -31,11 +31,11 @@ export function EditorialByline({
   readMinutes?: number;
 }) {
   return (
-    <p className="mt-6 text-sm text-muted-foreground">
+    <p className="mt-6 text-sm text-navy-foreground/65">
       Written and reviewed by the{" "}
       <Link
         to="/editorial-standards"
-        className="font-semibold text-navy underline-offset-4 hover:underline"
+        className="font-semibold text-navy-foreground underline-offset-4 hover:underline"
       >
         {COMPANY.displayName} Editorial Team
       </Link>{" "}
@@ -48,9 +48,9 @@ export function EditorialByline({
 export function KeyTakeaways({ items }: { items: readonly string[] }) {
   if (items.length === 0) return null;
   return (
-    <div className="mb-8 border-l-4 border-navy bg-surface p-6">
+    <div className="mb-8 rounded-2xl border border-gold/40 bg-gold/10 p-6">
       <p className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-navy">
-        <Lightbulb className="size-4 text-navy" />
+        <Lightbulb className="size-4 text-gold" />
         Key takeaways
       </p>
       <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed text-navy/85">

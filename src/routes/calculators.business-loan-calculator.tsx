@@ -150,7 +150,7 @@ function BusinessLoanCalculator() {
                   </dl>
                   <a
                     href="/apply"
-                    className="mt-8 inline-flex w-full items-center justify-center rounded-md bg-gold px-6 py-3.5 text-sm font-bold text-gold-foreground"
+                    className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-gold px-6 py-3.5 text-sm font-extrabold text-gold-foreground"
                   >
                     See real offers for your business
                   </a>

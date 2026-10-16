@@ -21,7 +21,7 @@ export function LegalPage({
         <header className="border-b border-border bg-surface py-16 md:py-20">
           <div className="container-page max-w-4xl">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-cobalt">{eyebrow}</p>
-            <h1 className="mt-4 text-4xl text-navy md:text-5xl">{title}</h1>
+            <h1 className="mt-4 text-4xl font-extrabold text-navy md:text-5xl">{title}</h1>
             <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">{intro}</p>
             <p className="mt-4 text-sm font-semibold text-navy/70">Effective September 28, 2026</p>
           </div>

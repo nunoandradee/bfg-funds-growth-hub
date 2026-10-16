@@ -4,12 +4,10 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { LeadForm } from "@/components/site/LeadForm";
-import { PageHero } from "@/components/site/PageParts";
 import { COMPANY } from "@/data/site";
 
 const TITLE = "Contact BFG Funds | Business Funding Support";
-const DESCRIPTION =
-  "Contact BFG Funds for business funding support by phone, email, or our secure online form.";
+const DESCRIPTION = "Contact BFG Funds for business funding support by phone, email, or our secure online form.";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -37,32 +35,21 @@ function ContactPage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <PageHero
-          crumbs={[{ name: "Home", to: "/" }, { name: "Contact" }]}
-          eyebrow="Contact"
-          title="Talk with a funding specialist"
-          intro="Call, email or send us a few details below. You'll hear back from a person who knows the lenders — not an automated queue."
-        >
-          <dl className="mt-10 grid gap-6 border-t border-border pt-8 md:grid-cols-3">
-            {contacts.map(({ icon: Icon, label, value, href }) => (
-              <div key={label} className="flex items-start gap-3">
-                <Icon className="mt-0.5 size-5 shrink-0 text-cobalt" />
-                <div>
-                  <dt className="text-sm text-muted-foreground">{label}</dt>
-                  <dd className="mt-1 font-semibold text-navy">
-                    {href ? (
-                      <a href={href} className="hover:underline">
-                        {value}
-                      </a>
-                    ) : (
-                      value
-                    )}
-                  </dd>
+        <section className="border-b border-border bg-navy py-16 text-navy-foreground md:py-20">
+          <div className="container-page">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">Contact BFG Funds</p>
+            <h1 className="mt-4 text-4xl font-extrabold md:text-5xl">Talk with a funding specialist</h1>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-navy-foreground/75">Contact {COMPANY.displayName} directly or complete the secure form below.</p>
+            <div className="mt-10 grid gap-5 md:grid-cols-3">
+              {contacts.map(({ icon: Icon, label, value, href }) => (
+                <div key={label} className="flex items-start gap-4 border-l-2 border-gold pl-5">
+                  <Icon className="mt-0.5 size-5 shrink-0 text-gold" />
+                  <div><p className="text-xs font-bold uppercase text-navy-foreground/55">{label}</p>{href ? <a href={href} className="mt-1 block font-semibold hover:text-gold">{value}</a> : <p className="mt-1 font-semibold">{value}</p>}</div>
                 </div>
-              </div>
-            ))}
-          </dl>
-        </PageHero>
+              ))}
+            </div>
+          </div>
+        </section>
         <LeadForm />
       </main>
       <Footer />

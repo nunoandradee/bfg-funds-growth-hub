@@ -79,7 +79,7 @@ function UnsubscribePage() {
 
         {state.kind === "invalid" && (
           <>
-            <h1 className="mt-4 text-3xl text-navy md:text-4xl">This link is not valid</h1>
+            <h1 className="mt-4 text-3xl font-extrabold text-navy md:text-4xl">This link is not valid</h1>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               Please use the Unsubscribe link from a recent {COMPANY.displayName} email, or write to{" "}
               <a className="font-semibold text-cobalt underline" href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> and we
@@ -90,7 +90,7 @@ function UnsubscribePage() {
 
         {state.kind === "error" && (
           <>
-            <h1 className="mt-4 text-3xl text-navy md:text-4xl">Something went wrong</h1>
+            <h1 className="mt-4 text-3xl font-extrabold text-navy md:text-4xl">Something went wrong</h1>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               Please try again in a moment, or write to{" "}
               <a className="font-semibold text-cobalt underline" href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> and we
@@ -101,7 +101,7 @@ function UnsubscribePage() {
 
         {state.kind === "ready" && !state.unsubscribed && (
           <>
-            <h1 className="mt-4 text-3xl text-navy md:text-4xl">Unsubscribe from {COMPANY.displayName} emails</h1>
+            <h1 className="mt-4 text-3xl font-extrabold text-navy md:text-4xl">Unsubscribe from {COMPANY.displayName} emails</h1>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               {state.masked ? <>We will stop emailing <strong className="text-navy">{state.masked}</strong>. </> : null}
               You can still reach us any time at {COMPANY.phoneDisplay}.
@@ -110,7 +110,7 @@ function UnsubscribePage() {
               type="button"
               disabled={busy}
               onClick={() => change("unsubscribe")}
-              className="mt-8 inline-flex h-12 items-center rounded-md bg-navy px-8 text-sm font-bold text-white transition hover:opacity-90 disabled:opacity-60"
+              className="mt-8 inline-flex h-12 items-center rounded-full bg-navy px-8 text-sm font-bold text-white transition hover:opacity-90 disabled:opacity-60"
             >
               {busy ? "Unsubscribing…" : "Unsubscribe"}
             </button>
@@ -119,7 +119,7 @@ function UnsubscribePage() {
 
         {state.kind === "ready" && state.unsubscribed && (
           <>
-            <h1 className="mt-4 text-3xl text-navy md:text-4xl">You&rsquo;re unsubscribed</h1>
+            <h1 className="mt-4 text-3xl font-extrabold text-navy md:text-4xl">You&rsquo;re unsubscribed</h1>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               {state.masked ? <><strong className="text-navy">{state.masked}</strong> will </> : "You will "}
               no longer receive emails from {COMPANY.displayName}.

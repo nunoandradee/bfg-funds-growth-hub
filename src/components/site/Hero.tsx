@@ -22,7 +22,7 @@ export function Hero() {
     <section id="top" className="border-b border-border bg-surface">
       <div className="container-page grid items-center gap-10 py-12 md:py-16 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:py-20">
         <div>
-          <h1 className="text-balance-tight text-4xl leading-[1.08] text-navy md:text-6xl">
+          <h1 className="text-balance-tight text-4xl font-extrabold leading-[1.08] text-navy md:text-6xl">
             Funding for the business you've built.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">

@@ -6,9 +6,9 @@ function DefaultErrorComponent() {
   return (
     <main className="grid min-h-screen place-items-center bg-background px-5">
       <div className="text-center">
-        <h1 className="text-3xl text-navy">This page didn’t load</h1>
+        <h1 className="text-3xl font-extrabold text-navy">This page didn’t load</h1>
         <p className="mt-3 text-muted-foreground">Please try again or return to the home page.</p>
-        <Link to="/" className="mt-6 inline-flex rounded-md bg-navy px-6 py-3 text-sm font-bold text-navy-foreground">Go home</Link>
+        <Link to="/" className="mt-6 inline-flex rounded-full bg-navy px-6 py-3 text-sm font-bold text-navy-foreground">Go home</Link>
       </div>
     </main>
   );
@@ -19,8 +19,8 @@ function DefaultNotFoundComponent() {
     <main className="grid min-h-screen place-items-center bg-background px-5">
       <div className="text-center">
         <p className="text-sm font-bold uppercase text-cobalt">404</p>
-        <h1 className="mt-3 text-3xl text-navy">Page not found</h1>
-        <Link to="/" className="mt-6 inline-flex rounded-md bg-navy px-6 py-3 text-sm font-bold text-navy-foreground">Go home</Link>
+        <h1 className="mt-3 text-3xl font-extrabold text-navy">Page not found</h1>
+        <Link to="/" className="mt-6 inline-flex rounded-full bg-navy px-6 py-3 text-sm font-bold text-navy-foreground">Go home</Link>
       </div>
     </main>
   );

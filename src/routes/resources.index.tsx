@@ -41,7 +41,7 @@ function ResourcesIndex() {
         {categories.map((category) => (
           <section key={category} className="border-b border-border py-14">
             <div className="container-page">
-              <h2 className="text-2xl text-navy md:text-3xl">{category}</h2>
+              <h2 className="text-2xl font-extrabold text-navy md:text-3xl">{category}</h2>
               <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {GUIDES.filter((g) => g.category === category).map((g) => (
                   <Link
@@ -67,7 +67,7 @@ function ResourcesIndex() {
 
         <section className="bg-surface py-14">
           <div className="container-page">
-            <h2 className="text-2xl text-navy md:text-3xl">Calculators</h2>
+            <h2 className="text-2xl font-extrabold text-navy md:text-3xl">Calculators</h2>
             <div className="mt-8 grid gap-6 md:grid-cols-3">
               {CALCULATORS.map((c) => (
                 <a

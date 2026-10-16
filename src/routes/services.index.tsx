@@ -38,7 +38,7 @@ function ServicesIndex() {
 
         <section className="py-16 md:py-20">
           <div className="container-page">
-            <h2 className="text-3xl text-navy md:text-4xl">At a glance</h2>
+            <h2 className="text-3xl font-extrabold text-navy md:text-4xl">At a glance</h2>
             {/* Table on wide screens, cards on phones. */}
             <div className="mt-8 hidden overflow-hidden rounded-2xl border border-border lg:block">
               <table className="w-full text-left text-sm">
@@ -107,7 +107,7 @@ function ServicesIndex() {
                 key={s.slug}
                 className="flex flex-col rounded-2xl border border-border bg-card p-7"
               >
-                <h2 className="text-xl text-navy">{s.title}</h2>
+                <h2 className="text-xl font-extrabold text-navy">{s.title}</h2>
                 <p className="mt-3 flex-1 leading-relaxed text-muted-foreground">{s.overview}</p>
                 <p className="mt-4 text-sm text-navy/80">
                   <span className="font-bold">Typical cost: </span>

@@ -29,8 +29,8 @@ function ApplyPage() {
       <main className="py-14 md:py-20">
         <div className="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
           <aside className="lg:pt-4">
-            <p className="text-sm font-semibold text-cobalt">Funding application</p>
-            <h1 className="text-balance-tight mt-3 text-4xl text-navy md:text-5xl">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-gold">Funding application</p>
+            <h1 className="text-balance-tight mt-3 text-4xl font-extrabold text-navy md:text-5xl">
               Get funded in as little as 24–48 hours
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
@@ -44,7 +44,7 @@ function ApplyPage() {
                 "Bank-level encryption on every document",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <Check className="mt-0.5 size-5 shrink-0 text-cobalt" />
+                  <Check className="mt-0.5 size-5 shrink-0 text-gold" />
                   {item}
                 </li>
               ))}
