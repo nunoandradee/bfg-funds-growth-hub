@@ -67,7 +67,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --shadow-card: 0 1px 2px oklch(0.24 0.06 260 / 0.06), 0 12px 32px -16px oklch(0.24 0.06 260 / 0.28);
+  --shadow-card:
+    0 1px 2px oklch(0.24 0.06 260 / 0.06), 0 12px 32px -16px oklch(0.24 0.06 260 / 0.28);
   --shadow-lift: 0 24px 60px -28px oklch(0.24 0.06 260 / 0.45);
 }
 
@@ -265,12 +266,6 @@
   }
 }
 
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 .hero-orb {
   position: absolute;
   z-index: -1;
@@ -314,14 +309,6 @@
   }
   .hero-orb-b {
     animation: orb-drift 22s ease-in-out -6s infinite reverse;
-  }
-  /* Slow on purpose: a quiet drift, not a ticker. */
-  .marquee-track {
-    animation: marquee 80s linear infinite;
-  }
-  .marquee:hover .marquee-track,
-  .marquee:focus-within .marquee-track {
-    animation-play-state: paused;
   }
 }
 

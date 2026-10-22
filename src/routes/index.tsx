@@ -20,7 +20,7 @@ import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { HomeEstimator } from "@/components/site/HomeEstimator";
 import { HowItWorks } from "@/components/site/HowItWorks";
-import { IndustryMarquee } from "@/components/site/IndustryMarquee";
+import { HeroFacts } from "@/components/site/HeroFacts";
 import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
 import { OfferXRayTeaser } from "@/components/site/OfferXRayTeaser";
@@ -157,7 +157,7 @@ function Index() {
       <Header />
       <main>
         <Hero />
-        <IndustryMarquee />
+        <HeroFacts />
         <ScrollStatement />
         <HowItWorks />
         <OfferXRayTeaser />
