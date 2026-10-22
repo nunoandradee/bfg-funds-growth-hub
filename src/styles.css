@@ -44,6 +44,14 @@
   --color-gold: var(--gold);
   --color-gold-foreground: var(--gold-foreground);
   --color-surface: var(--surface);
+  --color-sky: var(--sky);
+  --color-sky-ink: var(--sky-ink);
+  --color-mint: var(--mint);
+  --color-mint-ink: var(--mint-ink);
+  --color-sand: var(--sand);
+  --color-sand-ink: var(--sand-ink);
+  --color-peach: var(--peach);
+  --color-peach-ink: var(--peach-ink);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -79,6 +87,17 @@
   --cobalt-foreground: oklch(0.99 0.003 250);
   --gold: oklch(0.777 0.129 78.5);
   --gold-foreground: oklch(0.243 0.058 259.5);
+
+  /* Supporting tints: soft surfaces that bring warmth next to navy and gold.
+     Each pairs with a deeper "ink" for icons and small accents on it. */
+  --sky: oklch(0.955 0.025 235);
+  --sky-ink: oklch(0.45 0.11 240);
+  --mint: oklch(0.955 0.03 165);
+  --mint-ink: oklch(0.47 0.09 165);
+  --sand: oklch(0.96 0.03 85);
+  --sand-ink: oklch(0.5 0.1 70);
+  --peach: oklch(0.955 0.03 45);
+  --peach-ink: oklch(0.52 0.13 40);
 
   --primary: oklch(0.243 0.058 259.5);
   --primary-foreground: oklch(0.99 0.003 250);

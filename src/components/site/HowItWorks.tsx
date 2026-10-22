@@ -4,21 +4,25 @@ import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
 
 const STEPS = [
   {
+    tint: "bg-sky text-sky-ink",
     icon: ClipboardCheck,
     title: "Apply once",
     text: "A short online application with your business basics. Seeing your options won't affect your credit score.",
   },
   {
+    tint: "bg-mint text-mint-ink",
     icon: Network,
     title: "We take it to the right lenders",
     text: "Your specialist presents your business to the providers most likely to approve it: SBA lenders, equipment financiers, credit lines and revenue-based funders.",
   },
   {
+    tint: "bg-sand text-sand-ink",
     icon: Scale,
     title: "Compare offers side by side",
     text: "Payment, total payback and term, laid out plainly. When a cheaper option fits better, we tell you.",
   },
   {
+    tint: "bg-peach text-peach-ink",
     icon: Send,
     title: "Get funded",
     text: "Sign the offer you choose. Many programs wire funds within 24 hours of signing.",
@@ -55,9 +59,9 @@ export function HowItWorks() {
             style={{ scaleY: reduce ? 1 : progress }}
             className="absolute bottom-6 left-[1.6rem] top-6 w-px origin-top bg-gold"
           />
-          {STEPS.map(({ icon: Icon, title, text }) => (
+          {STEPS.map(({ tint, icon: Icon, title, text }) => (
             <li key={title} className="relative flex gap-6">
-              <div className="relative z-10 grid size-[3.25rem] shrink-0 place-items-center rounded-2xl bg-navy text-navy-foreground shadow-card">
+              <div className={`relative z-10 grid size-[3.25rem] shrink-0 place-items-center rounded-2xl ring-4 ring-background ${tint}`}>
                 <Icon className="size-5" />
               </div>
               <div className="rounded-2xl border border-border bg-card p-6 shadow-card">

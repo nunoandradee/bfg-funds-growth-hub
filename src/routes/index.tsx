@@ -77,15 +77,15 @@ const SERVICE_ICONS: Record<string, typeof CreditCard> = {
  */
 const SERVICE_TILES: Record<
   string,
-  { span: string; tone: "navy" | "cobalt" | "surface" | "gold" | "plain" }
+  { span: string; tone: keyof typeof TONES }
 > = {
   "business-line-of-credit": { span: "md:col-span-2", tone: "navy" },
-  "working-capital": { span: "", tone: "plain" },
-  "term-loan": { span: "", tone: "plain" },
-  "sba-loans": { span: "", tone: "plain" },
-  "revenue-based-financing": { span: "", tone: "plain" },
-  "equipment-financing": { span: "md:col-span-2", tone: "cobalt" },
-  "merchant-cash-advance": { span: "md:col-span-2", tone: "surface" },
+  "working-capital": { span: "", tone: "mint" },
+  "term-loan": { span: "", tone: "sky" },
+  "sba-loans": { span: "", tone: "sand" },
+  "revenue-based-financing": { span: "", tone: "peach" },
+  "equipment-financing": { span: "md:col-span-2", tone: "navy" },
+  "merchant-cash-advance": { span: "md:col-span-2", tone: "plain" },
   "invoice-factoring": { span: "md:col-span-2", tone: "gold" },
 };
 
@@ -97,19 +97,33 @@ const TONES = {
     link: "text-gold",
     spot: "color-mix(in oklch, var(--color-gold) 18%, transparent)",
   },
-  cobalt: {
-    card: "bg-navy text-navy-foreground border-transparent",
-    icon: "bg-gold text-gold-foreground",
-    body: "text-navy-foreground/75",
-    link: "text-gold",
-    spot: "color-mix(in oklch, var(--color-gold) 18%, transparent)",
+  mint: {
+    card: "bg-mint text-navy border-transparent",
+    icon: "bg-mint-ink text-white",
+    body: "text-navy/70",
+    link: "text-mint-ink",
+    spot: "color-mix(in oklch, var(--color-mint-ink) 10%, transparent)",
   },
-  surface: {
-    card: "bg-surface text-navy border-border",
-    icon: "bg-navy text-navy-foreground",
-    body: "text-muted-foreground",
-    link: "text-cobalt",
-    spot: undefined,
+  sky: {
+    card: "bg-sky text-navy border-transparent",
+    icon: "bg-sky-ink text-white",
+    body: "text-navy/70",
+    link: "text-sky-ink",
+    spot: "color-mix(in oklch, var(--color-sky-ink) 10%, transparent)",
+  },
+  sand: {
+    card: "bg-sand text-navy border-transparent",
+    icon: "bg-sand-ink text-white",
+    body: "text-navy/70",
+    link: "text-sand-ink",
+    spot: "color-mix(in oklch, var(--color-sand-ink) 10%, transparent)",
+  },
+  peach: {
+    card: "bg-peach text-navy border-transparent",
+    icon: "bg-peach-ink text-white",
+    body: "text-navy/70",
+    link: "text-peach-ink",
+    spot: "color-mix(in oklch, var(--color-peach-ink) 10%, transparent)",
   },
   gold: {
     card: "bg-gold/15 text-navy border-gold/30",
