@@ -19,7 +19,7 @@ import { CountUp } from "@/components/site/CountUp";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { HomeEstimator } from "@/components/site/HomeEstimator";
-import { HowItWorks } from "@/components/site/HowItWorks";
+import { ScrollStory } from "@/components/site/ScrollStory";
 import { IndustryCarousel } from "@/components/site/IndustryCarousel";
 import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
@@ -159,7 +159,7 @@ function Index() {
         <Hero />
         <IndustryCarousel />
         <ScrollStatement />
-        <HowItWorks />
+        <ScrollStory />
         <OfferXRayTeaser />
         <HomeEstimator />
 
