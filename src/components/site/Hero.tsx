@@ -35,14 +35,14 @@ export function Hero() {
       ref={ref}
       id="top"
       data-motion
-      className="relative isolate overflow-hidden bg-navy text-navy-foreground"
+      className="grain relative isolate overflow-hidden bg-navy text-navy-foreground"
     >
       <div aria-hidden className="hero-orb hero-orb-a" />
       <div aria-hidden className="hero-orb hero-orb-b" />
 
-      <div className="container-page grid items-center gap-12 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-24 lg:pt-20">
+      <div className="container-page relative z-[1] grid items-center gap-12 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-24 lg:pt-20">
         <div>
-          <h1 className="text-balance-tight text-[2.6rem] font-extrabold leading-[1.05] sm:text-5xl lg:text-[4.1rem]">
+          <h1 className="text-[2.6rem] font-extrabold leading-[1.05] tracking-[-0.035em] [text-wrap:balance] sm:text-5xl lg:text-[4.1rem]">
             {HEADLINE.map((word, i) => (
               <span key={word} className="inline-block overflow-hidden pb-1 align-bottom">
                 <span
@@ -94,7 +94,7 @@ export function Hero() {
               </div>
               <button
                 type="submit"
-                className="group inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-gold px-7 text-base font-extrabold text-gold-foreground shadow-lift transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+                className="gold-sheen group inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-gold px-7 text-base font-extrabold text-gold-foreground transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
               >
                 See my options
                 <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
@@ -143,8 +143,8 @@ function ProductTicker() {
 
   const service = SERVICES[index]!;
   return (
-    <div className="rounded-2xl bg-background p-5 text-navy shadow-lift ring-1 ring-border">
-      <p className="text-xs font-bold text-muted-foreground">We compare for you</p>
+    <div className="rounded-2xl bg-navy/70 p-5 text-navy-foreground shadow-lift ring-1 ring-white/15 backdrop-blur-xl [box-shadow:inset_0_1px_0_rgb(255_255_255/0.12),var(--shadow-lift)]">
+      <p className="text-xs font-bold text-navy-foreground/60">We compare for you</p>
       <div className="relative mt-1 h-8 overflow-hidden" aria-live="off">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.p
@@ -164,12 +164,12 @@ function ProductTicker() {
           <span
             key={s.slug}
             className={`h-1 flex-1 rounded-full transition-colors duration-500 ${
-              i <= index ? "bg-cobalt" : "bg-border"
+              i <= index ? "bg-gold" : "bg-white/15"
             }`}
           />
         ))}
       </div>
-      <p className="mt-3 text-xs text-muted-foreground">
+      <p className="mt-3 text-xs text-navy-foreground/60">
         {SERVICES.length} products, one application.
       </p>
     </div>

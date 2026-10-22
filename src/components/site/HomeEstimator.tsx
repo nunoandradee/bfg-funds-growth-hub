@@ -95,7 +95,7 @@ export function HomeEstimator() {
           </div>
 
           <div
-            className="flex flex-col justify-between gap-8 bg-navy p-6 text-navy-foreground md:p-10"
+            className="surface-navy flex flex-col justify-between gap-8 bg-navy p-6 text-navy-foreground md:p-10"
             aria-live="polite"
           >
             <div>
@@ -114,7 +114,7 @@ export function HomeEstimator() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <a
                 href={`/apply?amount=${amount}`}
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-sm font-extrabold text-gold-foreground shadow-lift transition-transform hover:-translate-y-0.5"
+                className="gold-sheen inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-sm font-extrabold text-gold-foreground transition-transform hover:-translate-y-0.5"
               >
                 See my real options
                 <ArrowRight className="size-4" />

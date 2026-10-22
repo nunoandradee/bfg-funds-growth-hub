@@ -90,14 +90,14 @@ const SERVICE_TILES: Record<
 
 const TONES = {
   navy: {
-    card: "bg-navy text-navy-foreground border-transparent",
+    card: "surface-navy bg-navy text-navy-foreground border-transparent",
     icon: "bg-gold text-gold-foreground",
     body: "text-navy-foreground/75",
     link: "text-gold",
     spot: "color-mix(in oklch, var(--color-gold) 18%, transparent)",
   },
   cobalt: {
-    card: "bg-cobalt text-cobalt-foreground border-transparent",
+    card: "surface-cobalt bg-cobalt text-cobalt-foreground border-transparent",
     icon: "bg-navy text-navy-foreground",
     body: "text-cobalt-foreground/85",
     link: "text-gold",
@@ -118,7 +118,7 @@ const TONES = {
     spot: "color-mix(in oklch, var(--color-gold) 25%, transparent)",
   },
   plain: {
-    card: "bg-card text-navy border-border shadow-card",
+    card: "bg-card text-navy border-border hover:shadow-lift hover:border-cobalt/30",
     icon: "bg-navy text-navy-foreground",
     body: "text-muted-foreground",
     link: "text-cobalt",
@@ -174,7 +174,7 @@ function Index() {
                   <Spotlight
                     key={service.slug}
                     style={tone.spot ? ({ "--spot-color": tone.spot } as CSSProperties) : undefined}
-                    className={`group flex flex-col rounded-3xl border p-7 transition-transform duration-300 hover:-translate-y-1 ${tone.card} ${tile.span} ${wide ? "md:p-9" : ""}`}
+                    className={`group flex flex-col rounded-3xl border p-7 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 ${tone.card} ${tile.span} ${wide ? "md:p-9" : ""}`}
                   >
                     <div
                       className={`grid size-12 place-items-center rounded-2xl transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110 ${tone.icon}`}
@@ -299,12 +299,12 @@ function Index() {
         </section>
 
         {/* CALCULATORS */}
-        <section className="relative overflow-hidden bg-navy py-20 text-navy-foreground md:py-28">
+        <section className="grain relative isolate overflow-hidden bg-navy py-20 text-navy-foreground md:py-28">
           <div
             aria-hidden
             className="pointer-events-none absolute -right-32 -top-32 size-[28rem] rounded-full bg-cobalt/40 blur-3xl"
           />
-          <div className="container-page relative">
+          <div className="container-page relative z-[1]">
             <div className="max-w-2xl">
               <h2 className="text-balance-tight text-4xl font-extrabold md:text-5xl">
                 Know the numbers before you apply
@@ -396,12 +396,12 @@ function Index() {
         </div>
 
         {/* CLOSING CTA */}
-        <section className="relative overflow-hidden bg-cobalt py-20 text-cobalt-foreground">
+        <section className="grain surface-cobalt relative isolate overflow-hidden bg-cobalt py-20 text-cobalt-foreground">
           <div
             aria-hidden
             className="pointer-events-none absolute -left-24 top-1/2 size-96 -translate-y-1/2 rounded-full bg-navy/40 blur-3xl"
           />
-          <div className="container-page relative flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center">
+          <div className="container-page relative z-[1] flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center">
             <div className="max-w-2xl">
               <h2 className="text-balance-tight text-4xl font-extrabold md:text-5xl">
                 See what your business qualifies for
@@ -414,7 +414,7 @@ function Index() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-base font-extrabold text-gold-foreground shadow-lift transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+                className="gold-sheen group inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-base font-extrabold text-gold-foreground transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
               >
                 See Your Options
                 <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />

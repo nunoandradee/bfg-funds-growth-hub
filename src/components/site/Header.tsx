@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import logoHorizontal from "@/assets/bfg-logo-horizontal.svg.asset.json";
+import logoWhite from "@/assets/bfg-logo-white.svg.asset.json";
 
 import { Link } from "@tanstack/react-router";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -26,10 +27,16 @@ const RESOURCES: NavItem[] = [
   { title: "About BFG Funds", href: "/about" },
 ];
 
-function Dropdown({ label, items }: { label: string; items: NavItem[] }) {
+function Dropdown({ label, items, dark }: { label: string; items: NavItem[]; dark: boolean }) {
   return (
     <div className="group relative">
-      <button className="flex items-center gap-1 py-6 text-sm font-semibold text-navy/80 transition-colors hover:text-cobalt group-focus-within:text-cobalt">
+      <button
+        className={`flex items-center gap-1 py-6 text-sm font-semibold transition-colors ${
+          dark
+            ? "text-navy-foreground/80 hover:text-gold group-focus-within:text-gold"
+            : "text-navy/80 hover:text-cobalt group-focus-within:text-cobalt"
+        }`}
+      >
         {label}
         <ChevronDown className="size-4 transition-transform group-hover:rotate-180" />
       </button>
@@ -74,16 +81,52 @@ function MobileGroup({
   );
 }
 
+/**
+ * While a page opens on a navy band (the home hero, inner page headers) the
+ * header wears the same navy so the two read as one surface; once that band
+ * scrolls under it, the header turns into frosted white.
+ */
+function useOverDarkBand() {
+  const [dark, setDark] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const band = ref.current?.parentElement?.querySelector("main > section:first-child");
+    if (!band || !band.classList.contains("bg-navy") || !("IntersectionObserver" in window)) return;
+    const headerHeight = ref.current?.offsetHeight ?? 72;
+    const observer = new IntersectionObserver(
+      ([entry]) => setDark(Boolean(entry?.isIntersecting)),
+      {
+        rootMargin: `-${headerHeight}px 0px 0px 0px`,
+      },
+    );
+    observer.observe(band);
+    return () => observer.disconnect();
+  }, []);
+  return { ref, dark };
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
+  const band = useOverDarkBand();
+  const dark = band.dark && !open;
+  const link = `py-6 text-sm font-semibold transition-colors ${
+    dark ? "text-navy-foreground/80 hover:text-gold" : "text-navy/80 hover:text-cobalt"
+  }`;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 backdrop-blur-md">
+    <header
+      ref={band.ref}
+      className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
+        dark
+          ? "border-transparent bg-navy"
+          : "border-border/70 bg-background/85 backdrop-blur-xl backdrop-saturate-150"
+      }`}
+    >
       <div className="container-page flex items-center justify-between gap-6">
         <Link to="/" className="flex shrink-0 items-center py-4" aria-label="BFG Funds home">
           <img
-            src={logoHorizontal.url}
+            src={dark ? logoWhite.url : logoHorizontal.url}
             alt="BFG Funds"
             width={232}
             height={56}
@@ -92,34 +135,28 @@ export function Header() {
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
-          <Dropdown label="Funding Options" items={FUNDING} />
-          <Link
-            to="/industries"
-            className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt"
-          >
+          <Dropdown label="Funding Options" items={FUNDING} dark={dark} />
+          <Link to="/industries" className={link}>
             Industries
           </Link>
-          <Dropdown label="Calculators" items={TOOLS} />
-          <Dropdown label="Resources" items={RESOURCES} />
-          <Link to="/contact" className="py-6 text-sm font-semibold text-navy/80 hover:text-cobalt">
+          <Dropdown label="Calculators" items={TOOLS} dark={dark} />
+          <Dropdown label="Resources" items={RESOURCES} dark={dark} />
+          <Link to="/contact" className={link}>
             Contact Us
           </Link>
         </nav>
 
-        <div className="hidden items-center gap-4 lg:flex">
-          <a href="/#contact" className="text-sm font-bold text-navy hover:text-cobalt">
-            See Your Options
-          </a>
+        <div className="hidden items-center lg:flex">
           <a
             href="/apply"
-            className="rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
+            className="gold-sheen rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
           >
             Apply Now
           </a>
         </div>
 
         <button
-          className="rounded-lg p-2 text-navy lg:hidden"
+          className={`rounded-lg p-2 lg:hidden ${dark ? "text-navy-foreground" : "text-navy"}`}
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -142,13 +179,10 @@ export function Header() {
               ]}
               onNavigate={close}
             />
-            <a href="/#contact" onClick={close} className="px-2 py-3 text-sm font-bold text-cobalt">
-              See Your Options
-            </a>
             <a
               href="/apply"
               onClick={close}
-              className="mt-1 rounded-full bg-gold px-5 py-3 text-center text-sm font-bold text-gold-foreground"
+              className="mt-3 rounded-full bg-gold px-5 py-3 text-center text-sm font-bold text-gold-foreground"
             >
               Apply Now
             </a>
