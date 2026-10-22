@@ -23,7 +23,7 @@ export const COMPANY = {
 
 /** Shown wherever amounts, rates or speeds are mentioned. */
 export const FUNDING_DISCLAIMER =
-  "BFG Funds is not a lender. We connect businesses with independent lenders and funding providers. Amounts, rates, terms and timing are set by each provider after its own review of your business (bank statements, revenue, time in business, credit profile and more) and are not guaranteed.";
+  "Funding offers come from our network of independent lenders and funding providers. Each one sets its own amount, rate, terms and timing after reviewing your business (bank statements, revenue, time in business, credit and more), and approval isn't guaranteed.";
 
 export type Faq = { q: string; a: string };
 
