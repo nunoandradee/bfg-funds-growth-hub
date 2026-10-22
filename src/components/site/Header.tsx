@@ -88,17 +88,10 @@ function MobileGroup({
  */
 function useOverDarkBand() {
   const [dark, setDark] = useState(false);
-  const [bandColor, setBandColor] = useState<string | undefined>(undefined);
   const ref = useRef<HTMLElement>(null);
   useEffect(() => {
-    const band = ref.current?.parentElement?.querySelector<HTMLElement>(
-      "main > section:first-child",
-    );
-    const isDark =
-      band && (band.classList.contains("bg-navy") || band.hasAttribute("data-dark-band"));
-    if (!band || !isDark || !("IntersectionObserver" in window)) return;
-    // Wear the band's exact colour so the two meet without a seam.
-    setBandColor(getComputedStyle(band).backgroundColor);
+    const band = ref.current?.parentElement?.querySelector("main > section:first-child");
+    if (!band || !band.classList.contains("bg-navy") || !("IntersectionObserver" in window)) return;
     const headerHeight = ref.current?.offsetHeight ?? 72;
     const observer = new IntersectionObserver(
       ([entry]) => setDark(Boolean(entry?.isIntersecting)),
@@ -109,7 +102,7 @@ function useOverDarkBand() {
     observer.observe(band);
     return () => observer.disconnect();
   }, []);
-  return { ref, dark, bandColor };
+  return { ref, dark };
 }
 
 export function Header() {
@@ -124,7 +117,6 @@ export function Header() {
   return (
     <header
       ref={band.ref}
-      style={dark && band.bandColor ? { backgroundColor: band.bandColor } : undefined}
       className={`sticky top-0 z-50 border-b transition-colors duration-300 ${
         dark
           ? "border-transparent bg-navy"

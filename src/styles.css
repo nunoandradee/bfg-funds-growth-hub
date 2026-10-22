@@ -238,29 +238,27 @@
     transform: none;
   }
 }
-@keyframes sun-rise {
-  from {
-    opacity: 0;
-    transform: translateY(12%) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes phone-rise {
-  from {
-    opacity: 0;
-    transform: translateY(120px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
 @keyframes belt {
   to {
     transform: translateX(-50%);
+  }
+}
+@keyframes ken-burns {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.07) translate3d(-1.5%, -1%, 0);
+  }
+}
+@keyframes hero-unveil {
+  from {
+    clip-path: inset(12% 8% 12% 8% round 1.5rem);
+    transform: scale(1.06);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 1.5rem);
+    transform: none;
   }
 }
 @keyframes orb-drift {
@@ -301,6 +299,20 @@
   }
   .hero-fade {
     animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  /* Unveil, then a slow documentary-style drift so the photo never sits still. */
+  /* Industry cards under the hero: a slow drift, paused while someone reads. */
+  .belt-track {
+    animation: belt 90s linear infinite;
+  }
+  .belt:hover .belt-track,
+  .belt:focus-within .belt-track {
+    animation-play-state: paused;
+  }
+  .hero-photo img {
+    animation:
+      hero-unveil 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both,
+      ken-burns 22s ease-in-out 1.4s infinite alternate;
   }
   .hero-card {
     animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;

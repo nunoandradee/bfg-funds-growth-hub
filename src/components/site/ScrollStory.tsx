@@ -41,7 +41,7 @@ export function ScrollStory() {
       id="how-it-works"
       data-motion
       aria-label="How it works"
-      className={`relative ${STAGE_BG} text-navy-foreground ${reduce ? "" : "h-[320vh]"}`}
+      className={`relative bg-[oklch(0.16_0.035_260)] text-navy-foreground ${reduce ? "" : "h-[320vh]"}`}
     >
       <div
         className={`${reduce ? "py-20" : "sticky top-0 h-[100dvh]"} flex items-center overflow-hidden`}
@@ -140,29 +140,6 @@ function Glow({ progress, still }: { progress: MotionValue<number>; still: boole
   );
 }
 
-/** The dark stage colour shared by the hero and this scene. */
-export const STAGE_BG = "bg-[oklch(0.16_0.035_260)]";
-
-/** Phone frame with a notch; its screen content is positioned inside. */
-export function PhoneShell({
-  children,
-  className = "aspect-[9/16] sm:aspect-[9/19]",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`relative rounded-[3rem] bg-[oklch(0.22_0.02_260)] p-2.5 shadow-[0_40px_120px_-30px_rgb(0_0_0/0.8),0_0_0_1px_rgb(255_255_255/0.08)_inset] ${className}`}
-    >
-      <div className="relative h-full overflow-hidden rounded-[2.4rem] bg-background text-navy">
-        <div className="absolute left-1/2 top-2.5 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-[oklch(0.15_0.02_260)]" />
-        {children}
-      </div>
-    </div>
-  );
-}
-
 function Phone({ progress, still }: { progress: MotionValue<number>; still: boolean }) {
   const rotate = useTransform(progress, [0, 0.5, 1], [-4, 0, 4]);
   const y = useTransform(progress, [0, 1], [30, -30]);
@@ -172,17 +149,20 @@ function Phone({ progress, still }: { progress: MotionValue<number>; still: bool
       className="relative mx-auto w-[15rem] sm:w-[17rem] xl:w-[19rem]"
       aria-label="Illustration of the BFG Funds journey: apply, compare offers, get funded"
     >
-      <PhoneShell>
-        <Screen step={0} progress={progress} still={still}>
-          <ApplyScreen />
-        </Screen>
-        <Screen step={1} progress={progress} still={still}>
-          <CompareScreen />
-        </Screen>
-        <Screen step={2} progress={progress} still={still}>
-          <FundedScreen />
-        </Screen>
-      </PhoneShell>
+      <div className="relative aspect-[9/16] rounded-[3rem] sm:aspect-[9/19] bg-[oklch(0.22_0.02_260)] p-2.5 shadow-[0_40px_120px_-30px_rgb(0_0_0/0.8),0_0_0_1px_rgb(255_255_255/0.08)_inset]">
+        <div className="relative h-full overflow-hidden rounded-[2.4rem] bg-background text-navy">
+          <div className="absolute left-1/2 top-2.5 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-[oklch(0.15_0.02_260)]" />
+          <Screen step={0} progress={progress} still={still}>
+            <ApplyScreen />
+          </Screen>
+          <Screen step={1} progress={progress} still={still}>
+            <CompareScreen />
+          </Screen>
+          <Screen step={2} progress={progress} still={still}>
+            <FundedScreen />
+          </Screen>
+        </div>
+      </div>
       <figcaption className="mt-4 text-center text-xs text-navy-foreground/40">
         Illustration
       </figcaption>
@@ -217,7 +197,7 @@ function Screen({
   );
 }
 
-export function ApplyScreen() {
+function ApplyScreen() {
   return (
     <div className="flex h-full flex-col pb-6">
       <p className="text-xs font-semibold text-muted-foreground">Funding application</p>
