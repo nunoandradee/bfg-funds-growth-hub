@@ -24,6 +24,7 @@ import { IndustryMarquee } from "@/components/site/IndustryMarquee";
 import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
 import { OfferXRayTeaser } from "@/components/site/OfferXRayTeaser";
+import { ScrollStatement } from "@/components/site/ScrollStatement";
 import { Spotlight } from "@/components/site/Spotlight";
 import { CALCULATORS } from "@/data/calculators";
 import { GUIDES } from "@/data/guides";
@@ -75,10 +76,7 @@ const SERVICE_ICONS: Record<string, typeof CreditCard> = {
  * Bento layout for the eight products: two wide tiles per row band so the
  * grid has rhythm instead of eight identical cards.
  */
-const SERVICE_TILES: Record<
-  string,
-  { span: string; tone: keyof typeof TONES }
-> = {
+const SERVICE_TILES: Record<string, { span: string; tone: keyof typeof TONES }> = {
   "business-line-of-credit": { span: "md:col-span-2", tone: "navy" },
   "working-capital": { span: "", tone: "mint" },
   "term-loan": { span: "", tone: "sky" },
@@ -160,6 +158,7 @@ function Index() {
       <main>
         <Hero />
         <IndustryMarquee />
+        <ScrollStatement />
         <HowItWorks />
         <OfferXRayTeaser />
         <HomeEstimator />

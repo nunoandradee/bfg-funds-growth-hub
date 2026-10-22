@@ -16,6 +16,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 import { ORGANIZATION_LD, ldMeta } from "@/lib/seo";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 
 function NotFoundComponent() {
   return (
@@ -133,6 +134,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   useScrollReveal(pathname);
+  useSmoothScroll();
 
   return (
     <QueryClientProvider client={queryClient}>

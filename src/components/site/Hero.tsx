@@ -1,6 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { ArrowRight, ChevronDown, ShieldCheck } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
 
 import heroOwners from "@/assets/hero-owners.jpg";
 import { SERVICES } from "@/data/site";
@@ -30,11 +38,35 @@ export function Hero() {
   const photoY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90]);
   const cardY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -40]);
 
+  // Depth under the pointer: the photo tilts a little, the card floats the
+  // other way. Motion values only, so nothing re-renders while the mouse moves.
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const sx = useSpring(px, { stiffness: 120, damping: 20, mass: 0.6 });
+  const sy = useSpring(py, { stiffness: 120, damping: 20, mass: 0.6 });
+  const tiltX = useTransform(sy, [-0.5, 0.5], [4, -4]);
+  const tiltY = useTransform(sx, [-0.5, 0.5], [-5, 5]);
+  const cardX = useTransform(sx, [-0.5, 0.5], [18, -18]);
+  const cardShiftY = useTransform(sy, [-0.5, 0.5], [12, -12]);
+  const cardTotalY = useTransform(() => cardY.get() + cardShiftY.get());
+  const onPointerMove = (e: PointerEvent<HTMLElement>) => {
+    if (reduce || e.pointerType !== "mouse") return;
+    const box = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - box.left) / box.width - 0.5);
+    py.set((e.clientY - box.top) / box.height - 0.5);
+  };
+  const onPointerLeave = () => {
+    px.set(0);
+    py.set(0);
+  };
+
   return (
     <section
       ref={ref}
       id="top"
       data-motion
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
       className="grain relative isolate overflow-hidden bg-navy text-navy-foreground"
     >
       <div aria-hidden className="hero-orb hero-orb-a" />
@@ -107,19 +139,22 @@ export function Hero() {
           </form>
         </div>
 
-        <div className="relative">
-          <motion.figure style={{ y: photoY }} className="hero-photo relative">
+        <div className="relative [perspective:1200px]">
+          <motion.figure
+            style={{ y: photoY, rotateX: tiltX, rotateY: tiltY }}
+            className="hero-photo relative overflow-hidden rounded-3xl shadow-lift"
+          >
             <img
               src={heroOwners}
               alt="Two café owners smiling behind their counter"
               width={1600}
               height={900}
               fetchPriority="high"
-              className="aspect-[4/3] w-full rounded-3xl object-cover object-center shadow-lift lg:aspect-[5/4]"
+              className="aspect-[4/3] w-full object-cover object-center lg:aspect-[5/4]"
             />
           </motion.figure>
           <motion.div
-            style={{ y: cardY }}
+            style={{ y: cardTotalY, x: cardX }}
             className="hero-card absolute -bottom-8 left-4 right-4 sm:-left-6 sm:right-auto sm:w-80"
           >
             <ProductTicker />

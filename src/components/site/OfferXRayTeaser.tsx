@@ -1,6 +1,7 @@
 import { AlertTriangle, ArrowRight, ScanSearch } from "lucide-react";
 
 import { usd } from "@/components/site/CalculatorParts";
+import { CountUp } from "@/components/site/CountUp";
 import { analyzeOffer } from "@/lib/offer-xray";
 
 // A worked example, computed with the same math as the tool itself.
@@ -56,7 +57,7 @@ export function OfferXRayTeaser() {
               <div>
                 <p className="text-sm text-navy-foreground/65">Real APR</p>
                 <p className="text-5xl font-extrabold tracking-tight text-gold tabular-nums">
-                  {Math.round(RESULT.apr)}%
+                  <CountUp to={Math.round(RESULT.apr)} suffix="%" duration={1600} />
                 </p>
               </div>
               <div className="pb-1.5 text-sm">
