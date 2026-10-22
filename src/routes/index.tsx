@@ -78,11 +78,11 @@ const SERVICE_ICONS: Record<string, typeof CreditCard> = {
  */
 const SERVICE_TILES: Record<string, { span: string; tone: keyof typeof TONES }> = {
   "business-line-of-credit": { span: "md:col-span-2", tone: "navy" },
-  "working-capital": { span: "", tone: "mint" },
+  "working-capital": { span: "", tone: "plain" },
   "term-loan": { span: "", tone: "sky" },
   "sba-loans": { span: "", tone: "sand" },
   "revenue-based-financing": { span: "", tone: "peach" },
-  "equipment-financing": { span: "md:col-span-2", tone: "navy" },
+  "equipment-financing": { span: "md:col-span-2", tone: "mint" },
   "merchant-cash-advance": { span: "md:col-span-2", tone: "plain" },
   "invoice-factoring": { span: "md:col-span-2", tone: "gold" },
 };
@@ -411,17 +411,13 @@ function Index() {
         </div>
 
         {/* CLOSING CTA */}
-        <section className="grain relative isolate overflow-hidden bg-navy py-20 text-navy-foreground">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -left-24 top-1/2 size-96 -translate-y-1/2 rounded-full bg-cobalt/35 blur-3xl"
-          />
-          <div className="container-page relative z-[1] flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center">
+        <section className="relative overflow-hidden bg-gold py-20 text-navy">
+          <div className="container-page relative flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center">
             <div className="max-w-2xl">
               <h2 className="text-balance-tight text-4xl font-extrabold md:text-5xl">
                 See what your business qualifies for
               </h2>
-              <p className="mt-4 text-lg leading-relaxed text-navy-foreground/75">
+              <p className="mt-4 text-lg leading-relaxed text-navy/75">
                 One short application, a specialist who picks up the phone, and offers you can
                 actually compare.
               </p>
@@ -429,14 +425,14 @@ function Index() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-base font-extrabold text-gold-foreground shadow-lift transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-navy px-8 py-4 text-base font-extrabold text-navy-foreground transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
               >
                 See Your Options
                 <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
               </a>
               <a
                 href={COMPANY.phoneHref}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-navy-foreground/30 px-8 py-4 text-base font-bold hover:bg-navy-foreground/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-navy/30 px-8 py-4 text-base font-bold hover:bg-navy/10"
               >
                 <Phone className="size-5" />
                 {COMPANY.phoneDisplay}

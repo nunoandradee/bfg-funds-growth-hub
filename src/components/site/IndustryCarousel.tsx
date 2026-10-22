@@ -35,8 +35,8 @@ const INDUSTRY_ICONS: Record<string, typeof Truck> = {
 };
 
 /**
- * The industries we fund as a slow belt of cards under the hero, on the same
- * navy. CSS drives the drift (paused on hover or focus, still for reduced
+ * The industries we fund as a slow belt of cards under the hero, on a light
+ * band so the page breathes after the navy hero. CSS drives the drift (paused on hover or focus, still for reduced
  * motion). The second copy only closes the loop, so it is hidden from
  * assistive tech and the keyboard.
  */
@@ -50,21 +50,19 @@ export function IndustryCarousel() {
           to="/industries/$slug"
           params={{ slug: industry.slug }}
           tabIndex={copy ? -1 : undefined}
-          className="group relative flex w-[19rem] shrink-0 flex-col rounded-2xl bg-white/[0.045] p-6 ring-1 ring-white/10 transition-[transform,background-color,box-shadow] duration-300 hover:-translate-y-1 hover:bg-white/[0.08] hover:ring-gold/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          className="group relative flex w-[19rem] shrink-0 flex-col rounded-2xl bg-card p-6 ring-1 ring-border transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lift hover:ring-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
         >
           <div className="flex items-start justify-between">
-            <span className="grid size-12 place-items-center rounded-xl bg-gold/15 text-gold transition-colors duration-300 group-hover:bg-gold group-hover:text-gold-foreground">
+            <span className="grid size-12 place-items-center rounded-xl bg-gold/15 text-[oklch(0.55_0.12_70)] transition-colors duration-300 group-hover:bg-gold group-hover:text-gold-foreground">
               <Icon aria-hidden strokeWidth={1.75} className="size-6" />
             </span>
             <ArrowUpRight
               aria-hidden
-              className="size-5 text-navy-foreground/30 transition-[transform,color] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-gold"
+              className="size-5 text-navy/25 transition-[transform,color] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-navy"
             />
           </div>
-          <p className="mt-6 text-lg font-bold tracking-tight text-navy-foreground">
-            {industry.name}
-          </p>
-          <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-navy-foreground/55">
+          <p className="mt-6 text-lg font-bold tracking-tight text-navy">{industry.name}</p>
+          <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
             {industry.summary}
           </p>
         </Link>
@@ -75,15 +73,15 @@ export function IndustryCarousel() {
     <section
       data-motion
       aria-labelledby="industries-belt"
-      className="border-t border-white/10 bg-navy pb-12 pt-10 text-navy-foreground md:pb-16 md:pt-12"
+      className="bg-background pb-12 pt-12 md:pb-16 md:pt-16"
     >
       <div className="container-page flex items-end justify-between gap-6">
-        <h2 id="industries-belt" className="text-lg font-bold tracking-tight md:text-xl">
+        <h2 id="industries-belt" className="text-lg font-bold tracking-tight text-navy md:text-xl">
           Industries we fund
         </h2>
         <Link
           to="/industries"
-          className="group inline-flex items-center gap-0.5 text-sm font-semibold text-gold hover:text-gold/80"
+          className="group inline-flex items-center gap-0.5 text-sm font-semibold text-cobalt"
         >
           View all {INDUSTRY_PAGES.length}
           <ChevronRight className="size-4 transition-transform group-hover:translate-x-0.5" />
