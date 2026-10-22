@@ -31,13 +31,19 @@ export function ReviewStrip({ dark = false }: { dark?: boolean }) {
 }
 
 /** The data promise, once confirmed. Hidden until DATA_PROMISE_CONFIRMED is true. */
-export function DataPromise({ dark = false }: { dark?: boolean }) {
+export function DataPromise({
+  dark = false,
+  className = "",
+}: {
+  dark?: boolean;
+  className?: string;
+}) {
   if (!DATA_PROMISE_CONFIRMED) return null;
   return (
     <p
       className={`flex items-start gap-2.5 text-sm font-semibold ${
         dark ? "text-navy-foreground" : "text-navy"
-      }`}
+      } ${className}`}
     >
       <Lock aria-hidden className="mt-0.5 size-4 shrink-0 text-gold" />
       {DATA_PROMISE}

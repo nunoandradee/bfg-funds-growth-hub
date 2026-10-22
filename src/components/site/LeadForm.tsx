@@ -187,16 +187,15 @@ export function LeadForm() {
       <div className="container-page grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <h2 className="text-balance-tight text-4xl font-extrabold text-navy md:text-5xl">
-            Start without your SSN
+            Talk to a specialist first
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Three quick steps about your business. No SSN, no documents and no credit check to
-            see your options. A specialist follows up, usually within one business day, and there's
-            no obligation.
+            Tell us a little about your business and a funding specialist will reach out, usually
+            within one business day, to walk you through your options. No obligation.
           </p>
           <ul className="mt-8 space-y-3 text-sm font-medium text-navy/80">
             {[
-              "No SSN or documents to get started",
+              "Seeing your options won't affect your credit score",
               "A real funding specialist, not a call center",
               "Decisions often within 24–48 hours",
             ].map((item) => (
@@ -206,9 +205,7 @@ export function LeadForm() {
               </li>
             ))}
           </ul>
-          <div className="mt-6">
-            <DataPromise />
-          </div>
+          <DataPromise className="mt-6" />
         </div>
 
         <div className="rounded-3xl border border-border bg-card p-6 shadow-lift md:p-9">
