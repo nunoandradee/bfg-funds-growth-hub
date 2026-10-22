@@ -1,14 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  Calculator,
-  Check,
-  Phone,
-  Scale,
-  ScanSearch,
-  ShieldCheck,
-  UserRound,
-} from "lucide-react";
+import { ArrowRight, Calculator, Check, Phone, ScanSearch } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
@@ -19,6 +10,7 @@ import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
 import { OfferXRayTeaser } from "@/components/site/OfferXRayTeaser";
 import { ProductExplorer } from "@/components/site/ProductExplorer";
+import { WhyChooseUs } from "@/components/site/WhyChooseUs";
 import { CALCULATORS } from "@/data/calculators";
 import { GUIDES } from "@/data/guides";
 import { COMPANY, SERVICES, SITE_URL } from "@/data/site";
@@ -58,24 +50,6 @@ const FACTS = [
   { value: "$10K–$2M", label: "Funding amounts" },
   { value: "8", label: "Funding products compared" },
   { value: "1", label: "Specialist, start to finish" },
-];
-
-const WHY = [
-  {
-    icon: UserRound,
-    title: "One specialist",
-    text: "The same person from application to funding. No call center, no being passed around.",
-  },
-  {
-    icon: Scale,
-    title: "Honest comparisons",
-    text: "Payment, total cost and term side by side. If a cheaper option fits, we say so.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "No impact to look",
-    text: "Seeing your options won't affect your credit score.",
-  },
 ];
 
 const USES = [
@@ -154,27 +128,7 @@ function Index() {
           </div>
         </section>
 
-        {/* WHY BFG */}
-        <section className="bg-navy py-20 text-navy-foreground md:py-24">
-          <div className="container-page">
-            <h2 className="text-center text-balance-tight text-4xl font-extrabold md:text-5xl">
-              See why business owners choose us.
-            </h2>
-            <div className="mt-14 grid gap-12 md:grid-cols-3">
-              {WHY.map(({ icon: Icon, title, text }) => (
-                <div key={title} className="text-center">
-                  <span className="mx-auto grid size-24 place-items-center rounded-full bg-gold text-gold-foreground">
-                    <Icon aria-hidden strokeWidth={1.75} className="size-10" />
-                  </span>
-                  <h3 className="mt-6 text-xl font-extrabold">{title}</h3>
-                  <p className="mx-auto mt-2 max-w-xs leading-relaxed text-navy-foreground/75">
-                    {text}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <WhyChooseUs />
 
         <HowItWorks />
         <OfferXRayTeaser />
