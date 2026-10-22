@@ -18,7 +18,11 @@ export function useScrollReveal(routeKey: string) {
 
     const fold = window.innerHeight;
     const pending = Array.from(document.querySelectorAll<HTMLElement>(TARGETS)).filter(
-      (el) => !el.dataset["reveal"] && el.getBoundingClientRect().top > fold,
+      (el) =>
+        !el.dataset["reveal"] &&
+        // Blocks animated with Motion run their own entrance.
+        !el.closest("[data-motion]") &&
+        el.getBoundingClientRect().top > fold,
     );
     // Cards in the same grid follow each other by a beat.
     pending.forEach((el) => {
