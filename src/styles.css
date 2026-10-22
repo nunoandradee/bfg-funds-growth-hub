@@ -238,6 +238,11 @@
     transform: none;
   }
 }
+@keyframes belt {
+  to {
+    transform: translateX(-50%);
+  }
+}
 @keyframes ken-burns {
   from {
     transform: scale(1) translate3d(0, 0, 0);
@@ -296,6 +301,14 @@
     animation: hero-fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   /* Unveil, then a slow documentary-style drift so the photo never sits still. */
+  /* Industry cards under the hero: a slow drift, paused while someone reads. */
+  .belt-track {
+    animation: belt 90s linear infinite;
+  }
+  .belt:hover .belt-track,
+  .belt:focus-within .belt-track {
+    animation-play-state: paused;
+  }
   .hero-photo img {
     animation:
       hero-unveil 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both,
