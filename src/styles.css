@@ -240,6 +240,17 @@
     transform: none;
   }
 }
+@keyframes product-progress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.product-progress {
+  animation: product-progress linear forwards;
+}
 @keyframes belt {
   to {
     transform: translateX(-50%);

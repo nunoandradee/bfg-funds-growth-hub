@@ -1,21 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  Banknote,
   Calculator,
   Check,
-  CreditCard,
-  HandCoins,
-  Landmark,
-  Percent,
   Phone,
-  ReceiptText,
   Scale,
   ScanSearch,
   ShieldCheck,
   UserRound,
-  Wrench,
-  Zap,
 } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
@@ -26,6 +18,7 @@ import { IndustryCarousel } from "@/components/site/IndustryCarousel";
 import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
 import { OfferXRayTeaser } from "@/components/site/OfferXRayTeaser";
+import { ProductExplorer } from "@/components/site/ProductExplorer";
 import { CALCULATORS } from "@/data/calculators";
 import { GUIDES } from "@/data/guides";
 import { COMPANY, SERVICES, SITE_URL } from "@/data/site";
@@ -59,17 +52,6 @@ export const Route = createFileRoute("/")({
     }),
   component: Index,
 });
-
-const SERVICE_ICONS: Record<string, typeof CreditCard> = {
-  "business-line-of-credit": CreditCard,
-  "working-capital": Banknote,
-  "term-loan": Landmark,
-  "sba-loans": ShieldCheck,
-  "revenue-based-financing": Percent,
-  "equipment-financing": Wrench,
-  "merchant-cash-advance": Zap,
-  "invoice-factoring": ReceiptText,
-};
 
 /** Plain facts the site already states; no invented volumes or ratings. */
 const FACTS = [
@@ -166,31 +148,8 @@ function Index() {
             <h2 className="text-center text-balance-tight text-4xl font-extrabold text-navy md:text-5xl">
               Funding options built to work for you.
             </h2>
-            <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {SERVICES.map((service) => {
-                const Icon = SERVICE_ICONS[service.slug] ?? HandCoins;
-                return (
-                  <article
-                    key={service.slug}
-                    className="flex flex-col items-center rounded-3xl bg-card p-7 text-center shadow-card transition-transform duration-300 hover:-translate-y-1"
-                  >
-                    <span className="grid size-14 place-items-center rounded-full bg-gold/20 text-navy">
-                      <Icon aria-hidden strokeWidth={1.75} className="size-7" />
-                    </span>
-                    <h3 className="mt-5 text-lg font-extrabold text-navy">{service.title}</h3>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                      {service.description}
-                    </p>
-                    <Link
-                      to="/services/$slug"
-                      params={{ slug: service.slug }}
-                      className="mt-6 rounded-full border-2 border-navy px-6 py-2 text-sm font-bold text-navy transition-colors hover:bg-navy hover:text-navy-foreground"
-                    >
-                      Learn more<span className="sr-only"> about {service.title}</span>
-                    </Link>
-                  </article>
-                );
-              })}
+            <div className="mt-14">
+              <ProductExplorer />
             </div>
           </div>
         </section>
