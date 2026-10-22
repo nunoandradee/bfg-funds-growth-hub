@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 import logoHorizontal from "@/assets/bfg-logo-horizontal.svg.asset.json";
 import logoWhite from "@/assets/bfg-logo-white.svg.asset.json";
@@ -55,7 +56,8 @@ function Dropdown({ label, items, dark }: { label: string; items: NavItem[]; dar
   );
 }
 
-function MobileGroup({
+/** A collapsible group in the phone menu (native details/summary, keyboard friendly). */
+function MobileSection({
   label,
   items,
   onNavigate,
@@ -65,19 +67,109 @@ function MobileGroup({
   onNavigate: () => void;
 }) {
   return (
-    <>
-      <p className="px-2 pt-3 text-xs font-bold uppercase tracking-[0.2em] text-cobalt">{label}</p>
-      {items.map((item) => (
-        <a
-          key={item.href}
-          href={item.href}
-          onClick={onNavigate}
-          className="rounded-lg px-2 py-3 text-sm font-semibold text-navy/85 hover:bg-surface"
+    <details className="group border-b border-white/10">
+      <summary className="flex cursor-pointer list-none items-center justify-between py-5 text-2xl font-bold [&::-webkit-details-marker]:hidden">
+        {label}
+        <ChevronDown
+          aria-hidden
+          className="size-6 text-gold transition-transform duration-300 group-open:rotate-180"
+        />
+      </summary>
+      <div className="-mt-1 flex flex-col pb-5">
+        {items.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            onClick={onNavigate}
+            className="rounded-xl py-2.5 text-lg font-medium text-navy-foreground/80 hover:text-gold"
+          >
+            {item.title}
+          </a>
+        ))}
+      </div>
+    </details>
+  );
+}
+
+/**
+ * Phones: the menu takes the whole screen on navy, with large, friendly links
+ * and the two actions that matter (apply, call) always within thumb reach.
+ * The page underneath stops scrolling while it is open; Esc closes it.
+ */
+function MobileMenu({ onClose }: { onClose: () => void }) {
+  useEffect(() => {
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    root.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      root.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [onClose]);
+
+  const link = "block border-b border-white/10 py-5 text-2xl font-bold hover:text-gold";
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu"
+      className="mobile-menu fixed inset-0 z-[60] flex flex-col bg-navy text-navy-foreground lg:hidden"
+    >
+      <div className="container-page flex items-center justify-between py-4">
+        <Link to="/" onClick={onClose} aria-label="BFG Funds home">
+          <img src={logoWhite.url} alt="BFG Funds" width={232} height={56} className="h-9 w-auto" />
+        </Link>
+        <button
+          onClick={onClose}
+          aria-label="Close menu"
+          className="grid size-11 place-items-center rounded-full bg-white/10 text-navy-foreground"
         >
-          {item.title}
+          <X className="size-6" />
+        </button>
+      </div>
+
+      <nav className="container-page flex-1 overflow-y-auto pb-6">
+        <MobileSection label="Funding options" items={FUNDING} onNavigate={onClose} />
+        <a href="/industries" onClick={onClose} className={link}>
+          Industries
         </a>
-      ))}
-    </>
+        <MobileSection label="Calculators" items={TOOLS} onNavigate={onClose} />
+        <a href="/resources" onClick={onClose} className={link}>
+          Guides
+        </a>
+        <a href="/about" onClick={onClose} className={link}>
+          About us
+        </a>
+        <a href="/faq" onClick={onClose} className={link}>
+          FAQ
+        </a>
+        <a href="/contact" onClick={onClose} className={link}>
+          Contact
+        </a>
+      </nav>
+
+      <div className="container-page grid gap-3 border-t border-white/10 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-5">
+        <a
+          href="/apply"
+          onClick={onClose}
+          className="rounded-full bg-gold py-4 text-center text-lg font-extrabold text-gold-foreground"
+        >
+          Apply Now
+        </a>
+        <a
+          href={COMPANY.phoneHref}
+          className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/25 py-3.5 text-lg font-bold"
+        >
+          <Phone aria-hidden className="size-5" />
+          Call {COMPANY.phoneDisplay}
+        </a>
+      </div>
+    </div>
   );
 }
 
@@ -107,7 +199,7 @@ function useOverDarkBand() {
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const close = () => setOpen(false);
+  const close = useCallback(() => setOpen(false), []);
   const band = useOverDarkBand();
   const dark = band.dark && !open;
   const link = `py-6 text-sm font-semibold transition-colors ${
@@ -174,30 +266,9 @@ export function Header() {
         </button>
       </div>
 
-      {open && (
-        <div className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-border bg-background lg:hidden">
-          <div className="container-page flex flex-col gap-1 py-4">
-            <MobileGroup label="Funding Options" items={FUNDING} onNavigate={close} />
-            <MobileGroup label="Calculators" items={TOOLS} onNavigate={close} />
-            <MobileGroup
-              label="Company"
-              items={[
-                { title: "Industries", href: "/industries" },
-                ...RESOURCES,
-                { title: "Contact Us", href: "/contact" },
-              ]}
-              onNavigate={close}
-            />
-            <a
-              href="/apply"
-              onClick={close}
-              className="mt-3 rounded-full bg-gold px-5 py-3 text-center text-sm font-bold text-gold-foreground"
-            >
-              Apply Now
-            </a>
-          </div>
-        </div>
-      )}
+      {/* Portalled to <body>: the header's backdrop blur would otherwise trap a
+          fixed overlay inside the header's own box. */}
+      {open && createPortal(<MobileMenu onClose={close} />, document.body)}
     </header>
   );
 }
