@@ -237,11 +237,6 @@
     transform: translate3d(40px, -30px, 0) scale(1.08);
   }
 }
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
 
 .hero-orb {
   position: absolute;
@@ -283,13 +278,6 @@
   }
   .hero-orb-b {
     animation: orb-drift 22s ease-in-out -6s infinite reverse;
-  }
-  .marquee-track {
-    animation: marquee 48s linear infinite;
-  }
-  .marquee:hover .marquee-track,
-  .marquee:focus-within .marquee-track {
-    animation-play-state: paused;
   }
 }
 
