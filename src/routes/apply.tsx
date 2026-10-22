@@ -3,6 +3,7 @@ import { LockKeyhole, Phone, ShieldCheck } from "lucide-react";
 
 import logoWhite from "@/assets/bfg-logo-white.svg.asset.json";
 import { ApplicationForm } from "@/components/site/ApplicationForm";
+import { DataPromise } from "@/components/site/TrustParts";
 import { COMPANY, FUNDING_DISCLAIMER } from "@/data/site";
 
 const TITLE = "Apply for Business Funding | BFG Funds";
@@ -104,6 +105,22 @@ function ApplyPage() {
                     </li>
                   ))}
                 </ol>
+              </div>
+
+              <div className="mt-8 space-y-4 border-t border-white/10 pt-7">
+                <DataPromise dark />
+                <a
+                  href="/#contact"
+                  className="block rounded-2xl bg-white/[0.06] p-4 text-sm ring-1 ring-white/10 transition-colors hover:bg-white/[0.1]"
+                >
+                  <span className="font-bold text-navy-foreground">
+                    Not ready to share your SSN?
+                  </span>{" "}
+                  <span className="text-navy-foreground/70">
+                    Start with three quick steps instead. No documents, no credit check.
+                  </span>{" "}
+                  <span className="font-bold text-gold">Start here →</span>
+                </a>
               </div>
 
               <div className="mt-8 border-t border-white/10 pt-7 text-sm text-navy-foreground/75">

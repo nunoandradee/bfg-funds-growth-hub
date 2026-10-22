@@ -11,6 +11,7 @@ import {
 } from "motion/react";
 
 import heroOwners from "@/assets/hero-owners.jpg";
+import { ReviewStrip } from "@/components/site/TrustParts";
 import { SERVICES } from "@/data/site";
 
 const AMOUNTS = [
@@ -136,6 +137,16 @@ export function Hero() {
               <ShieldCheck aria-hidden className="size-4 text-gold" />
               Checking your options won't affect your credit score.
             </p>
+            <a
+              href="#contact"
+              className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-gold hover:underline"
+            >
+              Not ready to share your SSN? Start with 3 quick steps
+              <ArrowRight aria-hidden className="size-3.5" />
+            </a>
+            <div className="mt-6">
+              <ReviewStrip dark />
+            </div>
           </form>
         </div>
 

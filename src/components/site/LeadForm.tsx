@@ -5,6 +5,7 @@ import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { INDUSTRIES } from "@/data/site";
+import { DataPromise } from "@/components/site/TrustParts";
 
 const TIME_IN_BUSINESS = [
   "I currently don't own a business",
@@ -49,7 +50,8 @@ const schema = z.object({
     .trim()
     .max(20)
     .refine(
-      (value) => value === "" || (/^[0-9+()\-.\s]+$/.test(value) && value.replace(/\D/g, "").length >= 10),
+      (value) =>
+        value === "" || (/^[0-9+()\-.\s]+$/.test(value) && value.replace(/\D/g, "").length >= 10),
       "Enter a valid mobile number",
     ),
   businessName: z.string().trim().min(1, "Legal business name is required").max(120),
@@ -185,18 +187,18 @@ export function LeadForm() {
       <div className="container-page grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <h2 className="text-balance-tight text-4xl font-extrabold text-navy md:text-5xl">
-            Have Questions? We Are All Ears!
+            Start without your SSN
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Tell us a little about your business and we'll match you with the funding program that
-            fits — line of credit, working capital, SBA, equipment or revenue-based. It takes about
-            two minutes and there's no obligation.
+            Three quick steps about your business. No SSN, no documents and no credit check to
+            see your options. A specialist follows up, usually within one business day, and there's
+            no obligation.
           </p>
           <ul className="mt-8 space-y-3 text-sm font-medium text-navy/80">
             {[
-              "No impact to your credit to review options",
+              "No SSN or documents to get started",
               "A real funding specialist, not a call center",
-              "Decisions in as little as 24 hours",
+              "Decisions often within 24–48 hours",
             ].map((item) => (
               <li key={item} className="flex items-start gap-3">
                 <Check className="mt-0.5 size-5 shrink-0 text-gold" />
@@ -204,6 +206,9 @@ export function LeadForm() {
               </li>
             ))}
           </ul>
+          <div className="mt-6">
+            <DataPromise />
+          </div>
         </div>
 
         <div className="rounded-3xl border border-border bg-card p-6 shadow-lift md:p-9">
@@ -416,14 +421,24 @@ export function LeadForm() {
                       />
                       <span>
                         I agree to the{" "}
-                         <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">
-                           Terms of Service
-                         </a>{" "}
-                         and{" "}
-                         <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">
-                           Privacy Policy
-                         </a>{" "}
-                         and consent to be contacted about my funding request by phone and email.
+                        <a
+                          href="/terms-of-service"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-cobalt underline"
+                        >
+                          Terms of Service
+                        </a>{" "}
+                        and{" "}
+                        <a
+                          href="/privacy-policy"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-cobalt underline"
+                        >
+                          Privacy Policy
+                        </a>{" "}
+                        and consent to be contacted about my funding request by phone and email.
                       </span>
                     </label>
                     <FieldError message={errors.terms} />
@@ -441,9 +456,24 @@ export function LeadForm() {
                   />
                   <span>
                     {SMS_CONSENT_TEXT} Read our{" "}
-                    <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">Privacy Policy</a>{" "}
+                    <a
+                      href="/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-cobalt underline"
+                    >
+                      Privacy Policy
+                    </a>{" "}
                     and{" "}
-                    <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">SMS Terms</a>.
+                    <a
+                      href="/sms-terms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-cobalt underline"
+                    >
+                      SMS Terms
+                    </a>
+                    .
                   </span>
                 </label>
               </div>
@@ -488,9 +518,24 @@ export function LeadForm() {
               {step === 2 && (
                 <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
                   By submitting this form with SMS consent checked, you agree to our{" "}
-                  <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">Privacy Policy</a>{" "}
+                  <a
+                    href="/privacy-policy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-cobalt underline"
+                  >
+                    Privacy Policy
+                  </a>{" "}
                   and{" "}
-                  <a href="/sms-terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-cobalt underline">SMS Terms</a>.
+                  <a
+                    href="/sms-terms"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-cobalt underline"
+                  >
+                    SMS Terms
+                  </a>
+                  .
                 </p>
               )}
             </form>

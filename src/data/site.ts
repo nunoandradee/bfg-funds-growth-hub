@@ -16,6 +16,8 @@ export const COMPANY = {
   phoneHref: "tel:+17866420539",
   phoneE164: "+17866420539",
   email: "hello@bfgfunds.com",
+  /** Office hours, e.g. "Mon–Fri, 9am–6pm ET". Shown on Contact and in the footer once set. */
+  hours: "",
   logoUrl: "https://cdn.bfgfunds.com/BFGFunds/bfg-logo-horizontal@2x.png",
 } as const;
 

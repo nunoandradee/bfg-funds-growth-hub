@@ -4,6 +4,7 @@ import { BadgeCheck, Eye, Handshake, Network, ShieldCheck, UserRound } from "luc
 import { Footer } from "@/components/site/Footer";
 import { Header } from "@/components/site/Header";
 import { CtaBand, PageHero } from "@/components/site/PageParts";
+import { TeamSection } from "@/components/site/TrustParts";
 import { COMPANY } from "@/data/site";
 import { breadcrumbLd, pageHead } from "@/lib/seo";
 
@@ -99,6 +100,8 @@ function AboutPage() {
             </div>
           </div>
         </section>
+
+        <TeamSection />
 
         <section className="bg-surface py-16 md:py-20">
           <div className="container-page">

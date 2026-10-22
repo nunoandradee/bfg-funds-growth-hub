@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
 import logoWhite from "@/assets/bfg-logo-white.svg.asset.json";
 import { CALCULATORS } from "@/data/calculators";
@@ -30,7 +30,7 @@ export function Footer() {
               className="h-9 w-auto"
             />
             <p className="mt-3 text-sm leading-relaxed text-navy-foreground/65">
-              Fast, reliable funding for small and mid-sized U.S. businesses.
+              A business funding marketplace for small and mid-sized U.S. businesses.
             </p>
             <Link to="/contact" className="mt-4 inline-block text-sm font-bold text-gold">
               See Your Options
@@ -98,6 +98,12 @@ export function Footer() {
                 <Mail className="size-4 text-gold" />
                 {COMPANY.email}
               </a>
+              {COMPANY.hours && (
+                <p className="flex items-center gap-2">
+                  <Clock className="size-4 text-gold" />
+                  {COMPANY.hours}
+                </p>
+              )}
             </address>
           </div>
         </div>
