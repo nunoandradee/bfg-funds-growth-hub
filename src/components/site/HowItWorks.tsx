@@ -1,73 +1,68 @@
 import { useRef } from "react";
-import { ClipboardCheck, Network, Scale, Send } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
 
 const STEPS = [
   {
-    tint: "bg-sky text-sky-ink",
-    icon: ClipboardCheck,
     title: "Apply once",
-    text: "A short online application with your business basics. Seeing your options won't affect your credit score.",
+    text: "A short online application. Seeing your options won't affect your credit score.",
   },
   {
-    tint: "bg-mint text-mint-ink",
-    icon: Network,
-    title: "We take it to the right lenders",
-    text: "Your specialist presents your business to the providers most likely to approve it: SBA lenders, equipment financiers, credit lines and revenue-based funders.",
+    title: "We find the right lenders",
+    text: "Your specialist takes your business to the providers most likely to approve it.",
   },
   {
-    tint: "bg-sand text-sand-ink",
-    icon: Scale,
-    title: "Compare offers side by side",
-    text: "Payment, total payback and term, laid out plainly. When a cheaper option fits better, we tell you.",
+    title: "Compare side by side",
+    text: "Payment, total payback and term, laid out plainly. If a cheaper option fits, we say so.",
   },
   {
-    tint: "bg-peach text-peach-ink",
-    icon: Send,
     title: "Get funded",
     text: "Sign the offer you choose. Many programs wire funds within 24 hours of signing.",
   },
 ];
 
 /**
- * The process as one story: the headline stays put while the steps scroll by,
- * and a line fills in step with the reader's progress. The steps themselves
- * fade in through the site-wide scroll reveal, so the server HTML shows them.
+ * The process as four quiet steps. On wide screens a hairline runs through
+ * them and fills in as the reader scrolls past; the steps themselves fade in
+ * through the site-wide scroll reveal, so the server HTML shows them.
  */
 export function HowItWorks() {
   const ref = useRef<HTMLOListElement>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 55%"] });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 60%"] });
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
 
   return (
-    <section id="how-it-works" className="py-20 md:py-28">
-      <div className="container-page grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-        <div className="lg:sticky lg:top-28 lg:self-start">
-          <h2 className="text-balance-tight text-4xl font-extrabold text-navy md:text-5xl">
-            From application to funded, with one specialist
+    <section id="how-it-works" className="bg-surface py-20 md:py-28">
+      <div className="container-page">
+        <div className="text-center">
+          <h2 className="mx-auto max-w-3xl text-4xl font-bold tracking-[-0.035em] text-navy md:text-6xl">
+            From application to funded.
           </h2>
-          <p className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground">
-            You talk to the same person the whole way. They do the shopping, you make the choice.
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-snug text-navy/60 md:text-xl">
+            One specialist the whole way. They do the shopping, you make the choice.
           </p>
         </div>
 
-        <ol ref={ref} className="relative space-y-6">
-          <span aria-hidden className="absolute bottom-6 left-[1.6rem] top-6 w-px bg-border" />
+        <ol
+          ref={ref}
+          className="relative mt-16 grid gap-12 md:mt-20 md:grid-cols-2 lg:grid-cols-4 lg:gap-8"
+        >
+          <span
+            aria-hidden
+            className="absolute left-[12.5%] right-[12.5%] top-5 hidden h-px bg-navy/10 lg:block"
+          />
           <motion.span
             aria-hidden
-            style={{ scaleY: reduce ? 1 : progress }}
-            className="absolute bottom-6 left-[1.6rem] top-6 w-px origin-top bg-gold"
+            style={{ scaleX: reduce ? 1 : progress }}
+            className="absolute left-[12.5%] right-[12.5%] top-5 hidden h-px origin-left bg-gold lg:block"
           />
-          {STEPS.map(({ tint, icon: Icon, title, text }) => (
-            <li key={title} className="relative flex gap-6">
-              <div className={`relative z-10 grid size-[3.25rem] shrink-0 place-items-center rounded-2xl ring-4 ring-background ${tint}`}>
-                <Icon className="size-5" />
-              </div>
-              <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
-                <h3 className="text-lg font-extrabold text-navy">{title}</h3>
-                <p className="mt-2 leading-relaxed text-muted-foreground">{text}</p>
-              </div>
+          {STEPS.map((step, i) => (
+            <li key={step.title} className="relative text-center">
+              <span className="relative mx-auto grid size-10 place-items-center rounded-full bg-navy text-sm font-bold text-navy-foreground ring-8 ring-surface">
+                {i + 1}
+              </span>
+              <h3 className="mt-6 text-xl font-bold tracking-tight text-navy">{step.title}</h3>
+              <p className="mx-auto mt-2 max-w-xs leading-relaxed text-navy/60">{step.text}</p>
             </li>
           ))}
         </ol>

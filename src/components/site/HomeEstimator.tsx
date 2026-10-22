@@ -29,9 +29,9 @@ export function HomeEstimator() {
   const fill = ((amount - MIN) / (MAX - MIN)) * 100;
 
   return (
-    <section className="py-16 md:py-20" aria-labelledby="estimator-title">
+    <section className="bg-surface py-20 md:py-28" aria-labelledby="estimator-title">
       <div className="container-page">
-        <div className="grid overflow-hidden rounded-3xl border border-border bg-card shadow-card lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="grid overflow-hidden rounded-[2rem] bg-card lg:grid-cols-[1.1fr_0.9fr]">
           <div className="p-6 md:p-10">
             <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-cobalt">
               <Calculator className="size-4" />
