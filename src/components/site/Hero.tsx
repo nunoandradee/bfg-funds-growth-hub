@@ -1,216 +1,110 @@
-import { useEffect, useRef, useState, type PointerEvent } from "react";
-import { ArrowRight, ChevronDown, ShieldCheck } from "lucide-react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "motion/react";
+import { ArrowRight } from "lucide-react";
 
 import heroOwners from "@/assets/hero-owners.jpg";
 import { ReviewStrip } from "@/components/site/TrustParts";
-import { SERVICES } from "@/data/site";
+import { COMPANY } from "@/data/site";
 
-const AMOUNTS = [
-  { value: 10_000, label: "$10,000" },
-  { value: 25_000, label: "$25,000" },
-  { value: 50_000, label: "$50,000" },
-  { value: 100_000, label: "$100,000" },
-  { value: 250_000, label: "$250,000" },
-  { value: 500_000, label: "$500,000" },
-  { value: 1_000_000, label: "$1,000,000" },
-  { value: 2_000_000, label: "$2,000,000" },
-];
+/** The reasons owners come to us; each starts the application. */
+const NEEDS = ["Manage cash flow", "Buy equipment", "Grow my business", "Cover expenses"];
 
-const HEADLINE = ["Funding", "for", "the", "business", "you've", "built."];
-const ACCENT_FROM = 4; // "you've built." in gold
-
-// The entrance runs in CSS (styles.css, .hero-*) so the server HTML is the
-// finished hero: nothing waits for JavaScript and search engines see it all.
-// Motion only adds the scroll parallax and the rotating product name.
+// A friendly, human opening: plain promise on the left, owners in an arch
+// with soft gold shapes on the right, and the reasons people need funding as
+// one-tap pills. Bottom padding leaves room for the facts card that overlaps
+// the next section. The entrance runs in CSS (styles.css, .hero-fade).
 export function Hero() {
-  const [amount, setAmount] = useState(100_000);
-  const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const photoY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90]);
-  const cardY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -40]);
-
-  // Depth under the pointer: the photo tilts a little, the card floats the
-  // other way. Motion values only, so nothing re-renders while the mouse moves.
-  const px = useMotionValue(0);
-  const py = useMotionValue(0);
-  const sx = useSpring(px, { stiffness: 120, damping: 20, mass: 0.6 });
-  const sy = useSpring(py, { stiffness: 120, damping: 20, mass: 0.6 });
-  const tiltX = useTransform(sy, [-0.5, 0.5], [4, -4]);
-  const tiltY = useTransform(sx, [-0.5, 0.5], [-5, 5]);
-  const cardX = useTransform(sx, [-0.5, 0.5], [18, -18]);
-  const cardShiftY = useTransform(sy, [-0.5, 0.5], [12, -12]);
-  const cardTotalY = useTransform(() => cardY.get() + cardShiftY.get());
-  const onPointerMove = (e: PointerEvent<HTMLElement>) => {
-    if (reduce || e.pointerType !== "mouse") return;
-    const box = e.currentTarget.getBoundingClientRect();
-    px.set((e.clientX - box.left) / box.width - 0.5);
-    py.set((e.clientY - box.top) / box.height - 0.5);
-  };
-  const onPointerLeave = () => {
-    px.set(0);
-    py.set(0);
-  };
-
   return (
     <section
-      ref={ref}
       id="top"
-      data-motion
-      onPointerMove={onPointerMove}
-      onPointerLeave={onPointerLeave}
-      className="grain relative isolate overflow-hidden bg-navy text-navy-foreground"
+      className="relative isolate overflow-hidden bg-navy pb-28 text-navy-foreground md:pb-36"
     >
-      <div aria-hidden className="hero-orb hero-orb-a" />
-      <div aria-hidden className="hero-orb hero-orb-b" />
+      <div
+        aria-hidden
+        className="absolute -left-40 top-1/3 -z-10 size-[34rem] rounded-full bg-white/[0.03]"
+      />
+      <div
+        aria-hidden
+        className="absolute -right-24 -top-48 -z-10 size-[40rem] rounded-full bg-white/[0.035]"
+      />
 
-      <div className="container-page relative z-[1] grid items-center gap-12 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:pb-24 lg:pt-20">
+      <div className="container-page grid items-center gap-12 pt-14 md:pt-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <div>
-          <h1 className="text-[2.6rem] font-extrabold leading-[1.05] tracking-[-0.035em] [text-wrap:balance] sm:text-5xl lg:text-[4.1rem]">
-            {HEADLINE.map((word, i) => (
-              <span key={word} className="inline-block overflow-hidden pb-1 align-bottom">
-                <span
-                  className={`hero-word inline-block ${i >= ACCENT_FROM ? "text-gold" : ""}`}
-                  style={{ animationDelay: `${120 + i * 70}ms` }}
-                >
-                  {word}
-                </span>
-                {i < HEADLINE.length - 1 && " "}
-              </span>
-            ))}
+          <h1
+            className="hero-fade text-balance-tight text-[2.6rem] font-extrabold leading-[1.08] sm:text-5xl lg:text-[3.6rem]"
+            style={{ animationDelay: "80ms" }}
+          >
+            Business funding from $10K to $2M, <span className="text-gold">built around you.</span>
           </h1>
           <p
-            className="hero-fade mt-6 max-w-xl text-lg leading-relaxed text-navy-foreground/75"
-            style={{ animationDelay: "560ms" }}
+            className="hero-fade mt-5 max-w-xl text-lg leading-relaxed text-navy-foreground/80"
+            style={{ animationDelay: "200ms" }}
           >
-            From $10K to $2M across eight funding products. One application, one specialist, and
-            real offers to compare.
+            Apply in minutes. One specialist compares real offers from our lender network, so you
+            can choose with the full picture.
           </p>
 
-          <form
-            action="/apply"
-            method="get"
-            className="hero-fade mt-9 max-w-xl"
-            style={{ animationDelay: "680ms" }}
-          >
-            <label htmlFor="hero-amount" className="text-sm font-bold text-navy-foreground">
-              How much do you need?
-            </label>
-            <div className="mt-2.5 flex flex-col gap-3 rounded-2xl bg-navy-foreground/[0.07] p-2 ring-1 ring-navy-foreground/15 sm:flex-row">
-              <div className="relative flex-1">
-                <select
-                  id="hero-amount"
-                  name="amount"
-                  value={amount}
-                  onChange={(e) => setAmount(Number(e.target.value))}
-                  className="h-14 w-full appearance-none rounded-xl bg-background pl-4 pr-11 text-base font-bold text-navy outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          <div className="hero-fade mt-9" style={{ animationDelay: "320ms" }}>
+            <p className="text-xl font-bold">Why do you need funding?</p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              {NEEDS.map((need) => (
+                <a
+                  key={need}
+                  href="/apply"
+                  className="rounded-full bg-background px-5 py-2.5 text-base font-bold text-navy transition-colors hover:bg-gold hover:text-gold-foreground"
                 >
-                  {AMOUNTS.map((a) => (
-                    <option key={a.value} value={a.value}>
-                      {a.label}
-                    </option>
-                  ))}
-                </select>
-                <ChevronDown
-                  aria-hidden
-                  className="pointer-events-none absolute right-4 top-1/2 size-5 -translate-y-1/2 text-navy/60"
-                />
-              </div>
-              <button
-                type="submit"
-                className="group inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-gold px-7 text-base font-extrabold text-gold-foreground shadow-lift transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
-              >
-                See my options
-                <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
-              </button>
+                  {need}
+                </a>
+              ))}
             </div>
-            <p className="mt-3 flex items-center gap-2 text-sm text-navy-foreground/65">
-              <ShieldCheck aria-hidden className="size-4 text-gold" />
-              Checking your options won't affect your credit score.
-            </p>
-            <div className="mt-6">
-              <ReviewStrip dark />
-            </div>
-          </form>
+          </div>
+
+          <p
+            className="hero-fade mt-7 text-sm text-navy-foreground/75"
+            style={{ animationDelay: "420ms" }}
+          >
+            Prefer to talk first? Call{" "}
+            <a
+              href={COMPANY.phoneHref}
+              className="font-bold text-navy-foreground underline underline-offset-4"
+            >
+              {COMPANY.phoneDisplay}
+            </a>
+          </p>
+          <div className="mt-5">
+            <ReviewStrip dark />
+          </div>
         </div>
 
-        <div className="relative [perspective:1200px]">
-          <motion.figure
-            style={{ y: photoY, rotateX: tiltX, rotateY: tiltY }}
-            className="hero-photo relative overflow-hidden rounded-3xl shadow-lift"
-          >
+        <div
+          className="hero-fade relative mx-auto w-full max-w-xl"
+          style={{ animationDelay: "250ms" }}
+        >
+          <div
+            aria-hidden
+            className="absolute -left-6 -top-6 size-32 rounded-full bg-gold/90 md:size-40"
+          />
+          <div
+            aria-hidden
+            className="absolute -bottom-8 -right-4 size-28 rounded-full bg-gold/35 md:size-36"
+          />
+          <div className="relative overflow-hidden rounded-t-[999px] rounded-b-3xl">
             <img
               src={heroOwners}
               alt="Two café owners smiling behind their counter"
               width={1600}
               height={900}
               fetchPriority="high"
-              className="aspect-[4/3] w-full object-cover object-center lg:aspect-[5/4]"
+              className="aspect-[5/4] w-full object-cover object-center"
             />
-          </motion.figure>
-          <motion.div
-            style={{ y: cardTotalY, x: cardX }}
-            className="hero-card absolute -bottom-8 left-4 right-4 sm:-left-6 sm:right-auto sm:w-80"
+          </div>
+          <a
+            href="/apply"
+            className="group absolute -bottom-5 left-6 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-extrabold text-gold-foreground shadow-lift transition-transform hover:-translate-y-0.5"
           >
-            <ProductTicker />
-          </motion.div>
+            See my options
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+          </a>
         </div>
       </div>
     </section>
-  );
-}
-
-/** Cycles through the eight funding products we compare for each client. */
-function ProductTicker() {
-  const reduce = useReducedMotion();
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (reduce) return;
-    const id = window.setInterval(() => setIndex((i) => (i + 1) % SERVICES.length), 2200);
-    return () => window.clearInterval(id);
-  }, [reduce]);
-
-  const service = SERVICES[index]!;
-  return (
-    <div className="rounded-2xl bg-navy/70 p-5 text-navy-foreground shadow-lift ring-1 ring-white/15 backdrop-blur-xl">
-      <p className="text-xs font-bold text-navy-foreground/60">We compare for you</p>
-      <div className="relative mt-1 h-8 overflow-hidden" aria-live="off">
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.p
-            key={service.slug}
-            initial={{ y: 28, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -28, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 260, damping: 26 }}
-            className="absolute inset-x-0 text-xl font-extrabold"
-          >
-            {service.title}
-          </motion.p>
-        </AnimatePresence>
-      </div>
-      <div className="mt-4 flex gap-1.5" aria-hidden>
-        {SERVICES.map((s, i) => (
-          <span
-            key={s.slug}
-            className={`h-1 flex-1 rounded-full transition-colors duration-500 ${
-              i <= index ? "bg-gold" : "bg-white/15"
-            }`}
-          />
-        ))}
-      </div>
-      <p className="mt-3 text-xs text-navy-foreground/60">
-        {SERVICES.length} products, one application.
-      </p>
-    </div>
   );
 }

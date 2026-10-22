@@ -4,10 +4,10 @@ import logoHorizontal from "@/assets/bfg-logo-horizontal.svg.asset.json";
 import logoWhite from "@/assets/bfg-logo-white.svg.asset.json";
 
 import { Link } from "@tanstack/react-router";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, Phone, X } from "lucide-react";
 
 import { CALCULATORS } from "@/data/calculators";
-import { SERVICES } from "@/data/site";
+import { COMPANY, SERVICES } from "@/data/site";
 
 type NavItem = { title: string; href: string };
 
@@ -146,7 +146,16 @@ export function Header() {
           </Link>
         </nav>
 
-        <div className="hidden items-center lg:flex">
+        <div className="hidden items-center gap-5 lg:flex">
+          <a
+            href={COMPANY.phoneHref}
+            className={`inline-flex items-center gap-2 text-sm font-bold transition-colors ${
+              dark ? "text-navy-foreground hover:text-gold" : "text-navy hover:text-cobalt"
+            }`}
+          >
+            <Phone aria-hidden className="size-4" />
+            {COMPANY.phoneDisplay}
+          </a>
           <a
             href="/apply"
             className="rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
