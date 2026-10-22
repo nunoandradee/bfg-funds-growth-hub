@@ -2,6 +2,11 @@ export const SITE_URL = "https://www.bfgfunds.com";
 
 export const COMPANY = {
   displayName: "BFG Funds",
+  /**
+   * The registered company behind the BFG Funds trade name. Shown only where
+   * the law expects it (Terms of Service, Privacy Policy), never in marketing.
+   */
+  legalEntity: "Luciano Leite LLC",
   street: "W Atlantic Blvd",
   city: "Coconut Creek",
   region: "FL",

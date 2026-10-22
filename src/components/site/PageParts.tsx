@@ -102,11 +102,11 @@ export function CtaBand({
   text?: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-cobalt py-14 text-cobalt-foreground">
+    <section className="relative overflow-hidden border-t border-border bg-surface py-14 text-navy">
       <div className="container-page relative flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
         <div className="max-w-2xl">
           <h2 className="text-balance-tight text-3xl font-extrabold md:text-4xl">{title}</h2>
-          <p className="mt-3 text-lg leading-relaxed text-cobalt-foreground/85">{text}</p>
+          <p className="mt-3 text-lg leading-relaxed text-muted-foreground">{text}</p>
         </div>
         <div className="flex flex-wrap gap-3">
           <a
@@ -118,7 +118,7 @@ export function CtaBand({
           </a>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full border border-cobalt-foreground/40 px-7 py-3.5 text-sm font-bold hover:bg-cobalt-foreground/10"
+            className="inline-flex items-center gap-2 rounded-full border border-navy px-7 py-3.5 text-sm font-bold text-navy transition-colors hover:bg-navy hover:text-navy-foreground"
           >
             Talk to a specialist
           </Link>

@@ -374,7 +374,15 @@ export function ApplicationForm() {
       )}
 
       {step === 2 && (
-        <Section title="About you" sub="Helpful for verification. Your data is encrypted.">
+        <Section title="About you" sub="Funding providers verify the owner's identity before making an offer.">
+          <div className="flex items-start gap-3 rounded-2xl bg-surface p-4 text-sm text-navy">
+            <Lock aria-hidden className="mt-0.5 size-5 shrink-0 text-cobalt" />
+            <p className="leading-relaxed">
+              <span className="font-bold">Why we ask for your SSN.</span> It verifies your identity and is
+              shared only with the funding providers reviewing your application. Seeing your options won't affect your credit
+              score. Your SSN is encrypted the moment it reaches us and is never stored in plain text.
+            </p>
+          </div>
           <div className="grid gap-5 sm:grid-cols-2">
             <Field label="Date of birth" error={errors.dob}>
               <input inputMode="numeric" placeholder="MM/DD/YYYY" autoComplete="bday" className={fieldCls} value={v.dob} onChange={(e) => set("dob", maskDate(e.target.value, 3))} />

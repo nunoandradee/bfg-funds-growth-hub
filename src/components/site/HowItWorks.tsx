@@ -53,7 +53,7 @@ export function HowItWorks() {
           <motion.span
             aria-hidden
             style={{ scaleY: reduce ? 1 : progress }}
-            className="absolute bottom-6 left-[1.6rem] top-6 w-px origin-top bg-cobalt"
+            className="absolute bottom-6 left-[1.6rem] top-6 w-px origin-top bg-gold"
           />
           {STEPS.map(({ icon: Icon, title, text }) => (
             <li key={title} className="relative flex gap-6">

@@ -1,5 +1,11 @@
 export const CALCULATORS = [
   {
+    path: "/calculators/offer-x-ray",
+    title: "Offer X-Ray",
+    summary:
+      "Enter the numbers from any offer you received and see its real APR, total cost and warning signs. Compare up to three.",
+  },
+  {
     path: "/calculators/business-loan-calculator",
     title: "Business Loan Calculator",
     summary:

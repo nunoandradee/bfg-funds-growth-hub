@@ -64,6 +64,7 @@ function PrivacyPolicyPage() {
       <section>
         <h2>Contact us</h2>
         <p>{COMPANY.displayName}<br />{COMPANY.address}<br /><a href={COMPANY.phoneHref}>{COMPANY.phoneDisplay}</a><br /><a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a></p>
+        <p className="text-sm">{COMPANY.displayName} is a trade name of {COMPANY.legalEntity}.</p>
       </section>
     </LegalPage>
   );

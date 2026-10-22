@@ -132,7 +132,7 @@ function ServicePage() {
               <span className="text-navy-foreground/90">{service.title}</span>
             </nav>
 
-            <div className="mt-8 grid size-14 place-items-center rounded-2xl bg-cobalt">
+            <div className="mt-8 grid size-14 place-items-center rounded-2xl bg-gold text-gold-foreground">
               <Icon className="size-7" />
             </div>
             <h1 className="mt-6 max-w-3xl text-balance-tight text-4xl font-extrabold md:text-6xl">
@@ -238,7 +238,7 @@ function ServicePage() {
               <ul className="mt-6 space-y-4">
                 {service.eligibility.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm font-semibold text-navy">
-                    <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-cobalt text-navy-foreground">
+                    <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-gold text-gold-foreground">
                       <Check className="size-3" />
                     </span>
                     {item}

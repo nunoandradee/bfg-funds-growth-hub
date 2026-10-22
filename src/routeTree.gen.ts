@@ -27,6 +27,7 @@ import { Route as CalculatorsIndexRouteImport } from './routes/calculators.index
 import { Route as CalculatorsBusinessLoanCalculatorRouteImport } from './routes/calculators.business-loan-calculator'
 import { Route as CalculatorsHowMuchFundingCanIGetRouteImport } from './routes/calculators.how-much-funding-can-i-get'
 import { Route as CalculatorsMerchantCashAdvanceCalculatorRouteImport } from './routes/calculators.merchant-cash-advance-calculator'
+import { Route as CalculatorsOfferXRayRouteImport } from './routes/calculators.offer-x-ray'
 import { Route as IndustriesIndexRouteImport } from './routes/industries.index'
 import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
 import { Route as ResourcesIndexRouteImport } from './routes/resources.index'
@@ -127,6 +128,11 @@ const CalculatorsMerchantCashAdvanceCalculatorRoute =
     path: '/calculators/merchant-cash-advance-calculator',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CalculatorsOfferXRayRoute = CalculatorsOfferXRayRouteImport.update({
+  id: '/calculators/offer-x-ray',
+  path: '/calculators/offer-x-ray',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndustriesIndexRoute = IndustriesIndexRouteImport.update({
   id: '/industries/',
   path: '/industries/',
@@ -176,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/calculators/business-loan-calculator': typeof CalculatorsBusinessLoanCalculatorRoute
   '/calculators/how-much-funding-can-i-get': typeof CalculatorsHowMuchFundingCanIGetRoute
   '/calculators/merchant-cash-advance-calculator': typeof CalculatorsMerchantCashAdvanceCalculatorRoute
+  '/calculators/offer-x-ray': typeof CalculatorsOfferXRayRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -202,6 +209,7 @@ export interface FileRoutesByTo {
   '/calculators/business-loan-calculator': typeof CalculatorsBusinessLoanCalculatorRoute
   '/calculators/how-much-funding-can-i-get': typeof CalculatorsHowMuchFundingCanIGetRoute
   '/calculators/merchant-cash-advance-calculator': typeof CalculatorsMerchantCashAdvanceCalculatorRoute
+  '/calculators/offer-x-ray': typeof CalculatorsOfferXRayRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -229,6 +237,7 @@ export interface FileRoutesById {
   '/calculators/business-loan-calculator': typeof CalculatorsBusinessLoanCalculatorRoute
   '/calculators/how-much-funding-can-i-get': typeof CalculatorsHowMuchFundingCanIGetRoute
   '/calculators/merchant-cash-advance-calculator': typeof CalculatorsMerchantCashAdvanceCalculatorRoute
+  '/calculators/offer-x-ray': typeof CalculatorsOfferXRayRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/resources/$slug': typeof ResourcesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -257,6 +266,7 @@ export interface FileRouteTypes {
     | '/calculators/business-loan-calculator'
     | '/calculators/how-much-funding-can-i-get'
     | '/calculators/merchant-cash-advance-calculator'
+    | '/calculators/offer-x-ray'
     | '/industries/$slug'
     | '/resources/$slug'
     | '/services/$slug'
@@ -283,6 +293,7 @@ export interface FileRouteTypes {
     | '/calculators/business-loan-calculator'
     | '/calculators/how-much-funding-can-i-get'
     | '/calculators/merchant-cash-advance-calculator'
+    | '/calculators/offer-x-ray'
     | '/industries/$slug'
     | '/resources/$slug'
     | '/services/$slug'
@@ -309,6 +320,7 @@ export interface FileRouteTypes {
     | '/calculators/business-loan-calculator'
     | '/calculators/how-much-funding-can-i-get'
     | '/calculators/merchant-cash-advance-calculator'
+    | '/calculators/offer-x-ray'
     | '/industries/$slug'
     | '/resources/$slug'
     | '/services/$slug'
@@ -336,6 +348,7 @@ export interface RootRouteChildren {
   CalculatorsBusinessLoanCalculatorRoute: typeof CalculatorsBusinessLoanCalculatorRoute
   CalculatorsHowMuchFundingCanIGetRoute: typeof CalculatorsHowMuchFundingCanIGetRoute
   CalculatorsMerchantCashAdvanceCalculatorRoute: typeof CalculatorsMerchantCashAdvanceCalculatorRoute
+  CalculatorsOfferXRayRoute: typeof CalculatorsOfferXRayRoute
   IndustriesSlugRoute: typeof IndustriesSlugRoute
   ResourcesSlugRoute: typeof ResourcesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
@@ -473,6 +486,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CalculatorsMerchantCashAdvanceCalculatorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/calculators/offer-x-ray': {
+      id: '/calculators/offer-x-ray'
+      path: '/calculators/offer-x-ray'
+      fullPath: '/calculators/offer-x-ray'
+      preLoaderRoute: typeof CalculatorsOfferXRayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/industries/': {
       id: '/industries/'
       path: '/industries'
@@ -538,6 +558,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculatorsHowMuchFundingCanIGetRoute: CalculatorsHowMuchFundingCanIGetRoute,
   CalculatorsMerchantCashAdvanceCalculatorRoute:
     CalculatorsMerchantCashAdvanceCalculatorRoute,
+  CalculatorsOfferXRayRoute: CalculatorsOfferXRayRoute,
   IndustriesSlugRoute: IndustriesSlugRoute,
   ResourcesSlugRoute: ResourcesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,

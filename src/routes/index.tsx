@@ -23,6 +23,7 @@ import { HowItWorks } from "@/components/site/HowItWorks";
 import { IndustryMarquee } from "@/components/site/IndustryMarquee";
 import { Footer } from "@/components/site/Footer";
 import { LeadForm } from "@/components/site/LeadForm";
+import { OfferXRayTeaser } from "@/components/site/OfferXRayTeaser";
 import { Spotlight } from "@/components/site/Spotlight";
 import { CALCULATORS } from "@/data/calculators";
 import { GUIDES } from "@/data/guides";
@@ -97,11 +98,11 @@ const TONES = {
     spot: "color-mix(in oklch, var(--color-gold) 18%, transparent)",
   },
   cobalt: {
-    card: "bg-cobalt text-cobalt-foreground border-transparent",
-    icon: "bg-navy text-navy-foreground",
-    body: "text-cobalt-foreground/85",
+    card: "bg-navy text-navy-foreground border-transparent",
+    icon: "bg-gold text-gold-foreground",
+    body: "text-navy-foreground/75",
     link: "text-gold",
-    spot: "color-mix(in oklch, white 14%, transparent)",
+    spot: "color-mix(in oklch, var(--color-gold) 18%, transparent)",
   },
   surface: {
     card: "bg-surface text-navy border-border",
@@ -146,6 +147,7 @@ function Index() {
         <Hero />
         <IndustryMarquee />
         <HowItWorks />
+        <OfferXRayTeaser />
         <HomeEstimator />
 
         {/* SERVICES */}
@@ -315,7 +317,7 @@ function Index() {
               </p>
             </div>
             <div className="mt-12 grid gap-5 md:grid-cols-3">
-              {CALCULATORS.map((c) => (
+              {CALCULATORS.filter((c) => c.path !== "/calculators/offer-x-ray").map((c) => (
                 <Spotlight
                   key={c.path}
                   style={
@@ -396,17 +398,17 @@ function Index() {
         </div>
 
         {/* CLOSING CTA */}
-        <section className="grain relative isolate overflow-hidden bg-cobalt py-20 text-cobalt-foreground">
+        <section className="grain relative isolate overflow-hidden bg-navy py-20 text-navy-foreground">
           <div
             aria-hidden
-            className="pointer-events-none absolute -left-24 top-1/2 size-96 -translate-y-1/2 rounded-full bg-navy/40 blur-3xl"
+            className="pointer-events-none absolute -left-24 top-1/2 size-96 -translate-y-1/2 rounded-full bg-cobalt/35 blur-3xl"
           />
           <div className="container-page relative z-[1] flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-center">
             <div className="max-w-2xl">
               <h2 className="text-balance-tight text-4xl font-extrabold md:text-5xl">
                 See what your business qualifies for
               </h2>
-              <p className="mt-4 text-lg leading-relaxed text-cobalt-foreground/85">
+              <p className="mt-4 text-lg leading-relaxed text-navy-foreground/75">
                 One short application, a specialist who picks up the phone, and offers you can
                 actually compare.
               </p>
@@ -421,7 +423,7 @@ function Index() {
               </a>
               <a
                 href={COMPANY.phoneHref}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-cobalt-foreground/40 px-8 py-4 text-base font-bold hover:bg-cobalt-foreground/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-navy-foreground/30 px-8 py-4 text-base font-bold hover:bg-navy-foreground/10"
               >
                 <Phone className="size-5" />
                 {COMPANY.phoneDisplay}

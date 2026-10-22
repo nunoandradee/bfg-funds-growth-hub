@@ -108,7 +108,7 @@ function AboutPage() {
             <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
               {STEPS.map(({ icon: Icon, title, text }) => (
                 <div key={title} className="rounded-2xl border border-border bg-card p-7">
-                  <div className="grid size-11 place-items-center rounded-xl bg-cobalt text-cobalt-foreground">
+                  <div className="grid size-11 place-items-center rounded-xl bg-navy text-navy-foreground">
                     <Icon className="size-5" />
                   </div>
                   <h3 className="mt-5 text-lg font-extrabold text-navy">{title}</h3>

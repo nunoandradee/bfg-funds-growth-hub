@@ -102,7 +102,7 @@ function IndustryPage() {
               <ul className="mt-5 space-y-3">
                 {industry.uses.map((u) => (
                   <li key={u} className="flex items-start gap-3 text-sm font-semibold text-navy">
-                    <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-cobalt text-navy-foreground">
+                    <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-gold text-gold-foreground">
                       <Check className="size-3" />
                     </span>
                     {u}
