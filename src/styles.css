@@ -238,6 +238,12 @@
   }
 }
 
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .hero-orb {
   position: absolute;
   z-index: -1;
@@ -278,6 +284,14 @@
   }
   .hero-orb-b {
     animation: orb-drift 22s ease-in-out -6s infinite reverse;
+  }
+  /* Slow on purpose: a quiet drift, not a ticker. */
+  .marquee-track {
+    animation: marquee 80s linear infinite;
+  }
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
   }
 }
 
