@@ -90,14 +90,14 @@ const SERVICE_TILES: Record<
 
 const TONES = {
   navy: {
-    card: "surface-navy bg-navy text-navy-foreground border-transparent",
+    card: "bg-navy text-navy-foreground border-transparent",
     icon: "bg-gold text-gold-foreground",
     body: "text-navy-foreground/75",
     link: "text-gold",
     spot: "color-mix(in oklch, var(--color-gold) 18%, transparent)",
   },
   cobalt: {
-    card: "surface-cobalt bg-cobalt text-cobalt-foreground border-transparent",
+    card: "bg-cobalt text-cobalt-foreground border-transparent",
     icon: "bg-navy text-navy-foreground",
     body: "text-cobalt-foreground/85",
     link: "text-gold",
@@ -396,7 +396,7 @@ function Index() {
         </div>
 
         {/* CLOSING CTA */}
-        <section className="grain surface-cobalt relative isolate overflow-hidden bg-cobalt py-20 text-cobalt-foreground">
+        <section className="grain relative isolate overflow-hidden bg-cobalt py-20 text-cobalt-foreground">
           <div
             aria-hidden
             className="pointer-events-none absolute -left-24 top-1/2 size-96 -translate-y-1/2 rounded-full bg-navy/40 blur-3xl"
@@ -414,7 +414,7 @@ function Index() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <a
                 href="#contact"
-                className="gold-sheen group inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-base font-extrabold text-gold-foreground transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-4 text-base font-extrabold text-gold-foreground shadow-lift transition-transform hover:-translate-y-0.5 active:scale-[0.98]"
               >
                 See Your Options
                 <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />

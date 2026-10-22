@@ -94,7 +94,7 @@ export function Hero() {
               </div>
               <button
                 type="submit"
-                className="gold-sheen group inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-gold px-7 text-base font-extrabold text-gold-foreground transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+                className="group inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-gold px-7 text-base font-extrabold text-gold-foreground shadow-lift transition-transform hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
               >
                 See my options
                 <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
@@ -143,7 +143,7 @@ function ProductTicker() {
 
   const service = SERVICES[index]!;
   return (
-    <div className="rounded-2xl bg-navy/70 p-5 text-navy-foreground shadow-lift ring-1 ring-white/15 backdrop-blur-xl [box-shadow:inset_0_1px_0_rgb(255_255_255/0.12),var(--shadow-lift)]">
+    <div className="rounded-2xl bg-navy/70 p-5 text-navy-foreground shadow-lift ring-1 ring-white/15 backdrop-blur-xl">
       <p className="text-xs font-bold text-navy-foreground/60">We compare for you</p>
       <div className="relative mt-1 h-8 overflow-hidden" aria-live="off">
         <AnimatePresence mode="popLayout" initial={false}>

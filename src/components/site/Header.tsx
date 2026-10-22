@@ -149,7 +149,7 @@ export function Header() {
         <div className="hidden items-center lg:flex">
           <a
             href="/apply"
-            className="gold-sheen rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
+            className="rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-gold-foreground shadow-card transition-transform hover:-translate-y-0.5"
           >
             Apply Now
           </a>
