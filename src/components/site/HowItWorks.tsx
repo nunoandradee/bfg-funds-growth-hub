@@ -2,8 +2,6 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, Check, Landmark } from "lucide-react";
 import { AnimatePresence, animate, motion, useInView, useReducedMotion } from "motion/react";
 
-import handPhoto from "@/assets/how-it-works-phone.jpg";
-
 const STEPS = [
   {
     title: "Complete the application.",
@@ -24,9 +22,9 @@ const SCENE_MS = [5600, 4200, 4200];
 const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
- * The process in three plain steps beside a photo of a phone that plays each
- * one: the application filling in, offers side by side, then the deposit. The
- * screens cycle only while in view; reduced motion shows the first, finished.
+ * The process in three plain steps beside an iPhone that plays each one: the
+ * application filling in, offers side by side, then the deposit. The phone
+ * cycles only while in view; reduced motion shows the first screen, finished.
  */
 export function HowItWorks() {
   const reduce = Boolean(useReducedMotion());
@@ -94,7 +92,10 @@ export function HowItWorks() {
           </a>
         </div>
 
-        <figure className="relative mx-auto w-full max-w-[22rem] sm:max-w-[24rem]">
+        <figure
+          className="relative mx-auto w-[16.5rem] sm:w-[18.5rem]"
+          aria-label="Illustration of the BFG Funds application on a phone"
+        >
           <div
             aria-hidden
             className="absolute -right-16 top-10 -z-10 size-48 rounded-full bg-gold/35"
@@ -103,16 +104,12 @@ export function HowItWorks() {
             aria-hidden
             className="absolute -left-14 bottom-16 -z-10 size-28 rounded-full bg-gold/80"
           />
-          <div ref={phoneRef} className="relative overflow-hidden rounded-[2rem] shadow-lift">
-            <img
-              src={handPhoto}
-              width={900}
-              height={1684}
-              loading="lazy"
-              alt="A hand holding a phone showing the BFG Funds application"
-              className="block h-auto w-full"
-            />
-            <PhoneScreen>
+          <motion.div
+            ref={phoneRef}
+            animate={reduce ? {} : { y: [0, -8, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <IPhone>
               <AnimatePresence initial={false}>
                 <motion.div
                   key={scene}
@@ -127,8 +124,8 @@ export function HowItWorks() {
                   {scene === 2 && <FundedScreen />}
                 </motion.div>
               </AnimatePresence>
-            </PhoneScreen>
-          </div>
+            </IPhone>
+          </motion.div>
           <figcaption className="mt-4 text-center text-xs text-muted-foreground">
             Illustration
           </figcaption>
@@ -138,66 +135,28 @@ export function HowItWorks() {
   );
 }
 
-// Where the phone's screen sits in the photo, as fractions of the image.
-const SCREEN = { left: 0.2422, top: 0.1176, width: 0.5267, height: 0.5944 };
-// The screens are laid out at this size, then scaled to fit the photo.
-const SCREEN_W = 272;
-const SCREEN_H = Math.round((SCREEN_W * (SCREEN.height * 1684)) / (SCREEN.width * 900));
-
-/**
- * Places the animated screens inside the photo's phone. The photo's own screen
- * is laid over them in multiply, so its real light, notch and rounded corners
- * stay on top and the screens read as lit from inside the phone.
- */
-function PhoneScreen({ children }: { children: ReactNode }) {
-  const boxRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
-
-  useEffect(() => {
-    const box = boxRef.current;
-    if (!box) return;
-    const observer = new ResizeObserver(([entry]) => {
-      if (entry) setScale(entry.contentRect.width / SCREEN_W);
-    });
-    observer.observe(box);
-    return () => observer.disconnect();
-  }, []);
-
-  const rect = {
-    left: `${SCREEN.left * 100}%`,
-    top: `${SCREEN.top * 100}%`,
-    width: `${SCREEN.width * 100}%`,
-    height: `${SCREEN.height * 100}%`,
-  };
-
+/** A modern iPhone: titanium edge, side buttons, Dynamic Island and status bar. */
+function IPhone({ children }: { children: ReactNode }) {
   return (
-    <>
-      <div ref={boxRef} aria-hidden className="absolute overflow-hidden bg-white" style={rect}>
-        <div
-          className="relative origin-top-left text-navy"
-          style={{ width: SCREEN_W, height: SCREEN_H, transform: `scale(${scale})` }}
-        >
-          <StatusBar />
-          {children}
+    <div className="relative aspect-[71.5/147.6]" aria-hidden>
+      <span className="absolute -left-[3px] top-[17%] h-[4%] w-[3px] rounded-l-sm bg-[#3a3f48]" />
+      <span className="absolute -left-[3px] top-[24%] h-[8%] w-[3px] rounded-l-sm bg-[#3a3f48]" />
+      <span className="absolute -left-[3px] top-[34%] h-[8%] w-[3px] rounded-l-sm bg-[#3a3f48]" />
+      <span className="absolute -right-[3px] top-[27%] h-[12%] w-[3px] rounded-r-sm bg-[#3a3f48]" />
+
+      {/* Titanium frame */}
+      <div className="absolute inset-0 rounded-[3.1rem] bg-[linear-gradient(145deg,#6b7280_0%,#2b2f36_22%,#4b5059_50%,#23262c_78%,#5d636d_100%)] p-[3px] shadow-[0_40px_80px_-30px_oklch(0.24_0.06_260/0.55),0_18px_36px_-18px_oklch(0.24_0.06_260/0.35)]">
+        <div className="h-full rounded-[2.95rem] bg-[#0b0c0f] p-[9px]">
+          <div className="relative h-full overflow-hidden rounded-[2.4rem] bg-background text-navy">
+            <StatusBar />
+            <div className="absolute left-1/2 top-2.5 z-20 h-[26px] w-[34%] -translate-x-1/2 rounded-full bg-black" />
+            {children}
+            <div className="absolute bottom-1.5 left-1/2 z-20 h-1 w-[36%] -translate-x-1/2 rounded-full bg-navy/80" />
+            <div className="pointer-events-none absolute inset-0 z-30 bg-[linear-gradient(120deg,rgba(255,255,255,0.10)_0%,transparent_28%)]" />
+          </div>
         </div>
       </div>
-      <div
-        aria-hidden
-        className="pointer-events-none absolute overflow-hidden mix-blend-multiply"
-        style={rect}
-      >
-        <img
-          src={handPhoto}
-          alt=""
-          className="absolute max-w-none brightness-[1.07]"
-          style={{
-            width: `${100 / SCREEN.width}%`,
-            left: `${(-SCREEN.left / SCREEN.width) * 100}%`,
-            top: `${(-SCREEN.top / SCREEN.height) * 100}%`,
-          }}
-        />
-      </div>
-    </>
+    </div>
   );
 }
 
